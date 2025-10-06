@@ -128,6 +128,7 @@
       <CopyLocal>True</CopyLocal>
     </Reference>
     <Compile Include="..\..\Source\Spring.inc" />
+    <Compile Include="..\..\Source\jedi.inc" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
 </Project>
