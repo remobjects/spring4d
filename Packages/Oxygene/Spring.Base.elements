@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Mode>Island</Mode>
+    <SubMode>Windows</SubMode>
+    <Architecture>i386;x86_64</Architecture>
+    <DelphiSDK>Delphi 12</DelphiSDK>
+    <DelphiCompatibility>True</DelphiCompatibility>
+    <DefaultUsesPrefixes>Delphi</DefaultUsesPrefixes>
+    <ProjectGuid>{8F00FFD6-085B-4B31-B6A2-D3157F252221}</ProjectGuid>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <Optimize>False</Optimize>
+    <GenerateDebugInfo>True</GenerateDebugInfo>
+    <ConditionalDefines>DEBUG;TRACE</ConditionalDefines>
+    <EnableAsserts>True</EnableAsserts>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Source\Base\Spring.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.Base.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.Dictionaries.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.Events.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.Extensions.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.Lists.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.LinkedLists.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.MultiMaps.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.MultiSets.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.Queues.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.Sets.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.Stacks.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Collections\Spring.Collections.Trees.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.Comparers.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.DesignPatterns.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.Events.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.Events.Base.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.Hash.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.HashTable.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.HazardEra.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.Helpers.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Logging\Spring.Logging.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Logging\Spring.Logging.Appenders.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Logging\Spring.Logging.Appenders.Base.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Logging\Spring.Logging.Controller.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Logging\Spring.Logging.Extensions.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Logging\Spring.Logging.Loggers.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Logging\Spring.Logging.NullLogger.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Logging\Spring.Logging.ResourceStrings.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Logging\Spring.Logging.Serializers.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.MethodIntercept.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Patches\Spring.Patches.RSP13163.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Patterns\Spring.Patterns.Specification.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.Reflection.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.ResourceStrings.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.SystemUtils.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.Times.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.ValueConverters.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.VirtualClass.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Base\Spring.VirtualInterface.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Reference Include="Island.DelphiSupport" />
+    <Reference Include="gc">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="rtl">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="Island">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="rtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="Delphi.rtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Compile Include="..\..\Source\Spring.inc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
+</Project>

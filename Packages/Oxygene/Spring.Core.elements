@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Mode>Island</Mode>
+    <SubMode>Windows</SubMode>
+    <Architecture>i386;x86_64</Architecture>
+    <DelphiSDK>Delphi 12</DelphiSDK>
+    <DelphiCompatibility>True</DelphiCompatibility>
+    <DefaultUsesPrefixes>Delphi</DefaultUsesPrefixes>
+    <ProjectGuid>{3F933A25-7C87-419F-B285-EE0B5E3F0B73}</ProjectGuid>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <Optimize>False</Optimize>
+    <GenerateDebugInfo>True</GenerateDebugInfo>
+    <ConditionalDefines>DEBUG;TRACE</ConditionalDefines>
+    <EnableAsserts>True</EnableAsserts>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Source\Core\Services\Spring.Services.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.ActivatorExtension.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.AutoMockExtension.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.Builder.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.Common.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.ComponentActivator.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.Core.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.CreationContext.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.Extensions.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.Injection.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.LifetimeManager.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.Pool.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.ProxyFactory.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.Registration.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.Resolvers.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Container\Spring.Container.ResourceStrings.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Interception\Spring.Interception.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Interception\Spring.Interception.AbstractInvocation.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Interception\Spring.Interception.ClassProxy.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Interception\Spring.Interception.CustomProxy.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Interception\Spring.Interception.InterfaceProxy.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Interception\Spring.Interception.ResourceStrings.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Logging\Spring.Logging.Configuration.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Logging\Spring.Logging.Configuration.Builder.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Logging\Spring.Logging.Container.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Mocking\Spring.Mocking.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Mocking\Spring.Mocking.Core.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Mocking\Spring.Mocking.Interceptor.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Core\Mocking\Spring.Mocking.Matching.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Reference Include="Island.DelphiSupport" />
+    <Reference Include="gc">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="rtl">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="Island">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="rtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="Spring.Base">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="Delphi.rtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Compile Include="..\..\Source\Spring.inc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
+</Project>

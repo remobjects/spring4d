@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Mode>Island</Mode>
+    <SubMode>Windows</SubMode>
+    <Architecture>i386;x86_64</Architecture>
+    <DelphiSDK>Delphi 12</DelphiSDK>
+    <DelphiCompatibility>True</DelphiCompatibility>
+    <DefaultUsesPrefixes>Delphi</DefaultUsesPrefixes>
+    <ProjectGuid>{EF4943C0-6445-4C2A-9321-93EC9C8C0BC7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <Optimize>False</Optimize>
+    <GenerateDebugInfo>True</GenerateDebugInfo>
+    <ConditionalDefines>DEBUG;TRACE</ConditionalDefines>
+    <EnableAsserts>True</EnableAsserts>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Source\Persistence\Adapters\Spring.Persistence.Adapters.FieldCache.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.AbstractSession.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.Base.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.ConnectionFactory.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.DatabaseManager.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.EmbeddedEntity.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.EntityCache.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.EntityMap.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.EntityWrapper.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.Exceptions.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.Graphics.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.Interfaces.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.ListSession.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.Repository.Proxy.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.Repository.Simple.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.ResourceStrings.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.Session.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Core\Spring.Persistence.Core.ValueConverters.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.Abstract.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.BetweenExpression.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.Conjunction.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.Disjunction.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.InExpression.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.Junction.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.LikeExpression.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.LogicalExpression.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.NullExpression.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.PropertyExpression.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Criterion.SimpleExpression.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Interfaces.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.OrderBy.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Properties.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Criteria\Spring.Persistence.Criteria.Restrictions.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\Mapping\Spring.Persistence.Mapping.Attributes.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.Abstract.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.CreateForeignKey.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.CreateSequence.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.CreateTable.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.Delete.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.Insert.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.Page.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.Select.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Commands.Update.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.Abstract.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.Ansi.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.ASA.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.Firebird.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.MSSQL.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.MySQL.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.NoSQL.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.Oracle.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.PostgreSQL.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.SQLite3.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Generators.Register.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Interfaces.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Params.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Register.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Persistence\SQL\Spring.Persistence.SQL.Types.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Reference Include="Island.DelphiSupport" />
+    <Reference Include="gc">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="rtl">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="Island">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="dbrtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="vcl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="vclimg">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="Spring.Base">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="Delphi.rtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Compile Include="..\..\Source\Spring.inc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
+</Project>

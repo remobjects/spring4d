@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Mode>Island</Mode>
+    <SubMode>Windows</SubMode>
+    <Architecture>i386</Architecture>
+    <DelphiSDK>Delphi 12</DelphiSDK>
+    <DelphiCompatibility>True</DelphiCompatibility>
+    <DefaultUsesPrefixes>Delphi</DefaultUsesPrefixes>
+    <ProjectGuid>{74111A14-7F4C-484F-934C-5ED889C0D028}</ProjectGuid>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <Optimize>False</Optimize>
+    <GenerateDebugInfo>True</GenerateDebugInfo>
+    <ConditionalDefines>DEBUG;TRACE</ConditionalDefines>
+    <EnableAsserts>True</EnableAsserts>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Source\Data\ObjectDataSet\Spring.Data.Registration.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Reference Include="Island.DelphiSupport" />
+    <Reference Include="gc">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="rtl">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="Island">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="Spring.Data">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="Delphi.rtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Compile Include="..\..\Source\Spring.inc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
+</Project>

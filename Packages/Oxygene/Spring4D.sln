@@ -1,0 +1,56 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# RemObjects Water
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Spring.Base", "Spring.Base.elements", "{8f00ffd6-085b-4b31-b6a2-d3157f252221}"
+EndProject
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Spring.Core", "Spring.Core.elements", "{3f933a25-7c87-419f-b285-ee0b5e3f0b73}"
+EndProject
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Spring.Data", "Spring.Data.elements", "{ce604316-e7df-4f7d-8c54-b06faab0f76b}"
+EndProject
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Spring.Data.Designtime", "Spring.Data.Designtime.elements", "{74111a14-7f4c-484f-934c-5ed889c0d028}"
+EndProject
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Spring.Extensions", "Spring.Extensions.elements", "{25f0d1d4-23c7-4350-a17f-67ae14842f76}"
+EndProject
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Spring.Persistence", "Spring.Persistence.elements", "{ef4943c0-6445-4c2a-9321-93ec9c8c0bc7}"
+EndProject
+Project("{656346d9-4656-40da-a068-22d5425d4639}") = "Spring.Tests.Oxygene", "..\..\Tests\Spring.Tests.Oxygene.elements", "{83f94c88-615c-458e-9455-6593952e7ea0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AnyCPU = Debug|AnyCPU
+		Release|AnyCPU = Release|AnyCPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8f00ffd6-085b-4b31-b6a2-d3157f252221}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{8f00ffd6-085b-4b31-b6a2-d3157f252221}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{8f00ffd6-085b-4b31-b6a2-d3157f252221}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{8f00ffd6-085b-4b31-b6a2-d3157f252221}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{3f933a25-7c87-419f-b285-ee0b5e3f0b73}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{3f933a25-7c87-419f-b285-ee0b5e3f0b73}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{3f933a25-7c87-419f-b285-ee0b5e3f0b73}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{3f933a25-7c87-419f-b285-ee0b5e3f0b73}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{ce604316-e7df-4f7d-8c54-b06faab0f76b}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{ce604316-e7df-4f7d-8c54-b06faab0f76b}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{ce604316-e7df-4f7d-8c54-b06faab0f76b}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{ce604316-e7df-4f7d-8c54-b06faab0f76b}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{74111a14-7f4c-484f-934c-5ed889c0d028}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{74111a14-7f4c-484f-934c-5ed889c0d028}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{74111a14-7f4c-484f-934c-5ed889c0d028}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{74111a14-7f4c-484f-934c-5ed889c0d028}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{25f0d1d4-23c7-4350-a17f-67ae14842f76}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{25f0d1d4-23c7-4350-a17f-67ae14842f76}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{25f0d1d4-23c7-4350-a17f-67ae14842f76}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{25f0d1d4-23c7-4350-a17f-67ae14842f76}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{ef4943c0-6445-4c2a-9321-93ec9c8c0bc7}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{ef4943c0-6445-4c2a-9321-93ec9c8c0bc7}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{ef4943c0-6445-4c2a-9321-93ec9c8c0bc7}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{ef4943c0-6445-4c2a-9321-93ec9c8c0bc7}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{83f94c88-615c-458e-9455-6593952e7ea0}.Debug|AnyCPU.ActiveCfg = Debug|AnyCPU
+		{83f94c88-615c-458e-9455-6593952e7ea0}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
+		{83f94c88-615c-458e-9455-6593952e7ea0}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
+		{83f94c88-615c-458e-9455-6593952e7ea0}.Release|AnyCPU.Build.0 = Release|AnyCPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

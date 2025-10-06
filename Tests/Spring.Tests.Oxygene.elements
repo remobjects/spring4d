@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Mode>Island</Mode>
+    <SubMode>Windows</SubMode>
+    <Architecture>i386;x86_64</Architecture>
+    <DelphiSDK>Delphi 12</DelphiSDK>
+    <DelphiCompatibility>True</DelphiCompatibility>
+    <DefaultUsesPrefixes>Delphi</DefaultUsesPrefixes>
+    <ProjectGuid>{83F94C88-615C-458E-9455-6593952E7EA0}</ProjectGuid>
+    <OutputType>Executable</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <Optimize>False</Optimize>
+    <GenerateDebugInfo>True</GenerateDebugInfo>
+    <ConditionalDefines>DEBUG;TRACE</ConditionalDefines>
+    <EnableAsserts>True</EnableAsserts>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Source\Spring.TestBootstrap.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Spring.Testing.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Spring.TestRegistration.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Spring.TestRunner.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Spring.TestUtils.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.Base.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.Collections.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.Collections.Dictionaries.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.Collections.Extensions.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.DesignPatterns.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.Helpers.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.Reflection.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.ValueConverters.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.SystemUtils.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.Logging.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.Logging.Serializers.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Base\Spring.Tests.Logging.Types.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Core\Spring.Tests.Container.Components.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Core\Spring.Tests.Container.Interfaces.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Core\Spring.Tests.Container.LifetimeManager.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Core\Spring.Tests.Container.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Core\Spring.Tests.Container.Logging.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Core\Spring.Tests.Interception.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Core\Spring.Tests.Interception.Types.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Core\Spring.Tests.Mocking.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Core\Spring.Tests.Pool.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Extensions\Spring.Tests.Cryptography.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Spring.Tests.Testing.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="Source\Extensions\Spring.Tests.Utils.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Reference Include="Island.DelphiSupport" />
+    <Reference Include="gc">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="rtl">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="Island">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Compile Include="Spring.Tests.dpr">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Reference Include="Delphi.rtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
+</Project>

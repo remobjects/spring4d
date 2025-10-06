@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Mode>Island</Mode>
+    <SubMode>Windows</SubMode>
+    <Architecture>i386;x86_64</Architecture>
+    <DelphiSDK>Delphi 12</DelphiSDK>
+    <DelphiCompatibility>True</DelphiCompatibility>
+    <DefaultUsesPrefixes>Delphi</DefaultUsesPrefixes>
+    <ProjectGuid>{25F0D1D4-23C7-4350-A17F-67AE14842F76}</ProjectGuid>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <Optimize>False</Optimize>
+    <GenerateDebugInfo>True</GenerateDebugInfo>
+    <ConditionalDefines>DEBUG;TRACE</ConditionalDefines>
+    <EnableAsserts>True</EnableAsserts>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Source\Extensions\Cryptography\Spring.Cryptography.Base.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Extensions\Cryptography\Spring.Cryptography.CRC.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Extensions\Cryptography\Spring.Cryptography.DES.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Extensions\Cryptography\Spring.Cryptography.MD5.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Extensions\Cryptography\Spring.Cryptography.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Extensions\Cryptography\Spring.Cryptography.SHA.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Extensions\Cryptography\Spring.Cryptography.Utils.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Extensions\Utils\Spring.Utils.IO.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Extensions\Utils\Spring.Utils.WinApi.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Compile Include="..\..\Source\Extensions\Utils\Spring.Utils.pas">
+      <Unoxidized>True</Unoxidized>
+    </Compile>
+    <Reference Include="Island.DelphiSupport" />
+    <Reference Include="gc">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="rtl">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="Island">
+      <CopyLocal>False</CopyLocal>
+    </Reference>
+    <Reference Include="rtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="Spring.Base">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Reference Include="Delphi.rtl">
+      <CopyLocal>True</CopyLocal>
+    </Reference>
+    <Compile Include="..\..\Source\Spring.inc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
+</Project>
