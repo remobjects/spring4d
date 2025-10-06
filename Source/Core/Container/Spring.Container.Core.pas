@@ -442,7 +442,7 @@ type
   public
     constructor Create(const kernel: TKernel; const model: TComponentModel;
       const arguments: TArray<TValue>);
-    function IsSatisfiedBy(const method: TRttiMethod): Boolean; override;
+    function IsSatisfiedBy(const &method: TRttiMethod): Boolean; override;
   end;
 
   TContainsMemberFilter = class(TSpecification<IInjection>)
@@ -722,13 +722,13 @@ begin
 end;
 
 function TInjectableMethodFilter.IsSatisfiedBy(
-  const method: TRttiMethod): Boolean;
+  const &method: TRttiMethod): Boolean;
 var
   params: TArray<TRttiParameter>;
   dependencies: TArray<TDependencyModel>;
   i: Integer;
 begin
-  params := method.GetParameters;
+  params := &method.GetParameters;
   SetLength(dependencies, Length(params));
   for i := Low(dependencies) to High(dependencies) do
     dependencies[i] := TDependencyModel.Create(params[i].ParamType, params[i]);

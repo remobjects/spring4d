@@ -217,7 +217,7 @@ type
     fSize: Int64;
   public
     constructor Create(const name: string; const size: Int64);
-    class function From(const size: Int64): TSizeUnit; static;
+    class function &From(const size: Int64): TSizeUnit; static;
     function FormatSize(const size: Int64): string;
     property Name: string read fName;
     property Size: Int64 read fSize;

@@ -53,7 +53,7 @@ type
     function GetConnected: Boolean; override; abstract;
     function GetDataSetCount: Integer; override; abstract;
     procedure RegisterClient(Client: TObject;
-      Event: TConnectChangeEvent); override; abstract;
+      &Event: TConnectChangeEvent); override; abstract;
     procedure SetConnected(Value: Boolean); override; abstract;
     procedure UnRegisterClient(Client: TObject); override; abstract;
   end;

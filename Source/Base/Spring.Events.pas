@@ -52,7 +52,7 @@ type
   protected
     procedure InternalInvokeMethod(UserData: Pointer;
       const Args: TArray<TValue>; out Result: TValue); virtual;
-    procedure InternalInvokeDelegate(Method: TRttiMethod;
+    procedure InternalInvokeDelegate(&Method: TRttiMethod;
       const Args: TArray<TValue>; out Result: TValue); virtual;
   {$ELSE}
   private
@@ -99,7 +99,7 @@ type
     fMethodInfo: TMethodInfo;
     fMethodInvoke: Pointer;
     procedure InvokeEventHandlerStub;
-    class procedure InvokeMethod(const Method: TMethod; Parameters: PParameters; StackSize: Integer); static;
+    class procedure InvokeMethod(const &Method: TMethod; Parameters: PParameters; StackSize: Integer); static;
   protected
     procedure Invoke;
     procedure InternalInvoke(Params: PParameters; StackSize: Integer); virtual;
@@ -245,7 +245,7 @@ const
 
 {$IFNDEF USE_RTTI_FOR_PROXY}
 
-procedure GetMethodTypeData(Method: TRttiMethod; var TypeData: PTypeData);
+procedure GetMethodTypeData(&Method: TRttiMethod; var TypeData: PTypeData);
 
   procedure WriteByte(var Dest: PByte; b: Byte);
   begin
@@ -270,8 +270,8 @@ var
   i: NativeInt;
   p: PByte;
 begin
-  TypeData.MethodKind := Method.MethodKind;
-  params := Method.GetParameters;
+  TypeData.MethodKind := &Method.MethodKind;
+  params := &Method.GetParameters;
   TypeData.ParamCount := Byte(Length(params));
   p := @TypeData.ParamList;
   for i := Low(params) to High(params) do
@@ -280,17 +280,17 @@ begin
     WritePackedShortString(p, params[i].Name);
     WritePackedShortString(p, params[i].ParamType.Name);
   end;
-  if method.MethodKind = mkFunction then
+  if &method.MethodKind = mkFunction then
   begin
-    WritePackedShortString(p, method.ReturnType.Name);
-    WritePointer(p, method.ReturnType.Handle);
+    WritePackedShortString(p, &method.ReturnType.Name);
+    WritePointer(p, &method.ReturnType.Handle);
   end;
-  WriteByte(p, Byte(method.CallingConvention));
+  WriteByte(p, Byte(&method.CallingConvention));
   for i := Low(params) to High(params) do
     WritePointer(p, Pointer(NativeInt(params[i].ParamType.Handle) - PointerSize));
 end;
 
-class procedure TEvent.InvokeMethod(const Method: TMethod;
+class procedure TEvent.InvokeMethod(const &Method: TMethod;
   Parameters: PParameters; StackSize: Integer);
 {$IFNDEF CPUX64}
 asm
@@ -323,7 +323,7 @@ asm
   sub r8,32
   sub rsp,r8                          // allocate additional stack space
 
-  mov [rbp+$30],Method                // preserve Method
+  mov [rbp+$30],&Method                // preserve Method
   mov [rbp+$38],Parameters            // preserve Parameters
 
   test r8,r8                          // if StackSize > 32
@@ -511,7 +511,7 @@ end;
 
 constructor TEvent.Create(typeInfo: PTypeInfo);
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
 {$IFNDEF USE_RTTI_FOR_PROXY}
   typeData: PTypeData;
   invokeEvent: procedure(Params: PParameters; StackSize: Integer) of object;
@@ -540,16 +540,16 @@ begin
     end;
     tkInterface:
     begin
-      method := typeInfo.RttiType.GetMethod('Invoke');
-      if not Assigned(method) then
+      &method := typeInfo.RttiType.GetMethod('Invoke');
+      if not Assigned(&method) then
         raise EInvalidOperationException.CreateResFmt(@STypeParameterContainsNoRtti, [typeInfo.Name]);
 {$IFDEF USE_RTTI_FOR_PROXY}
       TVirtualInterface.Create(typeInfo, InternalInvokeDelegate)
         .QueryInterface(typeInfo.TypeData.Guid, fProxy);
 {$ELSE}
-      New(typeData);
+      &New(typeData);
       try
-        GetMethodTypeData(method, typeData);
+        GetMethodTypeData(&method, typeData);
         fMethodInfo := TMethodInfo.Create(typeData);
         invokeEvent := InternalInvoke;
         fMethodInvoke := TMethod(invokeEvent).Code;
@@ -603,7 +603,7 @@ begin
   end;
 end;
 
-procedure TEvent.InternalInvokeDelegate(Method: TRttiMethod;
+procedure TEvent.InternalInvokeDelegate(&Method: TRttiMethod;
   const Args: TArray<TValue>;
   out Result: TValue); //FI:O804
 var
@@ -624,7 +624,7 @@ begin
       begin
         reference := MethodToMethodReference(handlers[i]);
         TValue.Make(@reference, TypeInfo(IInterface), value);
-        method.Invoke(value, argsWithoutSelf);
+        &method.Invoke(value, argsWithoutSelf);
       end;
     finally
       guard.Release;

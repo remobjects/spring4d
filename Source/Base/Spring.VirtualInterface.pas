@@ -42,7 +42,7 @@ type
 {$IFDEF DELPHIXE2_UP}
   TVirtualInterfaceInvokeEvent = Rtti.TVirtualInterfaceInvokeEvent;
 {$ELSE}
-  TVirtualInterfaceInvokeEvent = reference to procedure(Method: TRttiMethod;
+  TVirtualInterfaceInvokeEvent = reference to procedure(&Method: TRttiMethod;
     const Args: TArray<TValue>; out Result: TValue);
 {$ENDIF}
 
@@ -98,7 +98,7 @@ var
   i: Integer;
   maxVirtualIndex: SmallInt;
   methods: TArray<TRttiMethod>;
-  method: TRttiMethod;
+  &method: TRttiMethod;
   rttiType: TRttiType;
 begin
   fIntercepts := TObjectList<TMethodIntercept>.Create();
@@ -108,11 +108,11 @@ begin
   maxVirtualIndex := 2;
   methods := rttiType.GetMethods;
 
-  for method in methods do
+  for &method in methods do
   begin
-    if maxVirtualIndex < method.VirtualIndex then
-      maxVirtualIndex := method.VirtualIndex;
-    fIntercepts.Add(TMethodIntercept.Create(method, DoInvoke));
+    if maxVirtualIndex < &method.VirtualIndex then
+      maxVirtualIndex := &method.VirtualIndex;
+    fIntercepts.Add(TMethodIntercept.Create(&method, DoInvoke));
   end;
 
   fMethodTable := AllocMem(SizeOf(Pointer) * (maxVirtualIndex + 1));

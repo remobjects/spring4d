@@ -131,7 +131,7 @@ type
     class procedure SetUpFixture; virtual;
     class procedure TearDownFixture; virtual;
   public
-    constructor Create(const method: TRttiMethod; const args: TArray<TValue>); reintroduce;
+    constructor Create(const &method: TRttiMethod; const args: TArray<TValue>); reintroduce;
     function GetName: string; override;
 
     property Name: string read fName write fName;
@@ -221,12 +221,12 @@ end;
 {$ENDREGION}
 
 
-function IsTestMethod(const method: TRttiMethod;
+function IsTestMethod(const &method: TRttiMethod;
   const parameters: TArray<TRttiParameter>): Boolean;
 var
   parameter: TRttiParameter;
 begin
-  if method.HasCustomAttribute<TestAttribute> then
+  if &method.HasCustomAttribute<TestAttribute> then
     Exit(True)
   else
     for parameter in parameters do
@@ -394,12 +394,12 @@ end;
 
 {$REGION 'TTestCase'}
 
-constructor TTestCase.Create(const method: TRttiMethod; const args: TArray<TValue>);
+constructor TTestCase.Create(const &method: TRttiMethod; const args: TArray<TValue>);
 var
   attribute: ExpectedExceptionAttribute;
 begin
-  inherited Create(method.Name);
-  fMethod := method;
+  inherited Create(&method.Name);
+  fMethod := &method;
   if fMethod.TryGetCustomAttribute<ExpectedExceptionAttribute>(attribute) then
   begin
     fExpectedException := attribute.fExceptionType;
@@ -526,7 +526,7 @@ end;
 
 procedure TTestSuite.AddTests(testClass: TTestCaseClass);
 
-  procedure InternalInvoke(const method: TRttiMethod; const parameters: TArray<TRttiParameter>;
+  procedure InternalInvoke(const &method: TRttiMethod; const parameters: TArray<TRttiParameter>;
     const arguments: TArray<TValue>; argIndex: Integer = 0; paramIndex: Integer = 0);
   var
     attribute: TTestingAttribute;
@@ -543,29 +543,29 @@ procedure TTestSuite.AddTests(testClass: TTestCaseClass);
           for i := enumType.MinValue to enumType.MaxValue do
             TValue.Make(i, enumType.Handle, attribute.fValues[i])
         end;
-      if (paramIndex = 0) or not method.HasCustomAttribute<SequentialAttribute> then
+      if (paramIndex = 0) or not &method.HasCustomAttribute<SequentialAttribute> then
         for i := 0 to High(attribute.fValues) do
         begin
           attribute.Values[i].TryConvert(
             parameters[paramIndex].ParamType.Handle, arguments[paramIndex], ISO8601FormatSettings);
           if paramIndex = Length(parameters) - 1 then
-            AddTest(testClass.Create(method, arguments) as ITest)
+            AddTest(testClass.Create(&method, arguments) as ITest)
           else
-            InternalInvoke(method, parameters, arguments, i, paramIndex + 1);
+            InternalInvoke(&method, parameters, arguments, i, paramIndex + 1);
         end
       else
       begin
         attribute.Values[argIndex].TryConvert(
           parameters[paramIndex].ParamType.Handle, arguments[paramIndex], ISO8601FormatSettings);
         if paramIndex = Length(parameters) - 1 then
-          AddTest(testClass.Create(method, arguments) as ITest)
+          AddTest(testClass.Create(&method, arguments) as ITest)
         else
-          InternalInvoke(method, parameters, arguments, argIndex, paramIndex + 1);
+          InternalInvoke(&method, parameters, arguments, argIndex, paramIndex + 1);
       end;
     end;
   end;
 
-  procedure HandleSourceAttribute(const method: TRttiMethod;
+  procedure HandleSourceAttribute(const &method: TRttiMethod;
     const parameters: TArray<TRttiParameter>; const arguments: TArray<TValue>);
   var
     sourceAttribute: TestCaseSourceAttribute;
@@ -574,7 +574,7 @@ procedure TTestSuite.AddTests(testClass: TTestCaseClass);
     data: TTestCaseData;
     testCase: TTestCase;
   begin
-    for sourceAttribute in method.GetCustomAttributes<TestCaseSourceAttribute> do
+    for sourceAttribute in &method.GetCustomAttributes<TestCaseSourceAttribute> do
     begin
       if sourceAttribute.SourceType <> nil then
         sourceMethod := TType.GetType(sourceAttribute.SourceType).GetMethod(sourceAttribute.SourceName)
@@ -586,8 +586,8 @@ procedure TTestSuite.AddTests(testClass: TTestCaseClass);
         begin
           if values.TryAsType<TTestCaseData>(data) then
           begin
-            method.ConvertValues(data.fValues, arguments);
-            testCase := testClass.Create(method, arguments);
+            &method.ConvertValues(data.fValues, arguments);
+            testCase := testClass.Create(&method, arguments);
             if data.fExceptionType <> nil then
             begin
               testCase.fExpectedException := data.fExceptionType;
@@ -601,30 +601,30 @@ procedure TTestSuite.AddTests(testClass: TTestCaseClass);
 
           if Length(parameters) > 1 then
           begin
-            method.ConvertValues(values.GetArray, arguments);
-            AddTest(testClass.Create(method, arguments) as ITest);
+            &method.ConvertValues(values.GetArray, arguments);
+            AddTest(testClass.Create(&method, arguments) as ITest);
           end
           else
             if values.TryConvert(parameters[0].ParamType.Handle, arguments[0], ISO8601FormatSettings) then
-              AddTest(testClass.Create(method, arguments) as ITest);
+              AddTest(testClass.Create(&method, arguments) as ITest);
         end;
       end;
     end;
   end;
 
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
   parameters: TArray<TRttiParameter>;
   i: Integer;
   arguments: TArray<TValue>;
   attribute: TestCaseAttribute;
 begin
-  for method in TType.GetType(testClass).GetMethods do
+  for &method in TType.GetType(testClass).GetMethods do
   begin
-    if not method.IsPublished or method.IsStatic then
+    if not &method.IsPublished or &method.IsStatic then
       Continue;
 
-    parameters := method.GetParameters;
+    parameters := &method.GetParameters;
 
     for i := 0 to High(parameters) do
       if pfArray in parameters[i].Flags then
@@ -632,23 +632,23 @@ begin
     if i < Length(parameters) then
       Continue;
 
-    if method.ReturnType = nil then
+    if &method.ReturnType = nil then
       SetLength(arguments, Length(parameters))
     else
       SetLength(arguments, Length(parameters) + 1);
 
-    for attribute in method.GetCustomAttributes<TestCaseAttribute> do
+    for attribute in &method.GetCustomAttributes<TestCaseAttribute> do
     begin
-      method.ConvertValues(attribute.fValues, arguments);
-      AddTest(testClass.Create(method, arguments) as ITest);
+      &method.ConvertValues(attribute.fValues, arguments);
+      AddTest(testClass.Create(&method, arguments) as ITest);
     end;
 
-    HandleSourceAttribute(method, parameters, arguments);
+    HandleSourceAttribute(&method, parameters, arguments);
 
     if parameters = nil then
-      AddTest(testClass.Create(method, nil) as ITest)
-    else if IsTestMethod(method, parameters) then
-      InternalInvoke(method, parameters, arguments);
+      AddTest(testClass.Create(&method, nil) as ITest)
+    else if IsTestMethod(&method, parameters) then
+      InternalInvoke(&method, parameters, arguments);
   end;
 end;
 

@@ -53,7 +53,7 @@ type
     function Page(page, itemsPerPage: Integer): IDBPage<T>;
   public
     function Add(const criterion: ICriterion): ICriteria<T>;
-    function Where(const criterion: ICriterion): ICriteria<T>;
+    function &Where(const criterion: ICriterion): ICriteria<T>;
     function OrderBy(const orderBy: IOrderBy): ICriteria<T>;
 
     procedure Clear;

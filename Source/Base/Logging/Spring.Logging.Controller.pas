@@ -44,7 +44,7 @@ type
     fAppenders: IList<ILogAppender>;
     fConverters: IList<ILogEventConverter>;
   protected
-    procedure DoSend(const event: TLogEvent); override;
+    procedure DoSend(const &event: TLogEvent); override;
   public
     constructor Create; overload;
     constructor Create(const appenders: TArray<ILogAppender>); overload;
@@ -54,7 +54,7 @@ type
     procedure AddEventConverter(const converter: ILogEventConverter);
     function FindSerializer(typeInfo: PTypeInfo): ITypeSerializer;
     function IsLoggable(level: TLogLevel; eventTypes: TLogEventTypes): Boolean;
-    procedure SendToAppenders(const event: TLogEvent);
+    procedure SendToAppenders(const &event: TLogEvent);
   end;
 
   {$ENDREGION}
@@ -104,19 +104,19 @@ begin
   fConverters.Add(converter);
 end;
 
-procedure TLoggerController.DoSend(const event: TLogEvent);
+procedure TLoggerController.DoSend(const &event: TLogEvent);
 
   procedure HandleConverters;
   var
     converter: ILogEventConverter;
   begin
     for converter in fConverters do
-      if converter.HandleEvent(Self, event) then
+      if converter.HandleEvent(Self, &event) then
         Break;
   end;
 
 begin
-  SendToAppenders(event);
+  SendToAppenders(&event);
 
   if not fConverters.IsEmpty then
     HandleConverters;
@@ -148,12 +148,12 @@ begin
   Result := False;
 end;
 
-procedure TLoggerController.SendToAppenders(const event: TLogEvent);
+procedure TLoggerController.SendToAppenders(const &event: TLogEvent);
 var
   appender: ILogAppender;
 begin
   for appender in fAppenders do
-    appender.Send(event);
+    appender.Send(&event);
 end;
 
 {$ENDREGION}

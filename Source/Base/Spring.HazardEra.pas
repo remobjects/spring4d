@@ -1,4 +1,4 @@
-﻿{***************************************************************************}
+{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -178,7 +178,7 @@ end;
 
 class function TThreadBlockList.Acquire(isFirstAttempt: Boolean): PHazardEraThreadControlBlock;
 
-  function New(var era: PHazardEraThreadControlBlock; currentThreadId: TThreadID): PHazardEraThreadControlBlock;
+  function &New(var era: PHazardEraThreadControlBlock; currentThreadId: TThreadID): PHazardEraThreadControlBlock;
   begin
     Result := GetMem_Aligned64(SizeOf(THazardEraThreadControlBlock));
     Result.Active := Active;
@@ -215,7 +215,7 @@ begin
     Result := Result.Next;
   until Result = nil;
 
-  Result := New(blocks[index], currentThreadId);
+  Result := &New(blocks[index], currentThreadId);
 end;
 
 {$ENDREGION}

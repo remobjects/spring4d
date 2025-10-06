@@ -39,11 +39,11 @@ type
     function GetCodeAddress: Pointer;
     function GetVirtualIndex: SmallInt;
   public
-    constructor Create(const method: TRttiMethod;
+    constructor Create(const &method: TRttiMethod;
       const callback: TMethodImplementationCallback);
     destructor Destroy; override;
     property CodeAddress: Pointer read GetCodeAddress;
-    property Method: TRttiMethod read fMethod;
+    property &Method: TRttiMethod read fMethod;
     property VirtualIndex: SmallInt read GetVirtualIndex;
   end;
 
@@ -52,11 +52,11 @@ implementation
 
 {$REGION 'TMethodIntercept'}
 
-constructor TMethodIntercept.Create(const method: TRttiMethod;
+constructor TMethodIntercept.Create(const &method: TRttiMethod;
   const callback: TMethodImplementationCallback);
 begin
-  fImplementation := method.CreateImplementation(Self, callback);
-  fMethod := method;
+  fImplementation := &method.CreateImplementation(Self, callback);
+  fMethod := &method;
 end;
 
 destructor TMethodIntercept.Destroy; //FI:W504

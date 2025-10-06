@@ -2172,7 +2172,7 @@ begin
 
               for i := 0 to Pred(fColCount) do
               begin
-                new(thisColType);
+                &new(thisColType);
                 DeclaredColType := Sqlite3_ColumnDeclType16(stmt, i);
                 if DeclaredColType = nil then
                   thisColType^ := Sqlite3_ColumnType(stmt, i) //use the actual column type instead
@@ -2218,14 +2218,14 @@ begin
               else
                 if pInteger(fColTypes[i])^ = dtInt then
                 begin
-                  new(thisintvalue);
+                  &new(thisintvalue);
                   thisintvalue^ := Sqlite3_ColumnInt64(stmt, i);
                   fResults.Add(thisintvalue);
                 end
                 else
                   if pInteger(fColTypes[i])^ = dtNumeric then
                   begin
-                    new(thisdoublevalue);
+                    &new(thisdoublevalue);
                     thisdoublevalue^ := Sqlite3_ColumnDouble(stmt, i);
                     fResults.Add(thisdoublevalue);
                   end
@@ -2254,7 +2254,7 @@ begin
                     end
                     else
                     begin
-                      new(thisstringvalue);
+                      &new(thisstringvalue);
                       ptrValue := Sqlite3_ColumnText16(stmt, i);
                       setstring(thisstringvalue^, ptrvalue, strlen(ptrvalue));
                       fResults.Add(thisstringvalue);
@@ -3817,7 +3817,7 @@ var
   iRes: Integer;
   Val: PSQLiteFuncs;
 begin
-  New(Val);
+  &New(Val);
   Val.FuncName := UpperCase(UTF8ToString(FuncName));
   Val.Funcs := Self;
   Val.AFunc := nil;
@@ -3841,7 +3841,7 @@ var
   iRes: Integer;
   Val: PSQLiteFuncs;
 begin
-  New(Val);
+  &New(Val);
   Val.FuncName := UpperCase(UTF8ToString(FuncName));
   Val.Funcs := Self;
   Val.AFunc := AFunc;

@@ -599,9 +599,9 @@ type
     class function &&op_Implicit(const value: TGUID): TValue; overload; static;
 
 {$IF RTLVersion < 37}
-    class function From(typeInfo: PTypeInfo; const value): TValue; overload; static;
+    class function &From(typeInfo: PTypeInfo; const value): TValue; overload; static;
 {$IFEND}
-    class function From(instance: TObject; classType: TClass): TValue; overload; static;
+    class function &From(instance: TObject; classType: TClass): TValue; overload; static;
     class function FromFloat(typeInfo: PTypeInfo; value: Extended): TValue; overload; static;
     class function FromVariant(const value: Variant): TValue; static;
 
@@ -1124,7 +1124,7 @@ type
 {$ENDIF}
   end;
 
-  Event<T> = record
+  &Event<T> = record
   private
     fInstance: IInvokableEvent<T>;
     function GetCanInvoke: Boolean;
@@ -1153,9 +1153,9 @@ type
     /// </summary>
     property UseFreeNotification: Boolean read GetUseFreeNotification write SetUseFreeNotification;
 
-    class operator Implicit(const value: IInvokableEvent<T>): Event<T>;
-    class operator Implicit(var value: Event<T>): IInvokableEvent<T>;
-    class operator Implicit(var value: Event<T>): T;
+    class operator Implicit(const value: IInvokableEvent<T>): &Event<T>;
+    class operator Implicit(var value: &Event<T>): IInvokableEvent<T>;
+    class operator Implicit(var value: &Event<T>): T;
   end;
 
   INotifyEvent = IEvent<TNotifyEvent>;
@@ -1381,7 +1381,7 @@ type
     fName: string;
   public
     constructor Create(const value: TValue; const name: string);
-    class function From<T>(const value: T; const name: string): TNamedValue; overload; static;
+    class function &From<T>(const value: T; const name: string): TNamedValue; overload; static;
 
     class operator Implicit(const value: TNamedValue): TValue;
     class operator Implicit(const value: TValue): TNamedValue;
@@ -1404,8 +1404,8 @@ type
     fTypeInfo: PTypeInfo;
   public
     constructor Create(const value: TValue; const typeInfo: PTypeInfo);
-    class function From<T>(const value: T): TTypedValue; overload; static;
-    class function From<T>(const value: T; const typeInfo: PTypeInfo): TTypedValue; overload; static;
+    class function &From<T>(const value: T): TTypedValue; overload; static;
+    class function &From<T>(const value: T; const typeInfo: PTypeInfo): TTypedValue; overload; static;
 
     class operator Implicit(const value: TTypedValue): TValue;
     class operator Implicit(const value: TValue): TTypedValue;
@@ -1680,7 +1680,7 @@ type
 
 {$IFDEF DELPHIXE6_UP}{$RTTI EXPLICIT METHODS([]) PROPERTIES([]) FIELDS(DefaultFieldRttiVisibility)}{$ENDIF}
 
-  Nullable = record
+  &Nullable = record
   private
     class var HasValue: string;
     type Null = interface end;
@@ -1698,7 +1698,7 @@ type
   ///   The underlying value type of the <see cref="Nullable&lt;T&gt;" />
   ///   generic type.
   /// </typeparam>
-  Nullable<T> = {$IFDEF NULLABLE_PACKED}packed {$ENDIF}record
+  &Nullable<T> = {$IFDEF NULLABLE_PACKED}packed {$ENDIF}record
   private
     fValue: T;
     fHasValue: {$IFNDEF NULLABLE_CMR}string{$ELSE}Boolean{$ENDIF};
@@ -1763,7 +1763,7 @@ type
     ///     else compares their values as usual.
     ///   </para>
     /// </remarks>
-    function Equals(const other: Nullable<T>): Boolean;
+    function Equals(const other: &Nullable<T>): Boolean;
 
     function ToString: string;
 
@@ -1795,40 +1795,40 @@ type
     /// </exception>
     property Value: T read GetValue;
 
-    class operator Implicit(const value: Nullable.Null): Nullable<T>;
-    class operator Implicit(const value: T): Nullable<T>;
+    class operator Implicit(const value: &Nullable.Null): &Nullable<T>;
+    class operator Implicit(const value: T): &Nullable<T>;
 
 {$IFDEF IMPLICIT_NULLABLE}
-    class operator Implicit(const value: Nullable<T>): T; inline;
+    class operator Implicit(const value: &Nullable<T>): T; inline;
       {$IFDEF IMPLICIT_NULLABLE_WARN}inline; deprecated 'Possible unsafe operation involving implicit operator - use Value property';{$ENDIF}
 {$ENDIF}
 
 {$IFDEF NULLABLE_CMR}
-    class operator Initialize(out value: Nullable<T>);
+    class operator Initialize(out value: &Nullable<T>);
 {$ENDIF}
 
-    class operator Explicit(const value: Variant): Nullable<T>;
-    class operator Explicit(const value: Nullable<T>): T; inline;
+    class operator Explicit(const value: Variant): &Nullable<T>;
+    class operator Explicit(const value: &Nullable<T>): T; inline;
 
-    class operator Equal(const left, right: Nullable<T>): Boolean; inline;
-    class operator Equal(const left: Nullable<T>; const right: Nullable.Null): Boolean; inline;
-    class operator Equal(const left: Nullable<T>; const right: T): Boolean; inline;
-    class operator NotEqual(const left, right: Nullable<T>): Boolean; inline;
-    class operator NotEqual(const left: Nullable<T>; const right: Nullable.Null): Boolean; inline;
-    class operator NotEqual(const left: Nullable<T>; const right: T): Boolean; inline;
+    class operator Equal(const left, right: &Nullable<T>): Boolean; inline;
+    class operator Equal(const left: &Nullable<T>; const right: &Nullable.Null): Boolean; inline;
+    class operator Equal(const left: &Nullable<T>; const right: T): Boolean; inline;
+    class operator NotEqual(const left, right: &Nullable<T>): Boolean; inline;
+    class operator NotEqual(const left: &Nullable<T>; const right: &Nullable.Null): Boolean; inline;
+    class operator NotEqual(const left: &Nullable<T>; const right: T): Boolean; inline;
   end;
 
-  TNullableString = Nullable<string>;
-  TNullableAnsiString = Nullable<AnsiString>;
-  TNullableWideString = Nullable<WideString>;
-  TNullableInteger = Nullable<Integer>;
-  TNullableInt64 = Nullable<Int64>;
-  TNullableNativeInt = Nullable<NativeInt>;
-  TNullableDateTime = Nullable<TDateTime>;
-  TNullableCurrency = Nullable<Currency>;
-  TNullableDouble = Nullable<Double>;
-  TNullableBoolean = Nullable<Boolean>;
-  TNullableGuid = Nullable<TGUID>;
+  TNullableString = &Nullable<string>;
+  TNullableAnsiString = &Nullable<AnsiString>;
+  TNullableWideString = &Nullable<WideString>;
+  TNullableInteger = &Nullable<Integer>;
+  TNullableInt64 = &Nullable<Int64>;
+  TNullableNativeInt = &Nullable<NativeInt>;
+  TNullableDateTime = &Nullable<TDateTime>;
+  TNullableCurrency = &Nullable<Currency>;
+  TNullableDouble = &Nullable<Double>;
+  TNullableBoolean = &Nullable<Boolean>;
+  TNullableGuid = &Nullable<TGUID>;
 
   /// <summary>
   ///   Helper record for fast access to nullable value via RTTI.
@@ -1992,7 +1992,7 @@ type
     class operator Implicit(const value: T): Lazy<T>;
     class operator Implicit(const valueFactory: Func<T>): Lazy<T>;
     class operator Implicit(const value: ILazy<T>): Lazy<T>;
-    class operator Implicit(const value: Nullable.Null): Lazy<T>;
+    class operator Implicit(const value: &Nullable.Null): Lazy<T>;
 
     /// <summary>
     ///   Returns true if the value is assigned and contains an ILazy&lt;T&gt;
@@ -2302,7 +2302,7 @@ type
       fFinalizer: Action<T>;
       function Invoke: T;
     public
-      constructor Create(const value: T; finalizer: Action<T>);
+      constructor Create(const value: T; &finalizer: Action<T>);
       destructor Destroy; override;
     end;
 
@@ -2328,7 +2328,7 @@ type
   public
     class function Make<T: class, constructor>: IShared<T>; overload; static;
     class function Make<T>(const value: T): IShared<T>; overload; static;
-    class function Make<T>(const value: T; const finalizer: Action<T>): IShared<T>; overload; static;
+    class function Make<T>(const value: T; const &finalizer: Action<T>): IShared<T>; overload; static;
   end;
 
   {$RTTI INHERIT
@@ -3247,8 +3247,8 @@ function TypesOf(const values: array of TValue): TArray<PTypeInfo>;
 function InterfaceToMethodPointer(const intf; index: Integer): TMethodPointer;
 function MethodReferenceToMethod(const methodRef): TMethod;
 function MethodReferenceToMethodPointer(const methodRef): TMethodPointer;
-function MethodToMethodReference(const method: TMethod): IInterface;
-function MethodPointerToMethodReference(const method: TMethodPointer): IInterface;
+function MethodToMethodReference(const &method: TMethod): IInterface;
+function MethodPointerToMethodReference(const &method: TMethodPointer): IInterface;
 function HasMethodInfo(typeInfo: PTypeInfo): Boolean;
 function IsMethodReference(typeInfo: PTypeInfo): Boolean;
 
@@ -3510,7 +3510,7 @@ function FormatValue(const value: TValue): string;
   function FormatRecord(const value: TValue): string;
   var
     guid: TGUID;
-    method: TRttiMethod;
+    &method: TRttiMethod;
     i: NativeInt;
     fields: TArray<TRttiField>;
   begin
@@ -3519,12 +3519,12 @@ function FormatValue(const value: TValue): string;
       Exit(guid.ToString);
 
     // use function ToString: string when available
-    for method in value.TypeInfo.RttiType.GetMethods do
-      if SameText(method.Name, 'ToString')
-        and (method.MethodKind = mkFunction)
-        and (method.GetParameters = nil)
-        and (method.ReturnType.TypeKind = tkUString) then
-        Exit(method.Invoke(value, []).AsString);
+    for &method in value.TypeInfo.RttiType.GetMethods do
+      if SameText(&method.Name, 'ToString')
+        and (&method.MethodKind = mkFunction)
+        and (&method.GetParameters = nil)
+        and (&method.ReturnType.TypeKind = tkUString) then
+        Exit(&method.Invoke(value, []).AsString);
 
     // write fields otherwise
     Result := '(';
@@ -3912,12 +3912,12 @@ end;
 
 function GetUnderlyingType(typeInfo: PTypeInfo): PTypeInfo;
 var
-  nullable: TNullableHelper;
+  &nullable: TNullableHelper;
 begin
   if IsNullable(typeInfo) then
   begin
-    nullable := TNullableHelper.Create(typeInfo);
-    Result := nullable.ValueType;
+    &nullable := TNullableHelper.Create(typeInfo);
+    Result := &nullable.ValueType;
   end
   else
     Result := nil;
@@ -3982,15 +3982,15 @@ function GetLazyType(typeInfo: PTypeInfo): PTypeInfo;
 
 var
   lazyKind: TLazyKind;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   lazyKind := GetLazyKind(typeInfo);
   case lazyKind of
     lkFunc:
     begin
-      method := TType.GetType(typeInfo).GetMethod('Invoke');
-      if Assigned(method) then
-        Result := method.ReturnType.Handle
+      &method := TType.GetType(typeInfo).GetMethod('Invoke');
+      if Assigned(&method) then
+        Result := &method.ReturnType.Handle
       else
         Result := GetLazyTypeUnsafe(typeInfo);
     end;
@@ -3998,9 +3998,9 @@ begin
     begin
       if lazyKind = lkRecord then
         typeInfo := PManagedField(PByte(@typeInfo.TypeData.ManagedFldCount) + SizeOf(Integer)).TypeRef^;
-      method := TType.GetType(typeInfo).GetMethod('GetValue');
-      if Assigned(method) then
-        Result := method.ReturnType.Handle
+      &method := TType.GetType(typeInfo).GetMethod('GetValue');
+      if Assigned(&method) then
+        Result := &method.ReturnType.Handle
       else
         Result := nil; // must not happen - ILazy<T> has methodinfo
     end;
@@ -4194,14 +4194,14 @@ begin
   TMethod(Result).Data := Pointer(methodRef);
 end;
 
-function MethodToMethodReference(const method: TMethod): IInterface;
+function MethodToMethodReference(const &method: TMethod): IInterface;
 begin
-  Result := IInterface(TMethod(method).Data);
+  Result := IInterface(TMethod(&method).Data);
 end;
 
-function MethodPointerToMethodReference(const method: TMethodPointer): IInterface;
+function MethodPointerToMethodReference(const &method: TMethodPointer): IInterface;
 begin
-  Result := IInterface(TMethod(method).Data);
+  Result := IInterface(TMethod(&method).Data);
 end;
 
 function SkipShortString(P: PByte): Pointer;
@@ -4690,20 +4690,20 @@ function GetEqualsOperator(const typeInfo: PTypeInfo): TRttiMethod;
 const
   EqualsOperatorName = '&op_Equality';
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
   parameters: TArray<TRttiParameter>;
 begin
-  for method in TType.GetType(typeInfo).GetMethods(EqualsOperatorName) do
+  for &method in TType.GetType(typeInfo).GetMethods(EqualsOperatorName) do
   begin
-    if method.MethodKind <> mkOperatorOverload then
+    if &method.MethodKind <> mkOperatorOverload then
       Continue;
-    if method.CallingConvention <> ccReg then
+    if &method.CallingConvention <> ccReg then
       Continue;
-    parameters := method.GetParameters;
+    parameters := &method.GetParameters;
     if (Length(parameters) = 2)
       and (parameters[0].ParamType.Handle = typeInfo) and (parameters[1].ParamType.Handle = typeInfo)
       and (pfConst in parameters[0].Flags) and (pfConst in parameters[1].Flags) then
-     Exit(method);
+     Exit(&method);
   end;
   Result := nil;
 end;
@@ -5596,14 +5596,14 @@ end;
 
 procedure TInitTable.TDefaultProperty<T>.InitializeValue(instance: Pointer);
 var
-  method: TMethod;
+  &method: TMethod;
 begin
-  method.Code := GetCodePointer(instance, fPropInfo.SetProc);
-  method.Data := instance;
+  &method.Code := GetCodePointer(instance, fPropInfo.SetProc);
+  &method.Data := instance;
   if fPropInfo.Index = Low(fPropInfo.Index) then
-    TSetter(method)(fValue)
+    TSetter(&method)(fValue)
   else
-    TIndexedSetter(method)(fPropInfo.Index, fValue);
+    TIndexedSetter(&method)(fPropInfo.Index, fValue);
 end;
 
 {$ENDREGION}
@@ -6040,15 +6040,15 @@ function EqualsRec2Rec(const left, right: TValue): Boolean;
   end;
 
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   if (left.TypeInfo = TypeInfo(TValue)) and (right.TypeInfo = TypeInfo(TValue)) then
     Exit(PValue(left.GetReferenceToRawData).Equals(
       PValue(right.GetReferenceToRawData)^));
 
-  method := GetEqualsOperator(left.TypeInfo);
-  if Assigned(method) then
-    Result := method.Invoke(nil, [left, right]).AsBoolean
+  &method := GetEqualsOperator(left.TypeInfo);
+  if Assigned(&method) then
+    Result := &method.Invoke(nil, [left, right]).AsBoolean
   else
     Result := RawEquals(left.TypeInfo.RttiType);
 end;
@@ -6506,9 +6506,9 @@ begin
     varCurrency: Result := TVarData(value).VCurrency;
     varDate: Result := TVarData(value).VDate;
     varOleStr: Result := string(TVarData(value).VOleStr);
-    varDispatch: Result := From(System.TypeInfo(IDispatch), TVarData(value).VDispatch);
-    varError: Result := From(System.TypeInfo(HRESULT), TVarData(value).VError);
-    varUnknown: Result := From(System.TypeInfo(IInterface), TVarData(value).VUnknown);
+    varDispatch: Result := &From(System.TypeInfo(IDispatch), TVarData(value).VDispatch);
+    varError: Result := &From(System.TypeInfo(HRESULT), TVarData(value).VError);
+    varUnknown: Result := &From(System.TypeInfo(IInterface), TVarData(value).VUnknown);
     varByte: Result := TVarData(value).VByte;
     varWord: Result := TVarData(value).VWord;
     varLongWord: Result := TVarData(value).VLongWord;
@@ -6598,7 +6598,7 @@ end;
 
 function TValueHelper.GetNullableValue: TValue;
 var
-  nullable: TNullableHelper;
+  &nullable: TNullableHelper;
   instance: Pointer;
 begin
   if not IsNullable(TypeInfo) then
@@ -6607,9 +6607,9 @@ begin
   instance := GetReferenceToRawData;
   if instance = nil then
     Exit(TValue.Empty);
-  nullable := TNullableHelper.Create(TypeInfo);
-  if nullable.HasValue(instance) then
-    Result := nullable.GetValue(instance)
+  &nullable := TNullableHelper.Create(TypeInfo);
+  if &nullable.HasValue(instance) then
+    Result := &nullable.GetValue(instance)
   else
     Result := TValue.Empty;
 end;
@@ -6758,15 +6758,15 @@ end;
 procedure TValueHelper.SetNullableValue(const value: TValue);
 var
   typeInfo: PTypeInfo;
-  nullable: TNullableHelper;
+  &nullable: TNullableHelper;
   instance: Pointer;
 begin
   typeInfo := TValueData(Self).FTypeInfo;
   if IsNullable(typeInfo) then
   begin
     instance := GetReferenceToRawData;
-    nullable := TNullableHelper.Create(typeInfo);
-    nullable.SetValue(instance, value);
+    &nullable := TNullableHelper.Create(typeInfo);
+    &nullable.SetValue(instance, value);
   end;
 end;
 
@@ -7675,7 +7675,7 @@ end;
 function TValueHelper.TryGetNullableValue(out value: TValue): Boolean;
 var
   typeInfo: PTypeInfo;
-  nullable: TNullableHelper;
+  &nullable: TNullableHelper;
   instance: Pointer;
 begin
   typeInfo := TValueData(Self).FTypeInfo;
@@ -7685,10 +7685,10 @@ begin
     instance := GetReferenceToRawData;
     if instance = nil then
       Exit(False);
-    nullable := TNullableHelper.Create(typeInfo);
-    Result := nullable.HasValue(instance);
+    &nullable := TNullableHelper.Create(typeInfo);
+    Result := &nullable.HasValue(instance);
     if Result then
-      value := nullable.GetValue(instance);
+      value := &nullable.GetValue(instance);
   end;
 end;
 
@@ -8648,20 +8648,20 @@ end;
 {$REGION 'Nullable<T>'}
 
 {$IFNDEF NULLABLE_CMR}
-class constructor Nullable.Create;
+class constructor &Nullable.Create;
 begin
   HasValue := 'True';
   UniqueString(HasValue);
 end;
 {$ENDIF}
 
-constructor Nullable<T>.Create(const value: T);
+constructor &Nullable<T>.Create(const value: T);
 begin
   fValue := value;
-  fHasValue := {$IFNDEF NULLABLE_CMR}Nullable.HasValue{$ELSE}True{$ENDIF};
+  fHasValue := {$IFNDEF NULLABLE_CMR}&Nullable.HasValue{$ELSE}True{$ENDIF};
 end;
 
-constructor Nullable<T>.Create(const value: Variant);
+constructor &Nullable<T>.Create(const value: Variant);
 var
   v: TValue;
 begin
@@ -8669,7 +8669,7 @@ begin
   begin
     v := TValue.FromVariant(value);
     v.AsType(TypeInfo(T), fValue);
-    fHasValue := {$IFNDEF NULLABLE_CMR}Nullable.HasValue{$ELSE}True{$ENDIF};
+    fHasValue := {$IFNDEF NULLABLE_CMR}&Nullable.HasValue{$ELSE}True{$ENDIF};
   end
   else
   begin
@@ -8678,12 +8678,12 @@ begin
   end;
 end;
 
-function Nullable<T>.GetHasValue: Boolean;
+function &Nullable<T>.GetHasValue: Boolean;
 begin
   Result := fHasValue{$IFNDEF NULLABLE_CMR} <> ''{$ENDIF};
 end;
 
-function Nullable<T>.GetValue: T; //FI:W521
+function &Nullable<T>.GetValue: T; //FI:W521
 begin
   if HasValue then
     Exit(fValue);
@@ -8691,7 +8691,7 @@ begin
   __SuppressWarning(Result);
 end;
 
-function Nullable<T>.GetValueOrDefault: T;
+function &Nullable<T>.GetValueOrDefault: T;
 begin
   if HasValue then
     Result := fValue
@@ -8699,7 +8699,7 @@ begin
     Result := Default(T);
 end;
 
-function Nullable<T>.GetValueOrDefault(const defaultValue: T): T;
+function &Nullable<T>.GetValueOrDefault(const defaultValue: T): T;
 begin
   if HasValue then
     Result := fValue
@@ -8707,26 +8707,26 @@ begin
     Result := defaultValue;
 end;
 
-class procedure Nullable<T>.InitEquals;
+class procedure &Nullable<T>.InitEquals;
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
-  method := GetEqualsOperator(TypeInfo(T));
-  if Assigned(method) then
-    fEquals := method.CodeAddress;
+  &method := GetEqualsOperator(TypeInfo(T));
+  if Assigned(&method) then
+    fEquals := &method.CodeAddress;
   if not Assigned(fEquals) then
   begin
     fComparer := _LookupVtableInfo(giEqualityComparer, TypeInfo(T), SizeOf(T));
-    fEquals := Nullable<T>.EqualsComparer;
+    fEquals := &Nullable<T>.EqualsComparer;
   end;
 end;
 
-class function Nullable<T>.EqualsComparer(const left, right: T): Boolean;
+class function &Nullable<T>.EqualsComparer(const left, right: T): Boolean;
 begin
   Result := IEqualityComparer<T>(fComparer).Equals(left, right);
 end;
 
-class function Nullable<T>.EqualsInternal(const left, right: T): Boolean;
+class function &Nullable<T>.EqualsInternal(const left, right: T): Boolean;
 begin
   case TType.Kind<T> of
     tkInteger, tkChar, tkEnumeration, tkWChar:
@@ -8766,7 +8766,7 @@ begin
   end;
 end;
 
-function Nullable<T>.Equals(const other: Nullable<T>): Boolean;
+function &Nullable<T>.Equals(const other: &Nullable<T>): Boolean;
 begin
   if not HasValue then
     Exit(not other.HasValue);
@@ -8776,26 +8776,26 @@ begin
 end;
 
 {$IFDEF NULLABLE_CMR}
-class operator Nullable<T>.Initialize(out value: Nullable<T>);
+class operator &Nullable<T>.Initialize(out value: &Nullable<T>);
 begin
   value.fHasValue := False;
 end;
 {$ENDIF}
 
-class operator Nullable<T>.Implicit(const value: T): Nullable<T>;
+class operator &Nullable<T>.Implicit(const value: T): &Nullable<T>;
 begin
   Result.fValue := value;
-  Result.fHasValue := {$IFNDEF NULLABLE_CMR}Nullable.HasValue{$ELSE}True{$ENDIF};
+  Result.fHasValue := {$IFNDEF NULLABLE_CMR}&Nullable.HasValue{$ELSE}True{$ENDIF};
 end;
 
 {$IFDEF IMPLICIT_NULLABLE}
-class operator Nullable<T>.Implicit(const value: Nullable<T>): T;
+class operator &Nullable<T>.Implicit(const value: &Nullable<T>): T;
 begin
   Result := value.Value;
 end;
 {$ENDIF}
 
-class operator Nullable<T>.Explicit(const value: Variant): Nullable<T>;
+class operator &Nullable<T>.Explicit(const value: Variant): &Nullable<T>;
 var
   v: TValue;
 begin
@@ -8803,29 +8803,29 @@ begin
   begin
     v := TValue.FromVariant(value);
     v.AsType(TypeInfo(T), Result.fValue);
-    Result.fHasValue := {$IFNDEF NULLABLE_CMR}Nullable.HasValue{$ELSE}True{$ENDIF};
+    Result.fHasValue := {$IFNDEF NULLABLE_CMR}&Nullable.HasValue{$ELSE}True{$ENDIF};
   end
   else
-    Result := Default(Nullable<T>);
+    Result := Default(&Nullable<T>);
 end;
 
-class operator Nullable<T>.Explicit(const value: Nullable<T>): T;
+class operator &Nullable<T>.Explicit(const value: &Nullable<T>): T;
 begin
   Result := value.Value;
 end;
 
-class operator Nullable<T>.Implicit(const value: Nullable.Null): Nullable<T>;
+class operator &Nullable<T>.Implicit(const value: &Nullable.Null): &Nullable<T>;
 begin
   Result.fValue := Default(T);
   Result.fHasValue := {$IFNDEF NULLABLE_CMR}''{$ELSE}False{$ENDIF};
 end;
 
-class operator Nullable<T>.Equal(const left, right: Nullable<T>): Boolean;
+class operator &Nullable<T>.Equal(const left, right: &Nullable<T>): Boolean;
 begin
   Result := left.Equals(right);
 end;
 
-class operator Nullable<T>.Equal(const left: Nullable<T>;
+class operator &Nullable<T>.Equal(const left: &Nullable<T>;
   const right: T): Boolean;
 begin
   if {$IFDEF NULLABLE_CMR}not {$ENDIF}left.fHasValue{$IFNDEF NULLABLE_CMR} = ''{$ENDIF} then
@@ -8833,24 +8833,24 @@ begin
   Result := EqualsInternal(left.fValue, right);
 end;
 
-class operator Nullable<T>.Equal(const left: Nullable<T>;
-  const right: Nullable.Null): Boolean;
+class operator &Nullable<T>.Equal(const left: &Nullable<T>;
+  const right: &Nullable.Null): Boolean;
 begin
   Result := {$IFDEF NULLABLE_CMR}not {$ENDIF}left.fHasValue{$IFNDEF NULLABLE_CMR} = ''{$ENDIF};
 end;
 
-class operator Nullable<T>.NotEqual(const left, right: Nullable<T>): Boolean;
+class operator &Nullable<T>.NotEqual(const left, right: &Nullable<T>): Boolean;
 begin
   Result := not left.Equals(right);
 end;
 
-class operator Nullable<T>.NotEqual(const left: Nullable<T>;
-  const right: Nullable.Null): Boolean;
+class operator &Nullable<T>.NotEqual(const left: &Nullable<T>;
+  const right: &Nullable.Null): Boolean;
 begin
   Result := left.fHasValue{$IFNDEF NULLABLE_CMR} <> ''{$ENDIF};
 end;
 
-class operator Nullable<T>.NotEqual(const left: Nullable<T>;
+class operator &Nullable<T>.NotEqual(const left: &Nullable<T>;
   const right: T): Boolean;
 begin
   if {$IFDEF NULLABLE_CMR}not {$ENDIF}left.fHasValue{$IFNDEF NULLABLE_CMR} = ''{$ENDIF} then
@@ -8858,7 +8858,7 @@ begin
   Result := not EqualsInternal(left.fValue, right);
 end;
 
-function Nullable<T>.ToString: string;
+function &Nullable<T>.ToString: string;
 var
   v: TValue;
 begin
@@ -8871,7 +8871,7 @@ begin
     Result := 'Null';
 end;
 
-function Nullable<T>.ToVariant: Variant;
+function &Nullable<T>.ToVariant: Variant;
 var
   v: TValue;
 begin
@@ -8887,7 +8887,7 @@ begin
     Result := Null;
 end;
 
-function Nullable<T>.TryGetValue(out value: T): Boolean;
+function &Nullable<T>.TryGetValue(out value: T): Boolean;
 begin
   Result := fHasValue{$IFNDEF NULLABLE_CMR} <> ''{$ENDIF};
   if Result then
@@ -8950,7 +8950,7 @@ begin
       if IsEmpty(value) then
         PUnicodeString(PByte(instance) + fHasValueOffset)^ := ''
       else
-        PUnicodeString(PByte(instance) + fHasValueOffset)^ := Nullable.HasValue;
+        PUnicodeString(PByte(instance) + fHasValueOffset)^ := &Nullable.HasValue;
     tkEnumeration:
       PBoolean(PByte(instance) + fHasValueOffset)^ := not IsEmpty(value);
   end;
@@ -9110,7 +9110,7 @@ begin
   Result.fInstance := value;
 end;
 
-class operator Lazy<T>.Implicit(const value: Nullable.Null): Lazy<T>;
+class operator Lazy<T>.Implicit(const value: &Nullable.Null): Lazy<T>;
 begin
   Result.fInstance := nil;
 end;
@@ -9487,38 +9487,38 @@ end;
 
 class procedure Shared.Make(const value: TObject; var result);
 var
-  finalizer: PObjectFinalizer absolute result;
+  &finalizer: PObjectFinalizer absolute result;
 begin
-  if Assigned(finalizer) and (AtomicDecrement(finalizer.RefCount) = 0) then
-    finalizer.Value.Free
+  if Assigned(&finalizer) and (AtomicDecrement(&finalizer.RefCount) = 0) then
+    &finalizer.Value.Free
   else
   begin
-    GetMem(finalizer, SizeOf(TObjectFinalizer));
-    finalizer.Vtable := @Shared.ObjectFinalizerVtable;
+    GetMem(&finalizer, SizeOf(TObjectFinalizer));
+    &finalizer.Vtable := @Shared.ObjectFinalizerVtable;
   end;
-  finalizer.RefCount := 1;
-  finalizer.Value := value;
+  &finalizer.RefCount := 1;
+  &finalizer.Value := value;
 end;
 
 class procedure Shared.Make(const value: Pointer; typeInfo: PTypeInfo; var result);
 var
-  finalizer: PRecordFinalizer absolute result;
+  &finalizer: PRecordFinalizer absolute result;
 begin
   typeInfo := typeInfo.TypeData.RefType^;
-  if Assigned(finalizer) and (AtomicDecrement(finalizer.RefCount) = 0) then
+  if Assigned(&finalizer) and (AtomicDecrement(&finalizer.RefCount) = 0) then
   begin
-    FinalizeArray(finalizer.Value, typeInfo, 1);
-    FillChar(finalizer.Value^, typeInfo.TypeData.RecSize, 0);
-    FreeMem(finalizer.Value);
+    FinalizeArray(&finalizer.Value, typeInfo, 1);
+    FillChar(&finalizer.Value^, typeInfo.TypeData.RecSize, 0);
+    FreeMem(&finalizer.Value);
   end
   else
   begin
-    GetMem(finalizer, SizeOf(TRecordFinalizer));
-    finalizer.Vtable := @Shared.RecordFinalizerVtable;
+    GetMem(&finalizer, SizeOf(TRecordFinalizer));
+    &finalizer.Vtable := @Shared.RecordFinalizerVtable;
   end;
-  finalizer.RefCount := 1;
-  finalizer.Value := value;
-  finalizer.TypeInfo := typeInfo;
+  &finalizer.RefCount := 1;
+  &finalizer.Value := value;
+  &finalizer.TypeInfo := typeInfo;
 end;
 
 class procedure Shared.Make(typeInfo: PTypeInfo; var result);
@@ -9549,9 +9549,9 @@ begin
 end;
 
 class function Shared.Make<T>(const value: T;
-  const finalizer: Action<T>): IShared<T>;
+  const &finalizer: Action<T>): IShared<T>;
 begin
-  Result := THandleFinalizer<T>.Create(value, finalizer);
+  Result := THandleFinalizer<T>.Create(value, &finalizer);
 end;
 
 {$ENDREGION}
@@ -9602,10 +9602,10 @@ end;
 {$REGION 'Shared.THandleFinalizer<T>'}
 
 constructor Shared.THandleFinalizer<T>.Create(const value: T;
-  finalizer: Action<T>);
+  &finalizer: Action<T>);
 begin
   fValue := value;
-  fFinalizer := finalizer;
+  fFinalizer := &finalizer;
 end;
 
 destructor Shared.THandleFinalizer<T>.Destroy; //FI:W504
@@ -10153,77 +10153,77 @@ end;
 
 {$REGION 'Event<T>'}
 
-procedure Event<T>.Add(const handler: T);
+procedure &Event<T>.Add(const handler: T);
 begin
   EventHelper(fInstance).Add(handler, TypeInfo(T));
 end;
 
-procedure Event<T>.Clear;
+procedure &Event<T>.Clear;
 begin
   EventHelper(fInstance).Clear;
 end;
 
-function Event<T>.GetCanInvoke: Boolean;
+function &Event<T>.GetCanInvoke: Boolean;
 begin
   Result := EventHelper(fInstance).GetCanInvoke;
 end;
 
-function Event<T>.GetEnabled: Boolean;
+function &Event<T>.GetEnabled: Boolean;
 begin
   Result := EventHelper(fInstance).GetEnabled;
 end;
 
-function Event<T>.GetInvoke: T;
+function &Event<T>.GetInvoke: T;
 begin
   EventHelper(fInstance).GetInvoke(Result, TypeInfo(T));
 end;
 
-function Event<T>.GetOnChanged: TNotifyEvent;
+function &Event<T>.GetOnChanged: TNotifyEvent;
 begin
   Result := EventHelper(fInstance).GetOnChanged();
 end;
 
-function Event<T>.GetUseFreeNotification: Boolean;
+function &Event<T>.GetUseFreeNotification: Boolean;
 begin
   Result := EventHelper(fInstance).GetUseFreeNotification;
 end;
 
-procedure Event<T>.Remove(const handler: T);
+procedure &Event<T>.Remove(const handler: T);
 begin
   EventHelper(fInstance).Remove(handler);
 end;
 
-procedure Event<T>.RemoveAll(instance: Pointer);
+procedure &Event<T>.RemoveAll(instance: Pointer);
 begin
   EventHelper(fInstance).RemoveAll(instance);
 end;
 
-procedure Event<T>.SetEnabled(const value: Boolean);
+procedure &Event<T>.SetEnabled(const value: Boolean);
 begin
   EventHelper(fInstance).SetEnabled(value, TypeInfo(T));
 end;
 
-procedure Event<T>.SetOnChanged(const value: TNotifyEvent);
+procedure &Event<T>.SetOnChanged(const value: TNotifyEvent);
 begin
   EventHelper(fInstance).SetOnChanged(value, TypeInfo(T));
 end;
 
-procedure Event<T>.SetUseFreeNotification(const value: Boolean);
+procedure &Event<T>.SetUseFreeNotification(const value: Boolean);
 begin
   EventHelper(fInstance).SetUseFreeNotification(value, TypeInfo(T));
 end;
 
-class operator Event<T>.Implicit(const value: IInvokableEvent<T>): Event<T>;
+class operator &Event<T>.Implicit(const value: IInvokableEvent<T>): &Event<T>;
 begin
   IntfAssign(value, IInterface(Result.fInstance));
 end;
 
-class operator Event<T>.Implicit(var value: Event<T>): IInvokableEvent<T>;
+class operator &Event<T>.Implicit(var value: &Event<T>): IInvokableEvent<T>;
 begin
   EventHelper(value.fInstance).EnsureInstance(Result, TypeInfo(T));
 end;
 
-class operator Event<T>.Implicit(var value: Event<T>): T;
+class operator &Event<T>.Implicit(var value: &Event<T>): T;
 begin
   EventHelper(value.fInstance).GetInvoke(Result, TypeInfo(T));
 end;
@@ -10423,12 +10423,12 @@ end;
 class function TActivator.CreateInstance(const classType: TRttiInstanceType;
   const arguments: array of TValue): TValue;
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
-  method := FindConstructor(classType, arguments);
-  if not Assigned(method) then
+  &method := FindConstructor(classType, arguments);
+  if not Assigned(&method) then
     RaiseNoConstructorFound(classType.MetaclassType);
-  Result := CreateInstance(classType, method, arguments)
+  Result := CreateInstance(classType, &method, arguments)
 end;
 
 class function TActivator.CreateInstance(const classType: TRttiInstanceType;
@@ -10492,7 +10492,7 @@ class function TActivator.FindConstructor(classType: TClass): TConstructor;
 var
   classInfo: PTypeInfo;
   ctorFound: Boolean;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   Assert(Assigned(classType));
   classInfo := classType.ClassInfo;
@@ -10509,14 +10509,14 @@ begin
 
   CacheLock.EnterUpgradableRead;
   try
-    for method in TType.GetType(classInfo).GetMethods do
+    for &method in TType.GetType(classInfo).GetMethods do
     begin
-      if not method.IsConstructor then
+      if not &method.IsConstructor then
         Continue;
 
-      if method.GetParameters = nil then
+      if &method.GetParameters = nil then
       begin
-        Result := method.CodeAddress;
+        Result := &method.CodeAddress;
         CacheLock.EnterWrite;
         try
           ConstructorCache.AddOrSetValue(classInfo, Result);
@@ -10549,25 +10549,25 @@ class function TActivator.FindConstructor(const classType: TRttiInstanceType;
   end;
 
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
-  for method in classType.GetMethods do
+  for &method in classType.GetMethods do
   begin
-    if not method.IsConstructor then
+    if not &method.IsConstructor then
       Continue;
 
-    if Assignable(method.GetParameters, arguments) then
+    if Assignable(&method.GetParameters, arguments) then
     begin
       if Length(arguments) = 0 then
       begin
         CacheLock.EnterWrite;
         try
-          ConstructorCache.AddOrSetValue(classType.Handle, method.CodeAddress);
+          ConstructorCache.AddOrSetValue(classType.Handle, &method.CodeAddress);
         finally
           CacheLock.LeaveWrite;
         end;
       end;
-      Exit(method);
+      Exit(&method);
     end;
   end;
   Result := nil;

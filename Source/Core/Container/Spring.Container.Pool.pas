@@ -64,8 +64,8 @@ type
   private
     fLock: TCriticalSection;
     fActivator: IComponentActivator;
-    fMinPoolsize: Nullable<Integer>;
-    fMaxPoolsize: Nullable<Integer>;
+    fMinPoolsize: &Nullable<Integer>;
+    fMaxPoolsize: &Nullable<Integer>;
     fAvailableList: IQueue<Pointer>;
     fActiveList: IList<Pointer>;
     fInstances: IList<Pointer>;
@@ -76,8 +76,8 @@ type
     function GetAvailableObject: TObject;
     procedure InstancesChanged(Sender: TObject; const item: Pointer;
       action: TCollectionChangedAction);
-    property MinPoolsize: Nullable<Integer> read fMinPoolsize;
-    property MaxPoolsize: Nullable<Integer> read fMaxPoolsize;
+    property MinPoolsize: &Nullable<Integer> read fMinPoolsize;
+    property MaxPoolsize: &Nullable<Integer> read fMaxPoolsize;
   public
     constructor Create(const activator: IComponentActivator; minPoolSize, maxPoolSize: Integer);
     destructor Destroy; override;

@@ -1187,12 +1187,12 @@ end;
 procedure TTestCollectionChangedEventBase.Changed(Sender: TObject;
   const Item: Integer; Action: TCollectionChangedAction);
 var
-  event: TEvent<Integer>;
+  &event: TEvent<Integer>;
 begin
-  event.sender := Sender;
-  event.item := Item;
-  event.action := Action;
-  fChangedEvents.Add(event);
+  &event.sender := Sender;
+  &event.item := Item;
+  &event.action := Action;
+  fChangedEvents.Add(&event);
 end;
 
 procedure TTestCollectionChangedEventBase.CheckChanged(index, item: Integer;
@@ -1227,12 +1227,12 @@ end;
 procedure TTestMapChangedEventBase.Changed(Sender: TObject;
   const Item: TKeyValuePair; Action: TCollectionChangedAction);
 var
-  event: TEvent<TKeyValuePair>;
+  &event: TEvent<TKeyValuePair>;
 begin
-  event.sender := Sender;
-  event.item := Item;
-  event.action := Action;
-  fChangedEvents.Add(event);
+  &event.sender := Sender;
+  &event.item := Item;
+  &event.action := Action;
+  fChangedEvents.Add(&event);
 end;
 
 procedure TTestMapChangedEventBase.CheckChanged(index, key: Integer;
@@ -1263,23 +1263,23 @@ end;
 procedure TTestMapChangedEventBase.KeyChanged(Sender: TObject;
   const Item: Integer; Action: TCollectionChangedAction);
 var
-  event: TEvent<Integer>;
+  &event: TEvent<Integer>;
 begin
-  event.sender := Sender;
-  event.item := Item;
-  event.action := Action;
-  fKeyChangedEvents.Add(event);
+  &event.sender := Sender;
+  &event.item := Item;
+  &event.action := Action;
+  fKeyChangedEvents.Add(&event);
 end;
 
 procedure TTestMapChangedEventBase.ValueChanged(Sender: TObject;
   const Item: string; Action: TCollectionChangedAction);
 var
-  event: TEvent<string>;
+  &event: TEvent<string>;
 begin
-  event.sender := Sender;
-  event.item := Item;
-  event.action := Action;
-  fValueChangedEvents.Add(event);
+  &event.sender := Sender;
+  &event.item := Item;
+  &event.action := Action;
+  fValueChangedEvents.Add(&event);
 end;
 
 {$ENDREGION}
@@ -2564,17 +2564,17 @@ end;
 
 procedure TTestStackOfIntegerChangedEvent.TestNonGenericChangedEvent;
 var
-  event: IEvent;
-  method: TMethod;
+  &event: IEvent;
+  &method: TMethod;
 begin
-  event := SUT.OnChanged;
+  &event := SUT.OnChanged;
 
-  CheckTrue(event.Enabled);
+  CheckTrue(&event.Enabled);
 
-  method.Code := @TTestStackOfIntegerChangedEvent.HandlerA;
-  method.Data := Pointer(Self);
+  &method.Code := @TTestStackOfIntegerChangedEvent.HandlerA;
+  &method.Data := Pointer(Self);
 
-  event.Add(method);
+  &event.Add(&method);
 
   SUT.Push(0);
 
@@ -3273,17 +3273,17 @@ end;
 
 procedure TTestQueueOfIntegerChangedEvent.TestNonGenericChangedEvent;
 var
-  event: IEvent;
-  method: TMethod;
+  &event: IEvent;
+  &method: TMethod;
 begin
-  event := SUT.OnChanged;
+  &event := SUT.OnChanged;
 
-  CheckTrue(event.Enabled);
+  CheckTrue(&event.Enabled);
 
-  method.Code := @TTestStackOfIntegerChangedEvent.HandlerA;
-  method.Data := Pointer(Self);
+  &method.Code := @TTestStackOfIntegerChangedEvent.HandlerA;
+  &method.Data := Pointer(Self);
 
-  event.Add(method);
+  &event.Add(&method);
 
   SUT.Enqueue(0);
 
@@ -3414,17 +3414,17 @@ end;
 
 procedure TTestDequeOfIntegerChangedEvent.TestNonGenericChangedEvent;
 var
-  event: IEvent;
-  method: TMethod;
+  &event: IEvent;
+  &method: TMethod;
 begin
-  event := SUT.OnChanged;
+  &event := SUT.OnChanged;
 
-  CheckTrue(event.Enabled);
+  CheckTrue(&event.Enabled);
 
-  method.Code := @TTestStackOfIntegerChangedEvent.HandlerA;
-  method.Data := Pointer(Self);
+  &method.Code := @TTestStackOfIntegerChangedEvent.HandlerA;
+  &method.Data := Pointer(Self);
 
-  event.Add(method);
+  &event.Add(&method);
 
   SUT.AddFirst(0);
 
@@ -6113,38 +6113,38 @@ end;
 
 procedure TSkipTests.SkipOne;
 var
-  source, expected: IEnumerable<Nullable<Integer>>;
+  source, expected: IEnumerable<&Nullable<Integer>>;
 begin
-  source := TEnumerable.From<Nullable<Integer>>([3, 100, 4, nil, 10]);
-  expected := TEnumerable.From<Nullable<Integer>>([100, 4, nil, 10]);
+  source := TEnumerable.From<&Nullable<Integer>>([3, 100, 4, nil, 10]);
+  expected := TEnumerable.From<&Nullable<Integer>>([100, 4, nil, 10]);
   CheckEquals(expected, source.Skip(1));
 end;
 
 procedure TSkipTests.SkipOneNotIList;
 var
-  source, expected: IEnumerable<Nullable<Integer>>;
+  source, expected: IEnumerable<&Nullable<Integer>>;
 begin
-  source := TEnumerable.From<Nullable<Integer>>([3, 100, 4, nil, 10]);
-  expected := TEnumerable.From<Nullable<Integer>>([100, 4, nil, 10]);
-  CheckEquals(expected, ForceNotCollection<Nullable<Integer>>(source.Skip(1)));
+  source := TEnumerable.From<&Nullable<Integer>>([3, 100, 4, nil, 10]);
+  expected := TEnumerable.From<&Nullable<Integer>>([100, 4, nil, 10]);
+  CheckEquals(expected, ForceNotCollection<&Nullable<Integer>>(source.Skip(1)));
 end;
 
 procedure TSkipTests.SkipAllButOne;
 var
-  source, expected: IEnumerable<Nullable<Integer>>;
+  source, expected: IEnumerable<&Nullable<Integer>>;
 begin
-  source := TEnumerable.From<Nullable<Integer>>([3, 100, nil, 4, 10]);
-  expected := TEnumerable.From<Nullable<Integer>>([10]);
+  source := TEnumerable.From<&Nullable<Integer>>([3, 100, nil, 4, 10]);
+  expected := TEnumerable.From<&Nullable<Integer>>([10]);
   CheckEquals(expected, source.Skip(source.Count - 1));
 end;
 
 procedure TSkipTests.SkipAllButOneNotIList;
 var
-  source, expected: IEnumerable<Nullable<Integer>>;
+  source, expected: IEnumerable<&Nullable<Integer>>;
 begin
-  source := TEnumerable.From<Nullable<Integer>>([3, 100, nil, 4, 10]);
-  expected := TEnumerable.From<Nullable<Integer>>([10]);
-  CheckEquals(expected, ForceNotCollection<Nullable<Integer>>(source).Skip(source.Count - 1));
+  source := TEnumerable.From<&Nullable<Integer>>([3, 100, nil, 4, 10]);
+  expected := TEnumerable.From<&Nullable<Integer>>([10]);
+  CheckEquals(expected, ForceNotCollection<&Nullable<Integer>>(source).Skip(source.Count - 1));
 end;
 
 procedure TSkipTests.SkipOneMoreThanAll;

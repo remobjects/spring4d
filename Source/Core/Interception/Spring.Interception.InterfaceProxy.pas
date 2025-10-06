@@ -61,7 +61,7 @@ type
   protected
     procedure GenerateInterfaces(const additionalInterfaces: array of PTypeInfo;
       const options: TProxyGenerationOptions);
-    procedure HandleInvoke(Method: TRttiMethod; const Args: TArray<TValue>;
+    procedure HandleInvoke(&Method: TRttiMethod; const Args: TArray<TValue>;
       out Result: TValue); virtual;
   public
     constructor Create(proxyType: PTypeInfo;
@@ -155,7 +155,7 @@ begin
   Result := fTarget;
 end;
 
-procedure TInterfaceProxy.HandleInvoke(Method: TRttiMethod;
+procedure TInterfaceProxy.HandleInvoke(&Method: TRttiMethod;
   const Args: TArray<TValue>; out Result: TValue);
 var
   arguments: TArray<TValue>;
@@ -164,8 +164,8 @@ var
   i: Integer;
 begin
   arguments := Copy(Args, 1);
-  interceptors := fInterceptorSelector.SelectInterceptors(method, fInterceptors).ToArray;
-  invocation := TInvocation.Create(fTarget, interceptors, Method, arguments);
+  interceptors := fInterceptorSelector.SelectInterceptors(&method, fInterceptors).ToArray;
+  invocation := TInvocation.Create(fTarget, interceptors, &Method, arguments);
   try
     invocation.Proceed;
   finally

@@ -118,7 +118,7 @@ type
   /// </remarks>
   EORMAdapterException = class abstract(EORMException)
   strict private
-    fErrorCode: Nullable<Integer>;
+    fErrorCode: &Nullable<Integer>;
   public
     constructor Create(const msg: string); overload;
     constructor Create(const msg: string; errorCode: Integer); overload;
@@ -131,7 +131,7 @@ type
     /// <remarks>
     ///   Driver dependent
     /// </remarks>
-    property ErrorCode: Nullable<Integer> read fErrorCode;
+    property ErrorCode: &Nullable<Integer> read fErrorCode;
   end;
 
   /// <summary>

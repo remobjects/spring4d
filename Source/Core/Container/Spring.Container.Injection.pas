@@ -322,16 +322,16 @@ function TDependencyInjector.InjectConstructor(const model: TComponentModel;
   const parameterTypes: array of PTypeInfo): IInjection;
 var
   predicate: Predicate<TRttiMethod>;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   predicate := TMethodFilters.IsConstructor
     and TMethodFilters.HasParameterTypes(parameterTypes);
-  method := model.ComponentType.Methods.FirstOrDefault(predicate);
-  if not Assigned(method) then
+  &method := model.ComponentType.Methods.FirstOrDefault(predicate);
+  if not Assigned(&method) then
     raise ERegistrationException.CreateResFmt(
       @SUnsatisfiedConstructorParameters, [model.ComponentTypeName]);
   Result := TConstructorInjection.Create;
-  Result.Initialize(method);
+  Result.Initialize(&method);
   Result.InitializeDependencies(parameterTypes);
   model.ConstructorInjections.Add(Result);
 end;
@@ -339,18 +339,18 @@ end;
 function TDependencyInjector.InjectMethod(const model: TComponentModel;
   const methodName: string): IInjection;
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
   injectionExists: Boolean;
 begin
-  method := model.ComponentType.GetMethod(methodName);
-  if not Assigned(method) then
+  &method := model.ComponentType.GetMethod(methodName);
+  if not Assigned(&method) then
     raise ERegistrationException.CreateResFmt(@SMethodNotFound,
       [model.ComponentTypeName, methodName]);
   injectionExists := model.MethodInjections.TryGetFirst(Result,
-    TInjectionFilters.ContainsMember(method));
+    TInjectionFilters.ContainsMember(&method));
   if not injectionExists then
     Result := TMethodInjection.Create(methodName);
-  Result.Initialize(method);
+  Result.Initialize(&method);
   if not injectionExists then
     model.MethodInjections.Add(Result);
 end;
@@ -359,20 +359,20 @@ function TDependencyInjector.InjectMethod(const model: TComponentModel;
   const methodName: string; const parameterTypes: array of PTypeInfo): IInjection;
 var
   predicate: Predicate<TRttiMethod>;
-  method: TRttiMethod;
+  &method: TRttiMethod;
   injectionExists: Boolean;
 begin
   predicate := TMethodFilters.IsNamed(methodName)
     and TMethodFilters.IsInstanceMethod
     and TMethodFilters.HasParameterTypes(parameterTypes);
-  method := model.ComponentType.Methods.FirstOrDefault(predicate);
-  if not Assigned(method) then
+  &method := model.ComponentType.Methods.FirstOrDefault(predicate);
+  if not Assigned(&method) then
     raise ERegistrationException.CreateResFmt(@SUnsatisfiedMethodParameterTypes, [methodName]);
   injectionExists := model.MethodInjections.TryGetFirst(Result,
-    TInjectionFilters.ContainsMember(method));
+    TInjectionFilters.ContainsMember(&method));
   if not injectionExists then
     Result := TMethodInjection.Create(methodName);
-  Result.Initialize(method);
+  Result.Initialize(&method);
   Result.InitializeDependencies(parameterTypes);
   if not injectionExists then
     model.MethodInjections.Add(Result);
@@ -420,13 +420,13 @@ function TDependencyInjector.InjectConstructor(
   const model: TComponentModel): IInjection;
 var
   predicate: Predicate<TRttiMethod>;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   predicate := TMethodFilters.IsConstructor
     and TMethodFilters.HasParameterTypes([]);
-  method := model.ComponentType.Methods.FirstOrDefault(predicate);
+  &method := model.ComponentType.Methods.FirstOrDefault(predicate);
   Result := TConstructorInjection.Create;
-  Result.Initialize(method);
+  Result.Initialize(&method);
   model.ConstructorInjections.Add(Result);
 end;
 

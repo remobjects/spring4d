@@ -57,7 +57,7 @@ type
     function IsDebugEnabled: Boolean;
     function IsTraceEnabled: Boolean;
 
-    procedure Log(const event: TLogEvent); overload;
+    procedure Log(const &event: TLogEvent); overload;
 
     procedure LogValue(const name: string; const value: TValue); overload;
     procedure LogValue(level: TLogLevel; const name: string;
@@ -158,7 +158,7 @@ begin
   fGlobalInstance := TNullLogger.Create;
 end;
 
-procedure TNullLogger.Log(const event: TLogEvent);
+procedure TNullLogger.Log(const &event: TLogEvent);
 begin //FI:W519
 end;
 

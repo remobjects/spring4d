@@ -205,7 +205,7 @@ type
     procedure TakeWhile(const predicate: IInterface; var result; classType: TClass);
     procedure TakeWhileIndex(const predicate: IInterface; var result; classType: TClass);
     procedure Union(const second: IInterface; comparer: Pointer; var result; classType: TClass);
-    procedure Where(const predicate: IInterface; var result; classType: TClass);
+    procedure &Where(const predicate: IInterface; var result; classType: TClass);
     procedure WhereIndex(const predicate: IInterface; var result; classType: TClass);
   public
     class function NewInstance: TObject; override;
@@ -350,8 +350,8 @@ type
     function Union(const second: IEnumerable<T>): IEnumerable<T>; overload;
     function Union(const second: IEnumerable<T>; const comparer: IEqualityComparer<T>): IEnumerable<T>; overload;
 
-    function Where(const predicate: Predicate<T>): IEnumerable<T>; overload;
-    function Where(const predicate: Func<T, Integer, Boolean>): IEnumerable<T>; overload;
+    function &Where(const predicate: Predicate<T>): IEnumerable<T>; overload;
+    function &Where(const predicate: Func<T, Integer, Boolean>): IEnumerable<T>; overload;
 
     function ToArray: TArray<T>;
   end;
@@ -400,7 +400,7 @@ type
     Concat, Memoize, Ordered, Reversed, Shuffled,
     SkipWhile, SkipWhileIndex,
     TakeWhile, TakeWhileIndex,
-    Where, WhereIndex, Select);
+    &Where, WhereIndex, Select);
 
   TIteratorMethods = packed record
     MoveNext: function(self: Pointer): Boolean;
@@ -1082,7 +1082,7 @@ const
   IPartitionOfTGuid: TGUID = '{ACFB79AB-F593-4F2B-9720-E6CE984F6844}';
 
 procedure AssignComparer(var comparer; const source: IInterface);
-procedure EnsureEventInstance(var event: TEventBase; var result;
+procedure EnsureEventInstance(var &event: TEventBase; var result;
   eventClass: TEventBaseClass; eventChanged: TNotifyEvent);
 function SupportsIndexedAccess(const source: IInterface): Boolean;
 procedure UpdateNotify(instance: TObject; baseClass: TClass; var notify);
@@ -1110,30 +1110,30 @@ end;
 type
   TEventImpl = class(TEventBase, IEvent);
 
-procedure EnsureEventInstance(var event: TEventBase; var result;
+procedure EnsureEventInstance(var &event: TEventBase; var result;
   eventClass: TEventBaseClass; eventChanged: TNotifyEvent);
 
-  procedure CreateEvent(var event: TEventBase; var result;
+  procedure CreateEvent(var &event: TEventBase; var result;
     eventClass: TEventBaseClass; eventChanged: TNotifyEvent);
   var
     newEvent: TEventBase;
   begin
     newEvent := eventClass.Create;
-    if AtomicCmpExchange(Pointer(event), Pointer(newEvent), nil) <> nil then
+    if AtomicCmpExchange(Pointer(&event), Pointer(newEvent), nil) <> nil then
       newEvent.Free
     else
     begin
-      event.OnChanged := eventChanged;
-      eventChanged(event);
+      &event.OnChanged := eventChanged;
+      eventChanged(&event);
     end;
-    IEvent(result) := TEventImpl(event);
+    IEvent(result) := TEventImpl(&event);
   end;
 
 begin
-  if Assigned(event) then
-    IntfAssign(IEvent(TEventImpl(event)), IInterface(result))
+  if Assigned(&event) then
+    IntfAssign(IEvent(TEventImpl(&event)), IInterface(result))
   else
-    CreateEvent(event, result, eventClass, eventChanged);
+    CreateEvent(&event, result, eventClass, eventChanged);
 end;
 
 function SupportsIndexedAccess(const source: IInterface): Boolean;
@@ -1154,7 +1154,7 @@ end;
 procedure UpdateNotify(instance: TObject; baseClass: TClass; var notify);
 type
   TNotifyRec = record
-    event: TEventBase;
+    &event: TEventBase;
     code: Pointer;
   end;
 const
@@ -1165,7 +1165,7 @@ begin
   baseAddress := PVTable(baseClass)[ChangedVirtualIndex];
   actualAddress := PPVTable(instance)^[ChangedVirtualIndex];
   with TNotifyRec(notify) do
-    if (Assigned(event) and event.CanInvoke) or (actualAddress <> baseAddress) then
+    if (Assigned(&event) and &event.CanInvoke) or (actualAddress <> baseAddress) then
       code := actualAddress
     else
       code := nil;
@@ -3093,7 +3093,7 @@ end;
 
 function TEnumerableBase<T>.Where(const predicate: Predicate<T>): IEnumerable<T>;
 begin
-  Where(PInterface(@predicate)^, Result, TEnumerableExtension<T>);
+  &Where(PInterface(@predicate)^, Result, TEnumerableExtension<T>);
 end;
 
 function TEnumerableBase<T>.Where(
@@ -3216,13 +3216,13 @@ end;
 
 procedure TIterator<T>.AfterConstruction;
 var
-  method: function (var current: T): Boolean of object;
+  &method: function (var current: T): Boolean of object;
 begin
   inherited AfterConstruction;
   fState := STATE_INITIAL;
   fThreadId := GetCurrentThreadId;
-  method := TryMoveNext;
-  fTryMoveNext := TMethod(method).Code;
+  &method := TryMoveNext;
+  fTryMoveNext := TMethod(&method).Code;
 end;
 
 procedure TIterator<T>.Dispose;

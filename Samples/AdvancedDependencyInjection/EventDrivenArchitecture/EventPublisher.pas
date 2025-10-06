@@ -12,7 +12,7 @@ type
     fLocator: IServiceLocator;
   public
     constructor Create(const locator: IServiceLocator);
-    procedure Publish(const event: TObject; ownsObject: Boolean = True);
+    procedure Publish(const &event: TObject; ownsObject: Boolean = True);
   end;
 
 implementation
@@ -30,7 +30,7 @@ begin
   fLocator := locator;
 end;
 
-procedure TEventPublisher.Publish(const event: TObject; ownsObject: Boolean = True);
+procedure TEventPublisher.Publish(const &event: TObject; ownsObject: Boolean = True);
 const
   IEventSubscriberName = 'IEventSubscriber<*>';
 var
@@ -39,13 +39,13 @@ var
   consumers: TArray<TValue>;
   consumer: TValue;
 begin
-  consumerTypeName := StringReplace(IEventSubscriberName, '*', GetQualifiedClassName(event), []);
+  consumerTypeName := StringReplace(IEventSubscriberName, '*', GetQualifiedClassName(&event), []);
   consumerType := TType.FindType(consumerTypeName);
   consumers := fLocator.GetAllServices(consumerType.Handle);
   for consumer in consumers do
-    IEventSubscriber(consumer.AsInterface).Handle(event);
+    IEventSubscriber(consumer.AsInterface).Handle(&event);
   if ownsObject then
-    event.Free;
+    &event.Free;
 end;
 
 end.

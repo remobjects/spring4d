@@ -134,7 +134,7 @@ type
     procedure TestSet(const n: Integer; const value: TTestSet; const i: Integer = 0);
     procedure TestObject(const obj: TObject);
     procedure TestClass(const cls: TClass);
-    procedure TestMethod(const event: TNotifyEvent);
+    procedure TestMethod(const &event: TNotifyEvent);
     function GetNext: Integer;
 
     function GetEvent: IInvokableNotifyEvent<Integer>;
@@ -178,7 +178,7 @@ type
 
   TFoo = class
   public
-    function Method(const rec: TRec): Integer; virtual; abstract;
+    function &Method(const rec: TRec): Integer; virtual; abstract;
     function Method2(const rec: TRec2): Integer; virtual; abstract;
     function DynArrayOfRec2(const rec: TArray<TRec2>): Integer; virtual; abstract;
     function StaticArrayOfRec2(const rec: TRec2Array): Integer; virtual; abstract;
@@ -662,17 +662,17 @@ end;
 procedure MockReturnsOtherMockInDynamicMode.EventTypeIsHandled;
 var
   mock: Mock<IMockTest>;
-  event: IInvokableNotifyEvent<Integer>;
+  &event: IInvokableNotifyEvent<Integer>;
 begin
-  event := mock.Instance.GetEvent;
-  CheckNotNull(event);
-  event.Add(nil);
-  event.Remove(nil);
-  CheckFalse(event.CanInvoke);
+  &event := mock.Instance.GetEvent;
+  CheckNotNull(&event);
+  &event.Add(nil);
+  &event.Remove(nil);
+  CheckFalse(&event.CanInvoke);
   CheckException(ENotSupportedException,
     procedure
     begin
-      event.Invoke(nil, 0);
+      &event.Invoke(nil, 0);
     end);
 end;
 

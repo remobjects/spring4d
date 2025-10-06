@@ -1769,7 +1769,7 @@ type
     /// <exception cref="Spring|EArgumentNilException">
     ///   <c>predicate</c> is <c>nil</c>.
     /// </exception>
-    function Where(const predicate: Predicate<T>): IEnumerable<T>; overload;
+    function &Where(const predicate: Predicate<T>): IEnumerable<T>; overload;
 
     /// <summary>
     ///   Filters the sequence based on the specified predicate. Each element's
@@ -1786,7 +1786,7 @@ type
     /// <exception cref="Spring|EArgumentNilException">
     ///   <c>predicate</c> is <c>nil</c>.
     /// </exception>
-    function Where(const predicate: Func<T, Integer, Boolean>): IEnumerable<T>; overload;
+    function &Where(const predicate: Func<T, Integer, Boolean>): IEnumerable<T>; overload;
 
     /// <summary>
     ///   Gets the assigned comparer. If no comparer was assigned it returns
@@ -5680,7 +5680,7 @@ type
     /// <returns>
     ///   A sequence that contains the specified values.
     /// </returns>
-    class function From<T>(const values: array of T): IReadOnlyList<T>; overload; static;
+    class function &From<T>(const values: array of T): IReadOnlyList<T>; overload; static;
 
     /// <summary>
     ///   Returns a sequence that contains the specified values.
@@ -5694,7 +5694,7 @@ type
     /// <returns>
     ///   A sequence that contains the specified values.
     /// </returns>
-    class function From<T>(const values: TArray<T>): IReadOnlyList<T>; overload; static;
+    class function &From<T>(const values: TArray<T>): IReadOnlyList<T>; overload; static;
 
     /// <summary>
     ///   Groups the elements of a sequence according to a specified key

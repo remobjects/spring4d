@@ -224,21 +224,21 @@ end;
 procedure TEventBase.Add(const handler: TMethod);
 var
   guard: GuardedPointer;
-  handlers, new: PMethodArray;
+  handlers, &new: PMethodArray;
   count: NativeInt;
 begin
   if not Assigned(handler.Code) then
     Exit;
 
-  new := nil;
+  &new := nil;
   repeat
-    guard := AcquireGuard(fHandlers, new = nil);
+    guard := AcquireGuard(fHandlers, &new = nil);
     handlers := guard;
     count := DynArrayLength(handlers);
-    EraArraySetLength(new, count + 1, TypeInfo(TMethod));
-    EraArrayCopy(new, handlers);
-    new[count] := handler;
-  until AtomicCmpExchange(Pointer(fHandlers), new, handlers) = handlers;
+    EraArraySetLength(&new, count + 1, TypeInfo(TMethod));
+    EraArrayCopy(&new, handlers);
+    &new[count] := handler;
+  until AtomicCmpExchange(Pointer(fHandlers), &new, handlers) = handlers;
 
   guard.Release;
   EraArrayClear(handlers);
@@ -312,15 +312,15 @@ end;
 procedure TEventBase.Remove(const handler: TMethod);
 var
   guard: GuardedPointer;
-  handlers, new: PMethodArray;
+  handlers, &new: PMethodArray;
   count, index, i: NativeInt;
 begin
   if not Assigned(handler.Code) then
     Exit;
 
-  new := nil;
+  &new := nil;
   repeat
-    guard := AcquireGuard(fHandlers, new = nil);
+    guard := AcquireGuard(fHandlers, &new = nil);
     handlers := guard;
     count := DynArrayLength(handlers);
     index := -1;
@@ -337,11 +337,11 @@ begin
     end;
     if count > 1 then
     begin
-      EraArraySetLength(new, count, TypeInfo(TMethod));
-      EraArrayCopy(new, handlers);
-      EraArrayDelete(new, index);
+      EraArraySetLength(&new, count, TypeInfo(TMethod));
+      EraArrayCopy(&new, handlers);
+      EraArrayDelete(&new, index);
     end;
-  until AtomicCmpExchange(Pointer(fHandlers), new, handlers) = handlers;
+  until AtomicCmpExchange(Pointer(fHandlers), &new, handlers) = handlers;
 
   guard.Release;
   EraArrayClear(handlers);
@@ -351,18 +351,18 @@ end;
 procedure TEventBase.RemoveAll(instance: Pointer);
 var
   guard: GuardedPointer;
-  handlers, new: PMethodArray;
+  handlers, &new: PMethodArray;
   oldItems: TArray<TMethod>;
   count, i, index: NativeInt;
 begin
-  new := nil;
+  &new := nil;
   repeat
-    guard := AcquireGuard(fHandlers, new = nil);
+    guard := AcquireGuard(fHandlers, &new = nil);
     handlers := guard;
     count := DynArrayLength(handlers);
 
-    EraArraySetLength(new, count, TypeInfo(TMethod));
-    EraArrayCopy(new, handlers);
+    EraArraySetLength(&new, count, TypeInfo(TMethod));
+    EraArrayCopy(&new, handlers);
     SetLength(oldItems, count);
 
     index := 0;
@@ -371,16 +371,16 @@ begin
       begin
         oldItems[index] := handlers[i];
         Inc(index);
-        EraArrayDelete(new, i);
+        EraArrayDelete(&new, i);
       end;
 
     if index = 0 then
     begin
       guard.Release;
-      EraArrayClear(new);
+      EraArrayClear(&new);
       Exit;
     end;
-  until AtomicCmpExchange(Pointer(fHandlers), new, handlers) = handlers;
+  until AtomicCmpExchange(Pointer(fHandlers), &new, handlers) = handlers;
   guard.Release;
   EraArrayClear(handlers);
   for i := index - 1 downto 0 do

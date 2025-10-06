@@ -67,8 +67,8 @@ type
       '[FATAL]'
     );
   public
-    class function FormatText(const event: TLogEvent): string; static; inline;
-    class function FormatMsg(const event: TLogEvent): string; static; inline;
+    class function FormatText(const &event: TLogEvent): string; static; inline;
+    class function FormatMsg(const &event: TLogEvent): string; static; inline;
     class function FormatException(const e: Exception): string; static; //noinline
     class function FormatMethodName(classType: TClass;
       const methodName: string): string; static; inline;
@@ -78,9 +78,9 @@ type
       const methodName: string): string; static; inline;
   {$ENDREGION}
   protected
-    procedure DoSend(const event: TLogEvent); virtual; abstract;
+    procedure DoSend(const &event: TLogEvent); virtual; abstract;
   public
-    procedure Send(const event: TLogEvent);
+    procedure Send(const &event: TLogEvent);
   end;
 
   {$ENDREGION}
@@ -124,39 +124,39 @@ begin
   Result := SLogLeaving + FormatMethodName(classType, methodName);
 end;
 
-class function TLogAppenderBase.FormatText(const event: TLogEvent): string;
+class function TLogAppenderBase.FormatText(const &event: TLogEvent): string;
 begin
-  case event.EventType of
+  case &event.EventType of
     TLogEventType.Text,
     TLogEventType.SerializedData,
     TLogEventType.CallStack:
-      Result := event.Msg;
+      Result := &event.Msg;
     TLogEventType.Value:
-      Result := event.Msg + ': ' + event.Data.ToString;
+      Result := &event.Msg + ': ' + &event.Data.ToString;
 
     TLogEventType.Entering:
-      Result := FormatEntering(event.ClassType, event.Msg);
+      Result := FormatEntering(&event.ClassType, &event.Msg);
 
     TLogEventType.Leaving:
-      Result := FormatLeaving(event.ClassType, event.Msg);
+      Result := FormatLeaving(&event.ClassType, &event.Msg);
   end;
 end;
 
-class function TLogAppenderBase.FormatMsg(const event: TLogEvent): string;
+class function TLogAppenderBase.FormatMsg(const &event: TLogEvent): string;
 begin
-  if event.Exception = nil then
-    Result := FormatText(event)
+  if &event.Exception = nil then
+    Result := FormatText(&event)
   else
-    if event.Msg <> '' then
-      Result := FormatText(event) + ': ' + FormatException(event.Exception)
+    if &event.Msg <> '' then
+      Result := FormatText(&event) + ': ' + FormatException(&event.Exception)
     else
-      Result := FormatException(event.Exception);
+      Result := FormatException(&event.Exception);
 end;
 
-procedure TLogAppenderBase.Send(const event: TLogEvent);
+procedure TLogAppenderBase.Send(const &event: TLogEvent);
 begin
-  if IsEnabled(event.Level, [event.EventType]) then
-    DoSend(event);
+  if IsEnabled(&event.Level, [&event.EventType]) then
+    DoSend(&event);
 end;
 
 {$ENDREGION}

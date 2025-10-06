@@ -453,7 +453,7 @@ asm
   cmp   eax, ecx
   jnb    @remaining_bytes
 
-@loop:
+@&loop:
   imul  eax, [ebx], c1
   add   ebx, 4
   rol   eax, r1
@@ -462,7 +462,7 @@ asm
   rol   eax, r2
   lea   esi, [eax+n+eax*4]
   cmp   ecx, ebx
-  ja    @loop
+  ja    @&loop
 
 @remaining_bytes:
   mov   eax, edx
@@ -520,7 +520,7 @@ asm
   cmp   rcx, rdx
   jnb   @remaining_bytes
 
-@loop:
+@&loop:
   imul  r8d, [rcx], c1
   add   rcx, 4
   rol   r8d, r1
@@ -529,7 +529,7 @@ asm
   rol   r8d, r2
   lea   eax, [r8+n+r8*4]
   cmp   rdx, rcx
-  ja   @loop
+  ja   @&loop
 
 @remaining_bytes:
   mov   ecx, r9d

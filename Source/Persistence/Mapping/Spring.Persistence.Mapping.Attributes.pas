@@ -141,7 +141,7 @@ type
 
     property TableName: string read GetTableName;
     property Schema: string read fSchema;
-    property Namespace: string read GetNamespace;
+    property &Namespace: string read GetNamespace;
   end;
 
   /// <summary>

@@ -695,7 +695,7 @@ procedure TMongo.disconnect();
     SetLength(ps, Len);
     for i := 0 to Len-1 do
       ps[i] := bs[i].getHandle;
-    //Result := (mongo_insert_batch(handle, PAnsiChar(System.UTF8Encode(ns)), @ps, len, nil, 0) = 0); //BUG @·ûºÅ´íÎó,±ØÐëÔÚµ÷ÓÃ±¾µ¥ÔªµÄÖ÷³ÌÐò
+    //Result := (mongo_insert_batch(handle, PAnsiChar(System.UTF8Encode(ns)), @ps, len, nil, 0) = 0); //BUG @ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ã±ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     Result := (mongo_insert_batch(handle, PAnsiChar(System.UTF8Encode(ns)), pointer(ps), len, nil, 0) = 0);
   end;
 

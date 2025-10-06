@@ -9,7 +9,7 @@ procedure RunNullableDemo;
 
 implementation
 
-procedure ShowThreeStates(const value: Nullable<Boolean>);
+procedure ShowThreeStates(const value: &Nullable<Boolean>);
 begin
   if value.HasValue then
   begin
@@ -25,7 +25,7 @@ end;
 
 procedure RunNullableDemo;
 var
-  NullableBoolean: Nullable<Boolean>;
+  NullableBoolean: &Nullable<Boolean>;
 begin
   try
     WriteLn(NullableBoolean.Value);

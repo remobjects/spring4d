@@ -9,7 +9,7 @@ uses
 type
   TEmailOrderConfirmation = class(TInterfacedObject, IEventSubscriber<TOrderSubmittedEvent>)
   public
-    procedure Handle(const event: TOrderSubmittedEvent);
+    procedure Handle(const &event: TOrderSubmittedEvent);
   end;
 
 implementation
@@ -17,7 +17,7 @@ implementation
 { TEmailOrderConfirmation }
 
 procedure TEmailOrderConfirmation.Handle(
-  const event: TOrderSubmittedEvent);
+  const &event: TOrderSubmittedEvent);
 begin
   Writeln('send email');
 end;

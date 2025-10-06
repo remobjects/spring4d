@@ -115,14 +115,14 @@ type
 
   TFreezableInterceptorSelector = class(TInterfacedObject, IInterceptorSelector)
   public
-    function SelectInterceptors(const method: TRttiMethod;
+    function SelectInterceptors(const &method: TRttiMethod;
       const interceptors: IEnumerable<IInterceptor>): IEnumerable<IInterceptor>;
   end;
 
   TFreezableProxyGenerationHook = class(TInterfacedObject, IProxyGenerationHook)
   public
-    procedure NonVirtualMemberNotification(const method: TRttiMethod);
-    function ShouldInterceptMethod(const method: TRttiMethod): Boolean;
+    procedure NonVirtualMemberNotification(const &method: TRttiMethod);
+    function ShouldInterceptMethod(const &method: TRttiMethod): Boolean;
   end;
 
   ENotFreezableObjectException = class(Exception);
@@ -200,7 +200,7 @@ type
 
   TDelegateSelector = class(TInterfacedObject, IInterceptorSelector)
   public
-    function SelectInterceptors(const method: TRttiMethod;
+    function SelectInterceptors(const &method: TRttiMethod;
       const interceptors: IEnumerable<IInterceptor>): IEnumerable<IInterceptor>;
   end;
 
@@ -467,10 +467,10 @@ end;
 {$REGION 'TFreezableInterceptorSelector'}
 
 function TFreezableInterceptorSelector.SelectInterceptors(
-  const method: TRttiMethod;
+  const &method: TRttiMethod;
   const interceptors: IEnumerable<IInterceptor>): IEnumerable<IInterceptor>;
 begin
-  if StartsText('Set', method.Name) then
+  if StartsText('Set', &method.Name) then
     Exit(interceptors);
   Result := interceptors.Where(
     function(const i: IInterceptor): Boolean
@@ -485,17 +485,17 @@ end;
 {$REGION 'TFreezableProxyGenerationHook'}
 
 procedure TFreezableProxyGenerationHook.NonVirtualMemberNotification(
-  const method: TRttiMethod);
+  const &method: TRttiMethod);
 begin
-  if StartsText('Set', method.Name) then
+  if StartsText('Set', &method.Name) then
     raise EInvalidOperationException.CreateFmt('Property %s is not virtual. ' +
-      'Cannot freeze classes with non-virtual properties.', [Copy(method.Name, 4)]);
+      'Cannot freeze classes with non-virtual properties.', [Copy(&method.Name, 4)]);
 end;
 
 function TFreezableProxyGenerationHook.ShouldInterceptMethod(
-  const method: TRttiMethod): Boolean;
+  const &method: TRttiMethod): Boolean;
 begin
-  Result := StartsText('Set', method.Name) or StartsText('Get', method.Name);
+  Result := StartsText('Set', &method.Name) or StartsText('Get', &method.Name);
 end;
 
 {$ENDREGION}
@@ -588,25 +588,25 @@ end;
 procedure TMethodInterceptor.Intercept(const invocation: IInvocation);
 var
   arguments: TArray<TValue>;
-  method: TRttiMethod;
+  &method: TRttiMethod;
   params: TArray<TRttiParameter>;
   args: TArray<TValue>;
   i: Integer;
   codeAddress: Pointer;
 begin
   arguments := invocation.Arguments;
-  method := invocation.Method;
-  params := method.GetParameters;
+  &method := invocation.Method;
+  params := &method.GetParameters;
   SetLength(args, Length(arguments) + 1);
   args[0] := TValue.From(fDelegate);
 
   // convert arguments for Invoke call (like done in the DispatchInvoke methods
   for i := Low(arguments) to High(arguments) do
-    PassArg(params[i], arguments[i], args[i + 1], method.CallingConvention);
+    PassArg(params[i], arguments[i], args[i + 1], &method.CallingConvention);
 
   codeAddress := PPVtable(fDelegate)^[3];
 
-  invocation.Result := Rtti.Invoke(codeAddress, args, method.CallingConvention, method.ReturnTypeHandle);
+  invocation.Result := Rtti.Invoke(codeAddress, args, &method.CallingConvention, &method.ReturnTypeHandle);
 end;
 
 {$ENDREGION}
@@ -614,7 +614,7 @@ end;
 
 {$REGION 'TDelegateSelector'}
 
-function TDelegateSelector.SelectInterceptors(const method: TRttiMethod;
+function TDelegateSelector.SelectInterceptors(const &method: TRttiMethod;
   const interceptors: IEnumerable<IInterceptor>): IEnumerable<IInterceptor>;
 begin
   Result := interceptors.Where(
@@ -624,7 +624,7 @@ begin
     begin
       methodInterceptor := interceptor as TMethodInterceptor;
       Result := Assigned(methodInterceptor);
-    end).Skip(method.VirtualIndex - 3).Take(1);
+    end).Skip(&method.VirtualIndex - 3).Take(1);
 end;
 
 {$ENDREGION}

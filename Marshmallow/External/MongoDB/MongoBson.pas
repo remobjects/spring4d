@@ -170,7 +170,7 @@ type
     { Append an Int64 to the buffer }
     function append(name: string; value: Int64): Boolean; overload;
     { Append a Double to the buffer }
-    function appendDouble(name: string; value: Double): Boolean; //BUG ²»ÄÜºÍÆäËûÖØÔØ£¿ overload;
+    function appendDouble(name: string; value: Double): Boolean; //BUG ï¿½ï¿½ï¿½Üºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ overload;
     { Append a TDateTime to the buffer; converted to 64-bit POSIX time }
     function append(name: string; value: TDateTime): Boolean; overload;
     { Append a Boolean to the buffer }
@@ -1010,7 +1010,7 @@ begin
         Result := append(name, OleVarToDouble(d));
       end;
     varDate: Result := append(name, FormatDateTime('yyyy-MM-dd', value)); //
-    varInt64: Result := append(name, OleVarToInt64(value)); //BUG ²»ÄÜ³¬¹ý 2^52-1
+    varInt64: Result := append(name, OleVarToInt64(value)); //BUG ï¿½ï¿½ï¿½Ü³ï¿½ï¿½ï¿½ 2^52-1
     varBoolean: Result := append(name, Boolean(value));
     varOleStr: Result := append(name, PAnsiChar(System.UTF8Encode(value)));
     varUnknown:

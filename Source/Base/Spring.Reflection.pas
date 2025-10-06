@@ -250,7 +250,7 @@ type
 
     function TryGetField(const name: string; out field: TRttiField): Boolean;
     function TryGetProperty(const name: string; out prop: TRttiProperty): Boolean;
-    function TryGetMethod(const name: string; out method: TRttiMethod): Boolean;
+    function TryGetMethod(const name: string; out &method: TRttiMethod): Boolean;
 
     function GetMember(const name: string): TRttiMember;
 
@@ -1303,10 +1303,10 @@ begin
 end;
 
 function TRttiTypeHelper.TryGetMethod(const name: string;
-  out method: TRttiMethod): Boolean;
+  out &method: TRttiMethod): Boolean;
 begin
-  method := GetMethod(name);
-  Result := Assigned(method);
+  &method := GetMethod(name);
+  Result := Assigned(&method);
 end;
 
 function TRttiTypeHelper.TryGetProperty(const name: string;

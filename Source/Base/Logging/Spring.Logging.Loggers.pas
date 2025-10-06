@@ -95,9 +95,9 @@ type
       end;
   protected
     procedure ILogAppender.Send = Log;
-    procedure DoLog(const event: TLogEvent); virtual; abstract;
+    procedure DoLog(const &event: TLogEvent); virtual; abstract;
   public
-    procedure Log(const event: TLogEvent); overload;
+    procedure Log(const &event: TLogEvent); overload;
 
     procedure LogValue(const name: string; const value: TValue); overload;
     procedure LogValue(level: TLogLevel; const name: string;
@@ -192,7 +192,7 @@ type
   private
     fController: ILoggerController;
   protected
-    procedure DoLog(const event: TLogEvent); override;
+    procedure DoLog(const &event: TLogEvent); override;
   public
     constructor Create(const controller: ILoggerController);
   end;
@@ -517,10 +517,10 @@ begin
   LogValue(fDefaultLevel, name, value);
 end;
 
-procedure TAbstractLogger.Log(const event: TLogEvent);
+procedure TAbstractLogger.Log(const &event: TLogEvent);
 begin
-  if IsEnabled(event.Level, [event.EventType]) then
-    DoLog(event);
+  if IsEnabled(&event.Level, [&event.EventType]) then
+    DoLog(&event);
 end;
 
 procedure TAbstractLogger.Text(const fmt: string; const args: array of const);
@@ -657,9 +657,9 @@ begin
   fController := controller;
 end;
 
-procedure TLogger.DoLog(const event: TLogEvent);
+procedure TLogger.DoLog(const &event: TLogEvent);
 begin
-  fController.Send(event);
+  fController.Send(&event);
 end;
 
 {$ENDREGION}

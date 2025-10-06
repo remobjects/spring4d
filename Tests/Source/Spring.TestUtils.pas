@@ -42,7 +42,7 @@ type
   {$ENDIF}
   public
     procedure CheckEqualsString(const expected, actual: string; msg: string = '');
-    procedure CheckException(expected: ExceptionClass; const method: TProc; const msg: string = '');
+    procedure CheckException(expected: ExceptionClass; const &method: TProc; const msg: string = '');
     procedure Pass; inline;
     function RegisterExpectedMemoryLeak(p: Pointer): Boolean; inline;
     procedure StartExpectingException(e: ExceptionClass);
@@ -115,11 +115,11 @@ begin
 end;
 
 procedure TAbstractTestHelper.CheckException(expected: ExceptionClass;
-  const method: TProc; const msg: string);
+  const &method: TProc; const msg: string);
 begin
   FCheckCalled := True;
   try
-    method;
+    &method;
   except
     on E: Exception do
     begin

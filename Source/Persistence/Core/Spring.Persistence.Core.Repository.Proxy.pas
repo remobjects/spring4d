@@ -45,7 +45,7 @@ type
   protected
     class function GetPageArgs(const args: TArray<TValue>;
       out page: Integer; out pageSize: Integer): TArray<TValue>;
-    class function GetQueryTextFromMethod(const method: TRttiMethod): string;
+    class function GetQueryTextFromMethod(const &method: TRttiMethod): string;
   end;
 
   TProxyRepository<T: class, constructor; TID> = class(TProxyRepository)
@@ -58,7 +58,7 @@ type
     fIdTypeName: string;
     fQualifiedIdTypeName: string;
   protected
-    function DoOnInvoke(const Method: TRttiMethod; const Args: TArray<TValue>): TValue;
+    function DoOnInvoke(const &Method: TRttiMethod; const Args: TArray<TValue>): TValue;
     procedure RegisterDefaultMethods;
     procedure RegisterMethod(const methodSignature: string; const methodRef: TMethodReference);
   public
@@ -98,11 +98,11 @@ begin
 end;
 
 class function TProxyRepository.GetQueryTextFromMethod(
-  const method: TRttiMethod): string;
+  const &method: TRttiMethod): string;
 var
   attribute: QueryAttribute;
 begin
-  if method.TryGetCustomAttribute<QueryAttribute>(attribute) then
+  if &method.TryGetCustomAttribute<QueryAttribute>(attribute) then
     Exit(attribute.QueryText);
   Result := '';
 end;
@@ -129,13 +129,13 @@ begin
   fQualifiedIdTypeName := TType.GetType(System.TypeInfo(TID)).QualifiedName;
   RegisterDefaultMethods;
   OnInvoke :=
-    procedure(Method: TRttiMethod; const Args: TArray<TValue>; out Result: TValue)
+    procedure(&Method: TRttiMethod; const Args: TArray<TValue>; out Result: TValue)
     begin
-      Result := DoOnInvoke(Method, Copy(Args, 1));
+      Result := DoOnInvoke(&Method, Copy(Args, 1));
     end;
 end;
 
-function TProxyRepository<T, TID>.DoOnInvoke(const Method: TRttiMethod;
+function TProxyRepository<T, TID>.DoOnInvoke(const &Method: TRttiMethod;
   const Args: TArray<TValue>): TValue;
 var
   methodRef: TMethodReference;
@@ -143,36 +143,36 @@ var
   pageArgs: TArray<TValue>;
   page, pageSize: Integer;
 begin
-  if fDefaultMethods.TryGetValue(Method.ToString, methodRef) then
+  if fDefaultMethods.TryGetValue(&Method.ToString, methodRef) then
     Result := methodRef(Args)
   else
   begin
-    case Method.ReturnType.TypeKind of
+    case &Method.ReturnType.TypeKind of
       tkInteger, tkInt64: Result := fRepository.Count;
       tkClass, tkClassRef, tkPointer:
       begin
-        items := fRepository.Query(GetQueryTextFromMethod(Method), Args);
+        items := fRepository.Query(GetQueryTextFromMethod(&Method), Args);
         items.OwnsObjects := False;
         Result := TValue.From<T>(items.FirstOrDefault);
       end;
       tkInterface:
       begin
-        if Method.ReturnType.IsGenericTypeOf<IDBPage<TObject>> then
+        if &Method.ReturnType.IsGenericTypeOf<IDBPage<TObject>> then
         begin
           // last two arguments should be page and pagesize
           pageArgs := GetPageArgs(Args, page, pageSize);
           Result := TValue.From<IDBPage<T>>(fSession.Page<T>(page, pageSize,
-            GetQueryTextFromMethod(Method), pageArgs));
+            GetQueryTextFromMethod(&Method), pageArgs));
         end
         else
         begin
           Result := TValue.From<IList<T>>(fRepository.Query(
-            GetQueryTextFromMethod(Method), Args));
+            GetQueryTextFromMethod(&Method), Args));
         end;
       end
       else
         raise EORMUnsupportedType.CreateFmt('Unknown method (%s) return type: %s',
-          [Method.ToString, Method.ReturnType.ToString]);
+          [&Method.ToString, &Method.ReturnType.ToString]);
     end;
   end;
 end;

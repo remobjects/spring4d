@@ -47,7 +47,7 @@ uses
 type
   TTestNullableInteger = class(TTestCase)
   private
-    fInteger: Nullable<Integer>;
+    fInteger: &Nullable<Integer>;
   protected
     procedure TearDown; override;
   published
@@ -69,7 +69,7 @@ type
 
   TTestNullableBoolean = class(TTestCase)
   private
-    fBoolean: Nullable<Boolean>;
+    fBoolean: &Nullable<Boolean>;
   protected
     procedure TearDown; override;
   published
@@ -78,7 +78,7 @@ type
 
   TTestNullableDateTime = class(TTestCase)
   private
-    fDateTime: Nullable<TDateTime>;
+    fDateTime: &Nullable<TDateTime>;
   protected
     procedure TearDown; override;
   published
@@ -88,7 +88,7 @@ type
 
   TTestNullableInt64 = class(TTestCase)
   private
-    fInt64: Nullable<Int64>;
+    fInt64: &Nullable<Int64>;
   protected
     procedure TearDown; override;
   published
@@ -775,12 +775,12 @@ end;
 procedure TTestNullableInteger.TestAssignFloat;
 begin
   ExpectedException := EInvalidCast;
-  fInteger := Nullable<Integer>(99.9);
+  fInteger := &Nullable<Integer>(99.9);
 end;
 
 procedure TTestNullableInteger.TestAssignNull;
 var
-  n: Nullable<Integer>;
+  n: &Nullable<Integer>;
 begin
   n := 5;
   n := nil;
@@ -791,18 +791,18 @@ procedure TTestNullableInteger.TestAssignStringInt;
 begin
   // Nullable does NOT do a variant type conversion but is strict about the underlying type
   ExpectedException := EInvalidCast;
-  fInteger := Nullable<Integer>('5');
+  fInteger := &Nullable<Integer>('5');
 end;
 
 procedure TTestNullableInteger.TestAssignStringNonInt;
 begin
   ExpectedException := EInvalidCast;
-  fInteger := Nullable<Integer>('5x');
+  fInteger := &Nullable<Integer>('5x');
 end;
 
 procedure TTestNullableInteger.TestDefaultReturnsInitialValue;
 begin
-  fInteger := Default(Nullable<Integer>);
+  fInteger := Default(&Nullable<Integer>);
   CheckFalse(fInteger.HasValue);
 end;
 
@@ -814,7 +814,7 @@ end;
 
 procedure TTestNullableInteger.TestLocalVariable;
 var
-  dirtyValue: Nullable<Integer>;  { lives in stack }
+  dirtyValue: &Nullable<Integer>;  { lives in stack }
 begin
   CheckFalse(dirtyValue.HasValue);
   CheckTrue(dirtyValue = nil);
@@ -852,21 +852,21 @@ const
   ExpectedInteger: Integer = 5;
 begin
   value := Null;
-  fInteger := Nullable<Integer>.Create(value);
+  fInteger := &Nullable<Integer>.Create(value);
   CheckFalse(fInteger.HasValue);
 
-  fInteger := Nullable<Integer>(value);
+  fInteger := &Nullable<Integer>(value);
   CheckFalse(fInteger.HasValue);
 
   value := ExpectedInteger;
-  fInteger := Nullable<Integer>.Create(value);
+  fInteger := &Nullable<Integer>.Create(value);
   CheckTrue(fInteger.HasValue);
   CheckEquals(ExpectedInteger, fInteger.Value);
 end;
 
 procedure TTestNullableInteger.TestEquals;
 var
-  a, b: Nullable<Integer>;
+  a, b: &Nullable<Integer>;
 begin
   CheckFalse(a.HasValue);
   CheckFalse(b.HasValue);
@@ -928,7 +928,7 @@ end;
 
 procedure TTestNullableCustomRecord.TestEqualsUsingOperatorOverload;
 var
-  x, y: Nullable<TCustomRecord>;
+  x, y: &Nullable<TCustomRecord>;
 begin
   x := TCustomRecord.Create(1, 2);
   y := TCustomRecord.Create(1, 2);
@@ -1036,8 +1036,8 @@ end;
 
 procedure TTestMulticastEvent.TestAddNil;
 var
-  e: Event<TNotifyEvent>;
-  e2: Event<TProc<Integer, string>>;
+  e: &Event<TNotifyEvent>;
+  e2: &Event<TProc<Integer, string>>;
 begin
   e.Add(nil);
   e.Invoke(nil);
@@ -1050,7 +1050,7 @@ end;
 
 procedure TTestMulticastEvent.TestClassProcedureHandler;
 var
-  e: Event<TEventInt64>;
+  e: &Event<TEventInt64>;
 begin
   e.Add(TEventHandler.HandleInt64Static);
   e.Invoke(42);
@@ -1060,7 +1060,7 @@ end;
 
 procedure TTestMulticastEvent.TestClear;
 var
-  e: Event<TNotifyEvent>;
+  e: &Event<TNotifyEvent>;
 begin
   e.Add(HandleChanged);
   e.Clear;
@@ -1071,7 +1071,7 @@ end;
 
 procedure TTestMulticastEvent.TestDelegate;
 var
-  e: Event<Action<Integer, string>>;
+  e: &Event<Action<Integer, string>>;
 begin
   e.Add(fProc);
   e.Invoke(CNumber, CText);
@@ -1083,7 +1083,7 @@ end;
 
 procedure TTestMulticastEvent.TestInstanceProcedureHandler;
 var
-  e: Event<TEventInt64>;
+  e: &Event<TEventInt64>;
   t: TEventHandler;
 begin
   t := TEventHandler.Create;
@@ -1163,7 +1163,7 @@ end;
 
 procedure TTestMulticastEvent.TestIssue58;
 var
-  e: Event<TNotifyEvent>;
+  e: &Event<TNotifyEvent>;
   i: IEvent<TNotifyEvent>;
   t: TNotifyEvent;
 begin
@@ -1174,10 +1174,10 @@ end;
 
 procedure TTestMulticastEvent.TestIssue60;
 var
-  eventInt64: Event<TEventInt64>;
-  eventSingle: Event<TEventSingle>;
-  eventDouble: Event<TEventDouble>;
-  eventExtended: Event<TEventExtended>;
+  eventInt64: &Event<TEventInt64>;
+  eventSingle: &Event<TEventSingle>;
+  eventDouble: &Event<TEventDouble>;
+  eventExtended: &Event<TEventExtended>;
   expected: Integer;
 begin
   expected := 0;
@@ -1197,17 +1197,17 @@ end;
 
 procedure TTestMulticastEvent.TestNotify;
 var
-  event: Event<TEventInt64>;
+  &event: &Event<TEventInt64>;
 begin
-  event.OnChanged := HandleChanged;
-  event.Add(HandlerInt64);
-  event.Remove(HandlerInt64);
+  &event.OnChanged := HandleChanged;
+  &event.Add(HandlerInt64);
+  &event.Remove(HandlerInt64);
   CheckEquals(2, fHandlerInvokeCount);
 end;
 
 procedure TTestMulticastEvent.TestNotifyDelegate;
 var
-  event2: Event<Action<Integer, string>>;
+  event2: &Event<Action<Integer, string>>;
 begin
   event2.OnChanged := HandleChanged;
   event2.Add(fProc);
@@ -1235,7 +1235,7 @@ end;
 
 procedure TTestMulticastEvent.TestRecordType;
 var
-  e: Event<TNotifyEvent>;
+  e: &Event<TNotifyEvent>;
 begin
   CheckTrue(e.Enabled);
 //  CheckTrue(e.IsEmpty);
@@ -1301,7 +1301,7 @@ end;
 
 procedure TTestMulticastEvent.TestStackParams;
 var
-  event: Event<TEventWithStackParams>;
+  &event: &Event<TEventWithStackParams>;
   expected: Integer;
   args: TEventArgs;
 begin
@@ -1310,37 +1310,37 @@ begin
   args.s := '47';
   args.v := 48;
 
-  event.Add(HandlerWithStackParams);
+  &event.Add(HandlerWithStackParams);
   HandlerWithStackParams(42, 43, 44, 45, args);
-  event.Invoke(42, 43, 44, 45, args); Inc(expected);
+  &event.Invoke(42, 43, 44, 45, args); Inc(expected);
 
   CheckEquals(expected, fHandlerInvokeCount);
 end;
 
 procedure TTestMulticastEvent.TestRegisterParams;
 var
-  event: Event<TEventWithRegisterParams>;
+  &event: &Event<TEventWithRegisterParams>;
   expected: Integer;
 begin
   expected := 1;
 
-  event.Add(HandlerWithRegisterParams);
+  &event.Add(HandlerWithRegisterParams);
   HandlerWithRegisterParams(42, 43, 44);
-  event.Invoke(42, 43, 44); Inc(expected);
+  &event.Invoke(42, 43, 44); Inc(expected);
 
   CheckEquals(expected, fHandlerInvokeCount);
 end;
 
 procedure TTestMulticastEvent.TestFloatParams;
 var
-  event: Event<TEventWithFloatParams>;
+  &event: &Event<TEventWithFloatParams>;
   expected: Integer;
 begin
   expected := 1;
 
-  event.Add(HandlerWithFloatParams);
+  &event.Add(HandlerWithFloatParams);
   HandlerWithFloatParams(42, 43, 44);
-  event.Invoke(42, 43, 44); Inc(expected);
+  &event.Invoke(42, 43, 44); Inc(expected);
 
   CheckEquals(expected, fHandlerInvokeCount);
 end;
@@ -1627,7 +1627,7 @@ end;
 
 procedure TTestMulticastEventStackSize.TestIssue60Double;
 var
-  eventDouble: Event<TEventDouble>;
+  eventDouble: &Event<TEventDouble>;
   expected: Integer;
 begin
   expected := 0;
@@ -1645,7 +1645,7 @@ end;
 
 procedure TTestMulticastEventStackSize.TestIssue60DoubleAssignedConst;
 var
-  eventDouble: Event<TEventDouble>;
+  eventDouble: &Event<TEventDouble>;
   expected: Integer;
 begin
   expected := 0;
@@ -1663,7 +1663,7 @@ end;
 
 procedure TTestMulticastEventStackSize.TestIssue60Extended;
 var
-  eventExtended: Event<TEventExtended>;
+  eventExtended: &Event<TEventExtended>;
   expected: Integer;
 begin
   expected := 0;
@@ -1681,7 +1681,7 @@ end;
 
 procedure TTestMulticastEventStackSize.TestIssue60ExtendedAssignedConst;
 var
-  eventExtended: Event<TEventExtended>;
+  eventExtended: &Event<TEventExtended>;
   expected: Integer;
 begin
   expected := 0;
@@ -1699,7 +1699,7 @@ end;
 
 procedure TTestMulticastEventStackSize.TestIssue60GuidAssignedConst;
 var
-  eventExtended: Event<TEventGuid>;
+  eventExtended: &Event<TEventGuid>;
   expected: Integer;
   guid: TGUID;
 begin
@@ -1720,7 +1720,7 @@ end;
 
 procedure TTestMulticastEventStackSize.TestIssue60Int64;
 var
-  eventInt64: Event<TEventInt64>;
+  eventInt64: &Event<TEventInt64>;
   expected: Integer;
 begin
   expected := 0;
@@ -1739,7 +1739,7 @@ end;
 
 procedure TTestMulticastEventStackSize.TestIssue60Int64AssignedConst;
 var
-  eventInt64: Event<TEventInt64>;
+  eventInt64: &Event<TEventInt64>;
   expected: Integer;
 begin
   expected := 0;
@@ -1758,7 +1758,7 @@ end;
 
 procedure TTestMulticastEventStackSize.TestIssue60Single;
 var
-  eventSingle: Event<TEventSingle>;
+  eventSingle: &Event<TEventSingle>;
   expected: Integer;
 begin
   expected := 0;
@@ -1777,7 +1777,7 @@ end;
 
 procedure TTestMulticastEventStackSize.TestIssue60SingleAssignedConst;
 var
-  eventSingle: Event<TEventSingle>;
+  eventSingle: &Event<TEventSingle>;
   expected: Integer;
 begin
   expected := 0;
@@ -3276,12 +3276,12 @@ end;
 
 procedure TTestValueHelper.GetNullableValue_ValueIsEmpty_ReturnsEmpty;
 begin
-  fSUT := TValue.From<Nullable<Integer>>(Default(Nullable<Integer>));
+  fSUT := TValue.From<&Nullable<Integer>>(Default(&Nullable<Integer>));
   fValue := fSUT.GetNullableValue;
   CheckTrue(fValue.IsEmpty);
 
   fSUT := TValue.Empty;
-  TValueData(fSUT).FTypeInfo := TypeInfo(Nullable<Integer>);
+  TValueData(fSUT).FTypeInfo := TypeInfo(&Nullable<Integer>);
   fValue := fSUT.GetNullableValue;
   CheckTrue(fValue.IsEmpty);
 end;
@@ -3303,9 +3303,9 @@ end;
 
 procedure TTestValueHelper.NullableToString;
 begin
-  fSUT := TValue.From(Nullable<Integer>(42));
+  fSUT := TValue.From(&Nullable<Integer>(42));
   CheckEqualsString('42', fSUT.ToString);
-  fSUT := TValue.From(Nullable<Integer>(nil));
+  fSUT := TValue.From(&Nullable<Integer>(nil));
   CheckEqualsString('(null)', fSUT.ToString);
 end;
 
@@ -3422,17 +3422,17 @@ end;
 
 procedure TTestValueHelper.TryToType_ConvertIntegerToNullableEnum;
 var
-  value: Nullable<TEnumeration>;
+  value: &Nullable<TEnumeration>;
 begin
   fSUT := Integer(1);
-  CheckTrue(fSUT.TryToType<Nullable<TEnumeration>>(value));
+  CheckTrue(fSUT.TryToType<&Nullable<TEnumeration>>(value));
   CheckEquals(1, Integer(value.Value));
 
   fSUT := Integer(3);
-  CheckFalse(fSUT.TryToType<Nullable<TEnumeration>>(value));
+  CheckFalse(fSUT.TryToType<&Nullable<TEnumeration>>(value));
 
   fSUT := TValue.Empty;
-  CheckTrue(fSUT.TryToType<Nullable<TEnumeration>>(value));
+  CheckTrue(fSUT.TryToType<&Nullable<TEnumeration>>(value));
   CheckFalse(value.HasValue);
 end;
 
@@ -3483,10 +3483,10 @@ end;
 
 procedure TTestValueHelper.TryToType_ConvertStringToNullableString;
 var
-  value: Nullable<string>;
+  value: &Nullable<string>;
 begin
   fSUT := '42';
-  CheckTrue(fSUT.TryToType<Nullable<string>>(value));
+  CheckTrue(fSUT.TryToType<&Nullable<string>>(value));
   CheckTrue(value.HasValue);
   CheckEquals('42', value.Value);
 end;
@@ -3539,7 +3539,7 @@ var
 begin
   dt := EncodeDateTime(2015, 1, 1, 12, 0, 0, 0);
   v := VarSQLTimeStampCreate(dt);
-  fDateTime := Nullable<TDateTime>(v);
+  fDateTime := &Nullable<TDateTime>(v);
   CheckEquals(dt, fDateTime.Value);
 end;
 
@@ -3556,7 +3556,7 @@ begin
   VarSQLTimeStampOffsetCreate(v, DateTimeToSQLTimeStampOffset(dt,
     TTimeZone.Local.GetUtcOffset(dt).Hours,
     TTimeZone.Local.GetUtcOffset(dt).Minutes));
-  fDateTime := Nullable<TDateTime>(v);
+  fDateTime := &Nullable<TDateTime>(v);
   CheckEquals(dt, fDateTime.Value);
 end;
 
@@ -3576,7 +3576,7 @@ var
   v: Variant;
 begin
   v := VarFMTBcdCreate('8123456789012345678', 19, 0);
-  fInt64 := Nullable<Int64>(v);
+  fInt64 := &Nullable<Int64>(v);
   CheckEquals(8123456789012345678, fInt64.Value);
 end;
 

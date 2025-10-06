@@ -859,7 +859,7 @@ type
     property readyState: Integer read Get_readyState;
     property parseError: IXMLDOMParseError read Get_parseError;
     property url: WideString read Get_url;
-    property async: WordBool read Get_async write Set_async;
+    property &async: WordBool read Get_async write Set_async;
     property validateOnParse: WordBool read Get_validateOnParse write Set_validateOnParse;
     property resolveExternals: WordBool read Get_resolveExternals write Set_resolveExternals;
     property preserveWhiteSpace: WordBool read Get_preserveWhiteSpace write Set_preserveWhiteSpace;
@@ -893,7 +893,7 @@ type
     property readyState: Integer readonly dispid -525;
     property parseError: IXMLDOMParseError readonly dispid 59;
     property url: WideString readonly dispid 60;
-    property async: WordBool dispid 61;
+    property &async: WordBool dispid 61;
     procedure abort; dispid 62;
     function loadXML(const bstrXML: WideString): WordBool; dispid 63;
     procedure save(destination: OleVariant); dispid 64;
@@ -1606,7 +1606,7 @@ type
     property readyState: Integer readonly dispid -525;
     property parseError: IXMLDOMParseError readonly dispid 59;
     property url: WideString readonly dispid 60;
-    property async: WordBool dispid 61;
+    property &async: WordBool dispid 61;
     procedure abort; dispid 62;
     function loadXML(const bstrXML: WideString): WordBool; dispid 63;
     procedure save(destination: OleVariant); dispid 64;
@@ -1728,7 +1728,7 @@ type
     property readyState: Integer readonly dispid -525;
     property parseError: IXMLDOMParseError readonly dispid 59;
     property url: WideString readonly dispid 60;
-    property async: WordBool dispid 61;
+    property &async: WordBool dispid 61;
     procedure abort; dispid 62;
     function loadXML(const bstrXML: WideString): WordBool; dispid 63;
     procedure save(destination: OleVariant); dispid 64;

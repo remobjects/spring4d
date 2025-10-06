@@ -854,9 +854,9 @@ type
     irError            // other error
   );
 
-function TrySOInvoke(var ctx: TSuperRttiContext; const obj: TValue; const method: string; const params: ISuperObject; var Return: ISuperObject): TSuperInvokeResult; overload;
-function SOInvoke(const obj: TValue; const method: string; const params: ISuperObject; ctx: TSuperRttiContext = nil): ISuperObject; overload;
-function SOInvoke(const obj: TValue; const method: string; const params: string; ctx: TSuperRttiContext = nil): ISuperObject; overload;
+function TrySOInvoke(var ctx: TSuperRttiContext; const obj: TValue; const &method: string; const params: ISuperObject; var Return: ISuperObject): TSuperInvokeResult; overload;
+function SOInvoke(const obj: TValue; const &method: string; const params: ISuperObject; ctx: TSuperRttiContext = nil): ISuperObject; overload;
+function SOInvoke(const obj: TValue; const &method: string; const params: string; ctx: TSuperRttiContext = nil): ISuperObject; overload;
 {$ENDIF}
 
 implementation
@@ -2527,7 +2527,7 @@ begin
   end;
 end;
 
-function SOInvoke(const obj: TValue; const method: string; const params: ISuperObject; ctx: TSuperRttiContext): ISuperObject; overload;
+function SOInvoke(const obj: TValue; const &method: string; const params: ISuperObject; ctx: TSuperRttiContext): ISuperObject; overload;
 var
   owned: Boolean;
 begin
@@ -2538,7 +2538,7 @@ begin
   end else
     owned := False;
   try
-    if TrySOInvoke(ctx, obj, method, params, Result) <> irSuccess then
+    if TrySOInvoke(ctx, obj, &method, params, Result) <> irSuccess then
       raise Exception.Create('Invalid method call');
   finally
     if owned then
@@ -2546,13 +2546,13 @@ begin
   end;
 end;
 
-function SOInvoke(const obj: TValue; const method: string; const params: string; ctx: TSuperRttiContext): ISuperObject; overload;
+function SOInvoke(const obj: TValue; const &method: string; const params: string; ctx: TSuperRttiContext): ISuperObject; overload;
 begin
-  Result := SOInvoke(obj, method, so(params), ctx)
+  Result := SOInvoke(obj, &method, so(params), ctx)
 end;
 
 function TrySOInvoke(var ctx: TSuperRttiContext; const obj: TValue;
-  const method: string; const params: ISuperObject;
+  const &method: string; const params: ISuperObject;
   var Return: ISuperObject): TSuperInvokeResult;
 var
   t: TRttiInstanceType;
@@ -2609,7 +2609,7 @@ begin
     tkClass:
       begin
         t := TRttiInstanceType(ctx.Context.GetType(obj.AsObject.ClassType));
-        m := t.GetMethod(method);
+        m := t.GetMethod(&method);
         if m = nil then Exit(irMethothodError);
         ps := m.GetParameters;
         SetLength(a, Length(ps));
@@ -2629,7 +2629,7 @@ begin
     tkClassRef:
       begin
         t := TRttiInstanceType(ctx.Context.GetType(obj.AsClass));
-        m := t.GetMethod(method);
+        m := t.GetMethod(&method);
         if m = nil then Exit(irMethothodError);
         ps := m.GetParameters;
         SetLength(a, Length(ps));
@@ -5895,7 +5895,7 @@ end;
 
 function TSuperAvlTree.balance(bal: TSuperAvlEntry): TSuperAvlEntry;
 var
-  deep, old: TSuperAvlEntry;
+  deep, &old: TSuperAvlEntry;
   bf: integer;
 begin
   if (bal.FBf > 0) then
@@ -5903,28 +5903,28 @@ begin
     deep := bal.FGt;
     if (deep.FBf < 0) then
     begin
-      old := bal;
+      &old := bal;
       bal := deep.FLt;
-      old.FGt := bal.FLt;
+      &old.FGt := bal.FLt;
       deep.FLt := bal.FGt;
-      bal.FLt := old;
+      bal.FLt := &old;
       bal.FGt := deep;
       bf := bal.FBf;
       if (bf <> 0) then
       begin
         if (bf > 0) then
         begin
-          old.FBf := -1;
+          &old.FBf := -1;
           deep.FBf := 0;
         end else
         begin
           deep.FBf := 1;
-          old.FBf := 0;
+          &old.FBf := 0;
         end;
         bal.FBf := 0;
       end else
       begin
-        old.FBf := 0;
+        &old.FBf := 0;
         deep.FBf := 0;
       end;
     end else
@@ -5949,11 +5949,11 @@ begin
     deep := bal.FLt;
     if (deep.FBf > 0) then
     begin
-      old := bal;
+      &old := bal;
       bal := deep.FGt;
-      old.FLt := bal.FGt;
+      &old.FLt := bal.FGt;
       deep.FGt := bal.FLt;
-      bal.FGt := old;
+      bal.FGt := &old;
       bal.FLt := deep;
 
       bf := bal.FBf;
@@ -5961,17 +5961,17 @@ begin
       begin
         if (bf < 0) then
         begin
-          old.FBf := 1;
+          &old.FBf := 1;
           deep.FBf := 0;
         end else
         begin
           deep.FBf := -1;
-          old.FBf := 0;
+          &old.FBf := 0;
         end;
         bal.FBf := 0;
       end else
       begin
-        old.FBf := 0;
+        &old.FBf := 0;
         deep.FBf := 0;
       end;
     end else
