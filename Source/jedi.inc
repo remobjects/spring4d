@@ -698,7 +698,9 @@
   EXTENDEDSYNTAX_ON      Compiling in the X+ state (Delphi extended syntax enabled)
 *)
 
-{$DEFINE BORLAND}
+{$IFNDEF ELEMENTS}
+  {$DEFINE BORLAND}
+{$ENDIF}
 
 { Set FreePascal to Delphi mode }
 {$IFDEF FPC}
