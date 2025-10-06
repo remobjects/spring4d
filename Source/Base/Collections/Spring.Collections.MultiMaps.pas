@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -59,7 +59,7 @@ type
     function Remove(const item: TElement): Boolean;
   end;
 
-  TCollectionFactory = procedure (const key; const comparer: IInterface; elementType: PTypeInfo; var result);
+  TCollectionFactory = procedure (const key; const comparer: IInterface; elementType: PTypeInfo; var &result);
 
   // same layout as TCollectionWrapper<T>
   TCollectionWrapper = class sealed(TEnumerableBase)
@@ -95,7 +95,7 @@ type
     class procedure Create(classType: TClass; const collection: IEnumerable;
       wrappers: TList; updateValues: TNotifyEvent;
       collectionFactory: TCollectionFactory; const key;
-      const valueComparer: IInterface; elementType: PTypeInfo; var result); static;
+      const valueComparer: IInterface; elementType: PTypeInfo; var &result); static;
 
     procedure BeforeDestruction; reintroduce;
   end;
@@ -425,7 +425,7 @@ end;
 class procedure TCollectionWrapper.Create(classType: TClass;
   const collection: IEnumerable; wrappers: TList;
   updateValues: TNotifyEvent; collectionFactory: TCollectionFactory; const key;
-  const valueComparer: IInterface; elementType: PTypeInfo; var result);
+  const valueComparer: IInterface; elementType: PTypeInfo; var &result);
 var
   instance: TCollectionWrapper;
 begin

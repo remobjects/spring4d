@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -36,10 +36,10 @@ uses
 {$IFDEF DELPHIXE6_UP}{$RTTI EXPLICIT METHODS([]) PROPERTIES([]) FIELDS(FieldVisibility)}{$ENDIF}
 
 type
-  TEqualsMethod = function(self: Pointer; const left, right): Boolean;
-  TGetHashCodeMethod = function(self: Pointer; const value): Integer;
-  TEqualsMethod<T> = function(self: Pointer; const left, right: T): Boolean;
-  TGetHashCodeMethod<T> = function(self: Pointer; const value: T): Integer;
+  TEqualsMethod = function(&self: Pointer; const left, right): Boolean;
+  TGetHashCodeMethod = function(&self: Pointer; const value): Integer;
+  TEqualsMethod<T> = function(&self: Pointer; const left, right: T): Boolean;
+  TGetHashCodeMethod<T> = function(&self: Pointer; const value: T): Integer;
 
   THashTableEntry = record
     HashCode, BucketIndex, ItemIndex: Integer;
@@ -163,7 +163,7 @@ type
   end;
 
 const
-  KeyOffset = SizeOf(Integer);
+  KeyOffset = sizeOf(Integer);
 
   // use the MSB of the HashCode to note removed items
   RemovedFlag        = Integer($80000000);

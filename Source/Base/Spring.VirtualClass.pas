@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -48,18 +48,18 @@ type
   PVirtualMethodTable = ^Pointer;
 {$POINTERMATH OFF}
 
-  TEquals = function (const Self: TObject; Obj: TObject): Boolean;
-  TGetHashCode = function (const Self: TObject): Integer;
-  TToString = function (const Self: TObject): string;
-  TSafeCallException = function (const Self: TObject; ExceptObject: TObject;
+  TEquals = function (const &Self: TObject; Obj: TObject): Boolean;
+  TGetHashCode = function (const &Self: TObject): Integer;
+  TToString = function (const &Self: TObject): string;
+  TSafeCallException = function (const &Self: TObject; ExceptObject: TObject;
     ExceptAddr: Pointer): HResult;
-  TAfterConstruction = procedure (const Self: TObject);
-  TBeforeDestruction = procedure (const Self: TObject);
-  TDispatch = procedure (const Self: TObject; var Message);
-  TDefaultHandler = procedure (const Self: TObject; var Message);
+  TAfterConstruction = procedure (const &Self: TObject);
+  TBeforeDestruction = procedure (const &Self: TObject);
+  TDispatch = procedure (const &Self: TObject; var Message);
+  TDefaultHandler = procedure (const &Self: TObject; var Message);
   TNewInstance = function (Self: TClass): TObject;
-  TFreeInstance = procedure (const Self: TObject);
-  TDestroy = procedure (const Self: TObject; OuterMost: ShortInt);
+  TFreeInstance = procedure (const &Self: TObject);
+  TDestroy = procedure (const &Self: TObject; OuterMost: ShortInt);
 
   PClass = ^TClass;
   PClassData = ^TClassData;
@@ -275,15 +275,15 @@ var
   classType: Pointer;
 begin
   for classType in fClasses do
-    
-	// when this code runs after finalization of this unit
-	// there might still be object instances being proxified
-	// with these classes - any deallocation here would cause
-	// issues such as access violations and alike during the 
-	// finalization/destruction of these objects
-	// to avoid such issues the deallocation is left to the
-	// operation system when the process ends and they are
-	// exluced from memory leak reporting
+
+  // when this code runs after finalization of this unit
+  // there might still be object instances being proxified
+  // with these classes - any deallocation here would cause
+  // issues such as access violations and alike during the
+  // finalization/destruction of these objects
+  // to avoid such issues the deallocation is left to the
+  // operation system when the process ends and they are
+  // exluced from memory leak reporting
     RegisterExpectedMemoryLeak(PByte(classType) + vmtSelfPtr);
 
   fLock.Free;

@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -43,7 +43,7 @@ type
     class function AddMatcher(const condition: Predicate<TValue>): Integer; static;
 
     class function GetIndex(const v: TValue): Integer; static;
-    class procedure SetIndex(typeInfo: PTypeInfo; index: Integer; var Result); static;
+    class procedure SetIndex(typeInfo: PTypeInfo; index: Integer; var &result); static;
 
     /// <summary>
     ///   Wraps the index of the parameter matcher in a value of type T.
@@ -202,18 +202,18 @@ begin
   Result := v.AsVariant;
 end;
 
-procedure SetIndexFail(typeInfo: PTypeInfo; index: Integer; var Result); //FI:O804
+procedure SetIndexFail(typeInfo: PTypeInfo; index: Integer; var &result); //FI:O804
 begin
   raise ENotSupportedException.CreateResFmt(@STypeNotSupported, [typeInfo.TypeName]);
 end;
 
 procedure SetIndexOrdinal(typeInfo: PTypeInfo; //FI:O804
-  index: Integer; var Result);
+  index: Integer; var &result);
 begin
   PByte(@Result)^ := Byte(index);
 end;
 
-procedure SetIndexFloat(typeInfo: PTypeInfo; index: Integer; var Result);
+procedure SetIndexFloat(typeInfo: PTypeInfo; index: Integer; var &result);
 begin
   case typeInfo.TypeData.FloatType of
     ftSingle:
@@ -229,7 +229,7 @@ begin
   end;
 end;
 
-procedure SetIndexString(typeInfo: PTypeInfo; index: Integer; var Result);
+procedure SetIndexString(typeInfo: PTypeInfo; index: Integer; var &result);
 var
   s: string;
 begin
@@ -250,24 +250,24 @@ begin
 end;
 
 procedure SetIndexObject(typeInfo: PTypeInfo; //FI:O804
-  index: Integer; var Result);
+  index: Integer; var &result);
 begin
   TObject(Result) := TIndexWrapper.Create(index);
 end;
 
 procedure SetIndexInterface(typeInfo: PTypeInfo; //FI:O804
-  index: Integer; var Result);
+  index: Integer; var &result);
 begin
   IInterface(PPointer(@Result)^) := TIndexWrapper.Create(index);
 end;
 
 procedure SetIndexPointer(typeInfo: PTypeInfo; //FI:O804
-  index: Integer; var Result);
+  index: Integer; var &result);
 begin
   NativeInt(Result) := index;
 end;
 
-procedure SetIndexRecord(typeInfo: PTypeInfo; index: Integer; var Result);
+procedure SetIndexRecord(typeInfo: PTypeInfo; index: Integer; var &result);
 var
   fields: TArray<TRttiField>;
 begin
@@ -277,7 +277,7 @@ begin
   TMatcherFactory.SetIndex(fields[0].FieldType.Handle, index, Result);
 end;
 
-procedure SetIndexArray(typeInfo: PTypeInfo; index: Integer; var Result);
+procedure SetIndexArray(typeInfo: PTypeInfo; index: Integer; var &result);
 const
   len: NativeInt = 1;
 begin
@@ -293,7 +293,7 @@ begin
 end;
 
 procedure SetIndexVariant(typeInfo: PTypeInfo; //FI:O804
-  index: Integer; var Result);
+  index: Integer; var &result);
 begin
   PVariant(@Result)^ := index;
 end;
@@ -410,9 +410,9 @@ begin
   Result := Handlers[TValueData(v).FTypeInfo.Kind](v) - 1;
 end;
 
-class procedure TMatcherFactory.SetIndex(typeInfo: PTypeInfo; index: Integer; var Result);
+class procedure TMatcherFactory.SetIndex(typeInfo: PTypeInfo; index: Integer; var &result);
 const
-  Handlers: array[TTypeKind] of procedure (typeInfo: PTypeInfo; index: Integer; var Result) = (
+  Handlers: array[TTypeKind] of procedure (typeInfo: PTypeInfo; index: Integer; var &result) = (
     SetIndexFail, SetIndexOrdinal, SetIndexOrdinal, SetIndexOrdinal, SetIndexFloat,
     SetIndexFail, SetIndexOrdinal, SetIndexObject, SetIndexPointer, SetIndexString,
     SetIndexString, SetIndexString, SetIndexVariant, SetIndexArray, SetIndexRecord,

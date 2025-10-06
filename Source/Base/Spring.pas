@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -2026,12 +2026,12 @@ type
   private type
     ILazyInternal = interface(ILazy)
       procedure GetValue;
-      procedure GetValueInternal(var result);
+      procedure GetValueInternal(var &result);
     end;
 
     ILazyInternal<T> = interface(ILazy)
       function GetValue: T;
-      procedure GetValueInternal(var result);
+      procedure GetValueInternal(var &result);
     end;
 
     TLazy = class(TRefCountedObject)
@@ -2050,7 +2050,7 @@ type
       function GetValue: TValue;
       function GetValueT: T;
       function ILazyInternal<T>.GetValue = GetValueT;
-      procedure GetValueInternal(var result);
+      procedure GetValueInternal(var &result);
       procedure InvokeFactory(const valueFactory: Pointer); override;
     end;
 
@@ -2079,7 +2079,7 @@ type
       function GetIsValueCreated: Boolean;
       function GetValue: TValue;
       function GetObject: TObject;
-      procedure GetValueInternal(var result);
+      procedure GetValueInternal(var &result);
       procedure CreateValue;
     end;
 
@@ -2095,7 +2095,7 @@ type
       function GetIsValueCreated: Boolean;
       function GetValue: TValue;
       function GetInterface: IInterface;
-      procedure GetValueInternal(var result);
+      procedure GetValueInternal(var &result);
       procedure CreateValue;
     end;
 
@@ -2125,17 +2125,17 @@ type
     );
   var
     fInstance: ILazy;
-    procedure GetValue(var result);
+    procedure GetValue(var &result);
     function GetIsValueCreated: Boolean;
   public
-    class procedure Make(const value: TObject; var result; ownsObject: Boolean); overload; static;
-    class procedure Make(const value: IInterface; var result; typeInfo: PTypeInfo); overload; static;
-    class procedure Make<T>(const value: T; var result); overload; static;
+    class procedure Make(const value: TObject; var &result; ownsObject: Boolean); overload; static;
+    class procedure Make(const value: IInterface; var &result; typeInfo: PTypeInfo); overload; static;
+    class procedure Make<T>(const value: T; var &result); overload; static;
 
-    class procedure MakeFromDefaultCtor(var result; const typeInfo: PTypeInfo); static;
-    class procedure MakeFromFactory(factory: Pointer; var result; ownsObject: Boolean); overload; static;
-    class procedure MakeFromFactory(factory: Pointer; var result; typeInfo: PTypeInfo); overload; static;
-    class procedure MakeFromFactory<T>(factory: Pointer; var result); overload; static;
+    class procedure MakeFromDefaultCtor(var &result; const typeInfo: PTypeInfo); static;
+    class procedure MakeFromFactory(factory: Pointer; var &result; ownsObject: Boolean); overload; static;
+    class procedure MakeFromFactory(factory: Pointer; var &result; typeInfo: PTypeInfo); overload; static;
+    class procedure MakeFromFactory<T>(factory: Pointer; var &result); overload; static;
   end;
 
   /// <summary>
@@ -2237,10 +2237,10 @@ type
     class function Equal(const left; const right): Boolean; static;
     class function NotEqual(const left; const right): Boolean; static;
     class function GetIsAlive(const reference): Boolean; static;
-    class procedure GetTarget(const reference; var result; kind: TTypeKind); static;
+    class procedure GetTarget(const reference; var &result; kind: TTypeKind); static;
     class function TryGetTarget(const reference; var target; kind: TTypeKind): Boolean; static;
-    class procedure MakeFromObject(const value; var result); overload; static;
-    class procedure MakeFromInterface(const value; var result); overload; static;
+    class procedure MakeFromObject(const value; var &result); overload; static;
+    class procedure MakeFromInterface(const value; var &result); overload; static;
   end;
 
   {$RTTI INHERIT
@@ -2322,9 +2322,9 @@ type
       @TRecordFinalizer.Invoke
     );
   private
-    class procedure Make(const value: TObject; var result); overload; static;
-    class procedure Make(const value: Pointer; typeInfo: PTypeInfo; var result); overload; static;
-    class procedure Make(typeInfo: PTypeInfo; var result); overload; static;
+    class procedure Make(const value: TObject; var &result); overload; static;
+    class procedure Make(const value: Pointer; typeInfo: PTypeInfo; var &result); overload; static;
+    class procedure Make(typeInfo: PTypeInfo; var &result); overload; static;
   public
     class function Make<T: class, constructor>: IShared<T>; overload; static;
     class function Make<T>(const value: T): IShared<T>; overload; static;
@@ -3148,7 +3148,7 @@ function Pos(const SubStr, Str: UnicodeString; Offset: Integer): Integer; overlo
 
 {$IFNDEF DELPHIXE7_UP}
 procedure DynArrayAssign(var Dest: Pointer; Source: Pointer; typeInfo: Pointer);
-procedure DynArrayCopyRange(var Result: Pointer; A: Pointer; TypeInfo: Pointer; Index, Count: NativeInt);
+procedure DynArrayCopyRange(var &result: Pointer; A: Pointer; TypeInfo: Pointer; Index, Count: NativeInt);
 {$ENDIF}
 
 procedure PlatformNotImplemented;
@@ -3453,7 +3453,7 @@ asm
   jmp System.@DynArrayAsg;
 end;
 
-procedure DynArrayCopyRange(var Result: Pointer; A: Pointer; TypeInfo: Pointer; Index, Count: NativeInt);
+procedure DynArrayCopyRange(var &result: Pointer; A: Pointer; TypeInfo: Pointer; Index, Count: NativeInt);
 asm
 {$IFDEF CPUX64}
   .noframe
@@ -3775,15 +3775,15 @@ begin
   Result := nil;
 end;
 
-procedure InvokeImplGetter(const self: TObject; implGetter: NativeUInt; var result: IInterface);
+procedure InvokeImplGetter(const &self: TObject; implGetter: NativeUInt; var &result: IInterface);
 {$IFNDEF CPUX86}
 type
 {$IF Defined(MSWINDOWS) or Defined(OSX32)}
-  TGetProc = procedure (const Self: TObject; var Result: IInterface);
+  TGetProc = procedure (const &self: TObject; var &result: IInterface);
 {$ELSEIF Defined(LINUX64) or Defined(OSX64) or Defined(CPUARM32)}
-  TGetProc = procedure (var Result: IInterface; const Self: TObject);
+  TGetProc = procedure (var &result: IInterface; const &self: TObject);
 {$ELSEIF Defined(CPUARM64)}
-  TGetProc = function (const Self: TObject): IInterface;
+  TGetProc = function (const &self: TObject): IInterface;
 {$ELSE}
   {$MESSAGE Fatal 'InvokeImplGetter not implemented for platform'}
 {$IFEND}
@@ -6437,7 +6437,7 @@ end;
 
 class function TValueHelper.FromVariant(const value: Variant): TValue;
 
-  procedure FromCustomVariant(const value: Variant; var result: TValue);
+  procedure FromCustomVariant(const value: Variant; var &result: TValue);
   type
     PCustomVariantTypeInfo = ^TCustomVariantTypeInfo;
     TCustomVariantTypeInfo = record
@@ -7159,7 +7159,7 @@ begin
     value := TValue.FromOrdinal(target, i);
 end;
 
-procedure MakeDynArray(typeInfo: PTypeInfo; count: NativeInt; var result: TValue);
+procedure MakeDynArray(typeInfo: PTypeInfo; count: NativeInt; var &result: TValue);
 var
   p: Pointer;
 begin
@@ -9008,7 +9008,7 @@ begin
   Result := fValue;
 end;
 
-procedure Lazy.TLazy<T>.GetValueInternal(var result);
+procedure Lazy.TLazy<T>.GetValueInternal(var &result);
 begin
   if fValueFactory <> nil then
     CreateValue;
@@ -9128,7 +9128,7 @@ begin
     Result := False;
 end;
 
-procedure Lazy.GetValue(var result);
+procedure Lazy.GetValue(var &result);
 begin
   if Assigned(fInstance) then
     ILazyInternal(fInstance).GetValueInternal(result)
@@ -9136,7 +9136,7 @@ begin
     Guard.RaiseNoDelegateAssigned;
 end;
 
-class procedure Lazy.Make(const value: TObject; var result; ownsObject: Boolean);
+class procedure Lazy.Make(const value: TObject; var &result; ownsObject: Boolean);
 var
   rec: PObjectReference absolute result;
 begin
@@ -9158,7 +9158,7 @@ begin
   rec.Value := value;
 end;
 
-class procedure Lazy.Make(const value: IInterface; var result; typeInfo: PTypeInfo);
+class procedure Lazy.Make(const value: IInterface; var &result; typeInfo: PTypeInfo);
 var
   rec: PInterfaceReference absolute result;
 begin
@@ -9175,7 +9175,7 @@ begin
   rec.TypeInfo := typeInfo;
 end;
 
-class procedure Lazy.Make<T>(const value: T; var result);
+class procedure Lazy.Make<T>(const value: T; var &result);
 var
   instance: TLazy<T>;
 begin
@@ -9184,7 +9184,7 @@ begin
   ILazyInternal<T>(result) := instance;
 end;
 
-class procedure Lazy.MakeFromDefaultCtor(var result; const typeInfo: PTypeInfo);
+class procedure Lazy.MakeFromDefaultCtor(var &result; const typeInfo: PTypeInfo);
 var
   defaultCtor: TDefaultCtorFactory;
 begin
@@ -9197,7 +9197,7 @@ begin
   MakeFromFactory(Pointer(Func<TObject>(defaultCtor)), result, True);
 end;
 
-class procedure Lazy.MakeFromFactory(factory: Pointer; var result; ownsObject: Boolean);
+class procedure Lazy.MakeFromFactory(factory: Pointer; var &result; ownsObject: Boolean);
 var
   rec: PObjectReference absolute result;
 begin
@@ -9219,7 +9219,7 @@ begin
   rec.Value := nil;
 end;
 
-class procedure Lazy.MakeFromFactory(factory: Pointer; var result; typeInfo: PTypeInfo);
+class procedure Lazy.MakeFromFactory(factory: Pointer; var &result; typeInfo: PTypeInfo);
 var
   rec: PInterfaceReference absolute result;
 begin
@@ -9236,7 +9236,7 @@ begin
   rec.TypeInfo := typeInfo;
 end;
 
-class procedure Lazy.MakeFromFactory<T>(factory: Pointer; var result);
+class procedure Lazy.MakeFromFactory<T>(factory: Pointer; var &result);
 var
   instance: TLazy<T>;
 begin
@@ -9321,7 +9321,7 @@ begin
   Result := Value;
 end;
 
-procedure Lazy.TObjectReference.GetValueInternal(var result);
+procedure Lazy.TObjectReference.GetValueInternal(var &result);
 begin
   if Factory <> nil then
     CreateValue;
@@ -9386,7 +9386,7 @@ begin
   Result := Value;
 end;
 
-procedure Lazy.TInterfaceReference.GetValueInternal(var result);
+procedure Lazy.TInterfaceReference.GetValueInternal(var &result);
 begin
   if Factory <> nil then
     CreateValue;
@@ -9485,7 +9485,7 @@ end;
 
 {$REGION 'Shared'}
 
-class procedure Shared.Make(const value: TObject; var result);
+class procedure Shared.Make(const value: TObject; var &result);
 var
   &finalizer: PObjectFinalizer absolute result;
 begin
@@ -9500,7 +9500,7 @@ begin
   &finalizer.Value := value;
 end;
 
-class procedure Shared.Make(const value: Pointer; typeInfo: PTypeInfo; var result);
+class procedure Shared.Make(const value: Pointer; typeInfo: PTypeInfo; var &result);
 var
   &finalizer: PRecordFinalizer absolute result;
 begin
@@ -9521,7 +9521,7 @@ begin
   &finalizer.TypeInfo := typeInfo;
 end;
 
-class procedure Shared.Make(typeInfo: PTypeInfo; var result);
+class procedure Shared.Make(typeInfo: PTypeInfo; var &result);
 
   function AllocRecord(typeInfo: PTypeInfo): Pointer;
   begin
@@ -9700,7 +9700,7 @@ var
 type
   TVirtualClasses = class(Spring.VirtualClass.TVirtualClasses);
 
-procedure WeakRefFreeInstance(const Self: TObject);
+procedure WeakRefFreeInstance(const &self: TObject);
 var
   freeInstance: TFreeInstance;
 begin
@@ -9977,7 +9977,7 @@ end;
 
 {$REGION 'Weak'}
 
-class procedure Weak.MakeFromObject(const value; var result);
+class procedure Weak.MakeFromObject(const value; var &result);
 var
   ref: PReference absolute result;
 begin
@@ -10010,7 +10010,7 @@ begin
   RegisterWeakRef(@ref.Target, ref.Target);
 end;
 
-class procedure Weak.MakeFromInterface(const value; var result);
+class procedure Weak.MakeFromInterface(const value; var &result);
 var
   ref: PReference absolute result;
 begin
@@ -10073,7 +10073,7 @@ begin
   Result := Assigned(p);
 end;
 
-class procedure Weak.GetTarget(const reference; var result; kind: TTypeKind);
+class procedure Weak.GetTarget(const reference; var &result; kind: TTypeKind);
 {$IFNDEF CPUX86}
 var
   p: Pointer;

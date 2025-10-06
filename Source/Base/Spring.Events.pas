@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -170,13 +170,13 @@ type
   EventHelper = record
   private type
     IMethodEventInternal = interface(IInvokableEvent<TMethodPointer>)
-      procedure GetInvoke(var result);
+      procedure GetInvoke(var &result);
       procedure Add(const handler);
       procedure Remove(const handler);
     end;
 
     IDelegateEventInternal = interface(IInvokableEvent<IInterface>)
-      procedure GetInvoke(var result);
+      procedure GetInvoke(var &result);
       procedure Add(const handler);
       procedure Remove(const handler);
     end;
@@ -187,7 +187,7 @@ type
       procedure Add(handler: TMethodPointer); overload;
       procedure Remove(handler: TMethodPointer); overload;
 
-      procedure GetInvoke(var result); overload;
+      procedure GetInvoke(var &result); overload;
       procedure Add(const handler); overload;
       procedure Remove(const handler); overload;
     end;
@@ -198,7 +198,7 @@ type
       procedure Add(handler: IInterface); overload;
       procedure Remove(handler: IInterface); overload;
 
-      procedure GetInvoke(var result); overload;
+      procedure GetInvoke(var &result); overload;
       procedure Add(const handler); overload;
       procedure Remove(const handler); overload;
     end;
@@ -208,7 +208,7 @@ type
   public
     function GetCanInvoke: Boolean;
     function GetEnabled: Boolean;
-    procedure GetInvoke(var result; typeInfo: PTypeInfo);
+    procedure GetInvoke(var &result; typeInfo: PTypeInfo);
     function GetOnChanged: TNotifyEvent;
     function GetUseFreeNotification: Boolean;
     procedure SetEnabled(const value: Boolean; typeInfo: PTypeInfo);
@@ -219,7 +219,7 @@ type
     procedure Remove(const handler);
     procedure Clear;
     procedure RemoveAll(instance: Pointer);
-    procedure EnsureInstance(var result; typeInfo: PTypeInfo);
+    procedure EnsureInstance(var &result; typeInfo: PTypeInfo);
   end;
 
   {$ENDREGION}
@@ -238,7 +238,7 @@ uses
   Spring.ResourceStrings;
 
 const
-  PointerSize = SizeOf(Pointer); //FI:O803
+  PointerSize = sizeOf(Pointer); //FI:O803
 
 
 {$REGION 'Proxy generators'}
@@ -843,11 +843,11 @@ begin
     fInstance.Clear;
 end;
 
-procedure EventHelper.EnsureInstance(var result; typeInfo: PTypeInfo);
+procedure EventHelper.EnsureInstance(var &result; typeInfo: PTypeInfo);
 begin
   if not Assigned(fInstance) then
     CreateEventHandler(typeInfo);
-  IInterface(result) := fInstance;
+  IInterface(&result) := fInstance;
 end;
 
 function EventHelper.GetCanInvoke: Boolean;
@@ -866,11 +866,11 @@ begin
     Result := True
 end;
 
-procedure EventHelper.GetInvoke(var result; typeInfo: PTypeInfo);
+procedure EventHelper.GetInvoke(var &result; typeInfo: PTypeInfo);
 begin
   if not Assigned(fInstance) then
     CreateEventHandler(typeInfo);
-  fInstance.GetInvoke(result);
+  fInstance.GetInvoke(&result);
 end;
 
 function EventHelper.GetOnChanged: TNotifyEvent;
@@ -942,7 +942,7 @@ begin
   inherited Remove(TMethod(handler));
 end;
 
-procedure EventHelper.TMethodEvent.GetInvoke(var result);
+procedure EventHelper.TMethodEvent.GetInvoke(var &result);
 begin
   TMethodPointer(result) := fInvoke;
 end;
@@ -981,7 +981,7 @@ begin
   inherited Remove(MethodReferenceToMethod(handler));
 end;
 
-procedure EventHelper.TDelegateEvent.GetInvoke(var result);
+procedure EventHelper.TDelegateEvent.GetInvoke(var &result);
 begin
 {$IFDEF USE_RTTI_FOR_PROXY}
   IInterface(result) := IInterface(fProxy);

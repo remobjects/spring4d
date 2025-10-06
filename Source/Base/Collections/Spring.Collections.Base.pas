@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -44,16 +44,16 @@ uses
 type
   {$IFDEF MSWINDOWS}
   IEnumerableInternal = interface //FI:W523
-    procedure GetEnumerator(var result);
+    procedure GetEnumerator(var &result);
     function GetCount: Integer;
     function GetElementType: PTypeInfo;
     function GetIsEmpty: Boolean;
     function GetNonEnumeratedCount: Integer;
     function AsObject: TObject;
-    procedure ToArray(var result);
+    procedure ToArray(var &result);
   end;
   IEnumeratorInternal = interface //FI:W523
-    procedure GetCurrent(var result);
+    procedure GetCurrent(var &result);
   end;
   {$ENDIF}
 
@@ -133,7 +133,7 @@ type
     function All(const predicate: IInterface; getCurrent: TGetCurrentWithSelector<Boolean>): Boolean;
     function Any(const predicate: IInterface; getCurrent: TGetCurrentWithSelector<Boolean>): Boolean; overload;
 
-    procedure Aggregate(const func: IInterface; var result; getCurrent: TGetCurrent; getNext: TGetCurrentWithSelector);
+    procedure Aggregate(const func: IInterface; var &result; getCurrent: TGetCurrent; getNext: TGetCurrentWithSelector);
 
     function Average(const selector: IInterface; getCurrent: TGetCurrentWithSelector<Integer>): Double; overload;
     function Average(const selector: IInterface; getCurrent: TGetCurrentWithSelector<Int64>): Double; overload;
@@ -144,7 +144,7 @@ type
     procedure ForEach(const action: IInterface; actionCall: TActionCall); overload;
     function ForEach(const values: IInterface; operation: TCollectionOperation): Integer; overload;
 
-    procedure MaxMin(const comparer: IInterface; var result; getCurrent: TGetCurrent; getValue: TGetCurrentWithSelector);
+    procedure MaxMin(const comparer: IInterface; var &result; getCurrent: TGetCurrent; getValue: TGetCurrentWithSelector);
 
     function Max(const selector: IInterface; getCurrent: TGetCurrentWithSelector<Integer>): Integer; overload;
     function Max(const selector: IInterface; getCurrent: TGetCurrentWithSelector<Int64>): Int64; overload;
@@ -161,7 +161,7 @@ type
     function MoveTo(const collection: IInterface; typeInfo: PTypeInfo): Integer; overload;
     function MoveTo(const collection, predicate: IInterface; typeInfo: PTypeInfo): Integer; overload;
 
-    procedure ExtractAll(const match: IInterface; var result);
+    procedure ExtractAll(const match: IInterface; var &result);
     function RemoveAll(const match: IInterface; typeInfo: PTypeInfo): Integer;
 
     function Sum(const selector: IInterface; getCurrent: TGetCurrentWithSelector<Integer>): Integer; overload;
@@ -185,28 +185,28 @@ type
     function TryGetSingleOrDefault(var value; const predicate: IInterface; getCurrent: TGetCurrentWithPredicate): Boolean; overload;
 
     function CopyTo(var values: Pointer; index, size: NativeInt; getCurrent: TGetCurrent): Integer;
-    procedure ToArray(var result: Pointer; typeInfo: Pointer; getCurrent: TGetCurrent);
+    procedure ToArray(var &result: Pointer; typeInfo: Pointer; getCurrent: TGetCurrent);
 
-    procedure Concat(const second: IInterface; var result; classType: TClass);
-    procedure DefaultIfEmpty(defaultValue: Pointer; var result; typeInfo: Pointer; classType: TClass);
-    procedure Distinct(comparer: Pointer; var result; classType: TClass);
-    procedure Exclude(const second: IInterface; comparer: Pointer; var result; classType: TClass);
-    procedure Intersect(const second: IInterface; comparer: Pointer; var result; classType: TClass);
-    procedure Memoize(var result; classType: TClass);
-    procedure Ordered(const comparer: IInterface; var result; classType: TClass);
-    procedure Reversed(var result; classType: TClass);
-    procedure Shuffled(var result; classType: TClass);
-    procedure Skip(count: Integer; var result; classType: TClass);
-    procedure SkipLast(count: Integer; var result; classType: TClass);
-    procedure SkipWhile(const predicate: IInterface; var result; classType: TClass);
-    procedure SkipWhileIndex(const predicate: IInterface; var result; classType: TClass);
-    procedure Take(count: Integer; var result; classType: TClass);
-    procedure TakeLast(count: Integer; var result; classType: TClass);
-    procedure TakeWhile(const predicate: IInterface; var result; classType: TClass);
-    procedure TakeWhileIndex(const predicate: IInterface; var result; classType: TClass);
-    procedure Union(const second: IInterface; comparer: Pointer; var result; classType: TClass);
-    procedure &Where(const predicate: IInterface; var result; classType: TClass);
-    procedure WhereIndex(const predicate: IInterface; var result; classType: TClass);
+    procedure Concat(const second: IInterface; var &result; classType: TClass);
+    procedure DefaultIfEmpty(defaultValue: Pointer; var &result; typeInfo: Pointer; classType: TClass);
+    procedure Distinct(comparer: Pointer; var &result; classType: TClass);
+    procedure Exclude(const second: IInterface; comparer: Pointer; var &result; classType: TClass);
+    procedure Intersect(const second: IInterface; comparer: Pointer; var &result; classType: TClass);
+    procedure Memoize(var &result; classType: TClass);
+    procedure Ordered(const comparer: IInterface; var &result; classType: TClass);
+    procedure Reversed(var &result; classType: TClass);
+    procedure Shuffled(var &result; classType: TClass);
+    procedure Skip(count: Integer; var &result; classType: TClass);
+    procedure SkipLast(count: Integer; var &result; classType: TClass);
+    procedure SkipWhile(const predicate: IInterface; var &result; classType: TClass);
+    procedure SkipWhileIndex(const predicate: IInterface; var &result; classType: TClass);
+    procedure Take(count: Integer; var &result; classType: TClass);
+    procedure TakeLast(count: Integer; var &result; classType: TClass);
+    procedure TakeWhile(const predicate: IInterface; var &result; classType: TClass);
+    procedure TakeWhileIndex(const predicate: IInterface; var &result; classType: TClass);
+    procedure Union(const second: IInterface; comparer: Pointer; var &result; classType: TClass);
+    procedure &Where(const predicate: IInterface; var &result; classType: TClass);
+    procedure WhereIndex(const predicate: IInterface; var &result; classType: TClass);
   public
     class function NewInstance: TObject; override;
 
@@ -426,8 +426,8 @@ type
     function GetNonEnumeratedCount: Integer;
     procedure MemoizeToArray(var values: Pointer; typeInfo: PTypeInfo);
     function PartitionToArray(var values: Pointer; typeInfo: PTypeInfo): Boolean;
-    procedure Skip(count: Integer; var result; classType: TClass);
-    procedure Take(count: Integer; var result; classType: TClass);
+    procedure Skip(count: Integer; var &result; classType: TClass);
+    procedure Take(count: Integer; var &result; classType: TClass);
     function TryGetElementAt(var value; index: Integer; getCurrent: TGetCurrent; default: TGetDefault): Boolean;
     function TryGetFirst(var value; getCurrent: TGetCurrent; default: TGetDefault): Boolean;
     function TryGetLast(var value; getCurrent: TGetCurrent; default: TGetDefault): Boolean;
@@ -560,32 +560,32 @@ type
   TCollectionThunks<T> = record
   public type
     {$IFDEF RSP31615}
-    FuncInternal = reference to procedure({$IFDEF CPUX64}var result;{$ENDIF}const arg1, arg2: T{$IFDEF CPUX86}; var result{$ENDIF});
+    FuncInternal = reference to procedure({$IFDEF CPUX64}var &result{$ENDIF}const arg1, arg2: T{$IFDEF CPUX86} var &result{$ENDIF})
     {$ENDIF}
     ICollectionInternal = interface(IReadOnlyCollection<T>)
       // IMPORTANT NOTICE:
       // keep this in sync with ICollection<T> in Spring.Collections
-      function GetOnChanged: ICollectionChangedEvent<T>;
-      function Add(const item: T): Boolean;
+      function GetOnChanged: ICollectionChangedEvent<T>
+      function Add(const item: T): Boolean
       // internal helper type to solve compiler issue with using Slice on the
       // overloaded AddRange method in older Delphi versions
-      procedure AddRange(const values: array of T);
-      {$IFDEF RSP31615}overload;
-      procedure AddRange(const values: IEnumerable<T>); overload;
-      procedure Extract({$IFDEF CPUX64}var result; {$ENDIF}const item: T{$IFDEF CPUX86}; var result{$ENDIF});
+      procedure AddRange(const values: array of T)
+      {$IFDEF RSP31615}overload
+      procedure AddRange(const values: IEnumerable<T>) overload
+      procedure Extract({$IFDEF CPUX64}var &result {$ENDIF}const item: T{$IFDEF CPUX86} var &result{$ENDIF})
       {$ENDIF}
-    end;
+    end
   public
-    class procedure AggregateCurrentWithValue(const enumerator, func: IInterface; var result); static;
-    class procedure Assign(var target; const source); static;
-    class procedure CallActionOnCurrent(const enumerator, action: IInterface); static;
+    class procedure AggregateCurrentWithValue(const enumerator, func: IInterface var &result) static
+    class procedure Assign(var target const source) static
+    class procedure CallActionOnCurrent(const enumerator, action: IInterface) static;
     class function Contains(const collection: IInterface; const value; const comparer: IInterface): Boolean; static;
     class function EqualsCurrentWithOtherEnumerator(const enumerator1, enumerator2, comparer: IInterface): Boolean; static;
     class function EqualsCurrentWithArrayElement(const enumerator: IInterface; comparer, values: Pointer; index: NativeInt): Boolean; static;
     class function EqualsCurrentWithValue(const enumerator, comparer: IInterface; const value): Boolean; static;
     class procedure GetCurrent(const enumerator: IInterface; var value); static;
-    class procedure GetCurrentIfGreaterThan(const enumerator, comparer: IInterface; var result); static;
-    class procedure GetCurrentIfLessThan(const enumerator, comparer: IInterface; var result); static;
+    class procedure GetCurrentIfGreaterThan(const enumerator, comparer: IInterface; var &result); static;
+    class procedure GetCurrentIfLessThan(const enumerator, comparer: IInterface; var &result); static;
     class function GetCurrentWithPredicate(const enumerator, predicate: IInterface; var value): Boolean; static;
     class function GetCurrentWithSelector(const enumerator, selector: IInterface): T; static;
     class procedure GetDefault(var value); static;
@@ -768,7 +768,7 @@ type
     fContains: TContains;
     function GetCount: Integer;
     function Contains(const value; comparer: Pointer; equals: TEqualsMethod): Boolean;
-    procedure ToArray(var result: Pointer; typeInfo: Pointer; assign: TAssign);
+    procedure ToArray(var &result: Pointer; typeInfo: Pointer; assign: TAssign);
     function TryGetElementAt(var value; index: Integer;
       assign: TAssign; default: TGetDefault; getCurrent: TGetCurrent): Boolean;
   public
@@ -882,7 +882,7 @@ type
     function GetCount: Integer;
     function Contains(const value; comparer: Pointer;
       compare: TCompareMethod; equals: TEqualsMethod): Boolean;
-    procedure ToArray(var result: Pointer; typeInfo: Pointer; assign: TAssign);
+    procedure ToArray(var &result: Pointer; typeInfo: Pointer; assign: TAssign);
   public
     class function Create(classType: TClass; source: TRefCountedObject;
       tree: TBinaryTree; version: PInteger; const valueComparer: IInterface;
@@ -1082,7 +1082,7 @@ const
   IPartitionOfTGuid: TGUID = '{ACFB79AB-F593-4F2B-9720-E6CE984F6844}';
 
 procedure AssignComparer(var comparer; const source: IInterface);
-procedure EnsureEventInstance(var &event: TEventBase; var result;
+procedure EnsureEventInstance(var &event: TEventBase; var &result;
   eventClass: TEventBaseClass; eventChanged: TNotifyEvent);
 function SupportsIndexedAccess(const source: IInterface): Boolean;
 procedure UpdateNotify(instance: TObject; baseClass: TClass; var notify);
@@ -1110,10 +1110,10 @@ end;
 type
   TEventImpl = class(TEventBase, IEvent);
 
-procedure EnsureEventInstance(var &event: TEventBase; var result;
+procedure EnsureEventInstance(var &event: TEventBase; var &result;
   eventClass: TEventBaseClass; eventChanged: TNotifyEvent);
 
-  procedure CreateEvent(var &event: TEventBase; var result;
+  procedure CreateEvent(var &event: TEventBase; var &result;
     eventClass: TEventBaseClass; eventChanged: TNotifyEvent);
   var
     newEvent: TEventBase;
@@ -1409,7 +1409,7 @@ begin
   Result := enumerator.MoveNext;
 end;
 
-procedure TEnumerableBase.Aggregate(const func: IInterface; var result;
+procedure TEnumerableBase.Aggregate(const func: IInterface; var &result;
   getCurrent: TGetCurrent; getNext: TGetCurrentWithSelector);
 var
   enumerator: IEnumerator;
@@ -1592,7 +1592,7 @@ begin
     Result := Boolean(RaiseHelper.ArgumentOutOfRange(ExceptionArgument.min, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum));
 end;
 
-procedure TEnumerableBase.Concat(const second: IInterface; var result; classType: TClass);
+procedure TEnumerableBase.Concat(const second: IInterface; var &result; classType: TClass);
 begin
   if not Assigned(second) then RaiseHelper.ArgumentNil(ExceptionArgument.second);
 
@@ -1637,7 +1637,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.DefaultIfEmpty(defaultValue: Pointer; var result; typeInfo: Pointer; classType: TClass);
+procedure TEnumerableBase.DefaultIfEmpty(defaultValue: Pointer; var &result; typeInfo: Pointer; classType: TClass);
 const
   Len: NativeInt = 1;
 var
@@ -1656,7 +1656,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.Distinct(comparer: Pointer; var result; classType: TClass);
+procedure TEnumerableBase.Distinct(comparer: Pointer; var &result; classType: TClass);
 var
   elementType: PTypeInfo;
 begin
@@ -1722,7 +1722,7 @@ begin
     Result := Boolean(RaiseHelper.ArgumentOutOfRange(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum));
 end;
 
-procedure TEnumerableBase.Exclude(const second: IInterface; comparer: Pointer; var result; classType: TClass);
+procedure TEnumerableBase.Exclude(const second: IInterface; comparer: Pointer; var &result; classType: TClass);
 var
   elementType: PTypeInfo;
 begin
@@ -1742,7 +1742,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.ExtractAll(const match: IInterface; var result);
+procedure TEnumerableBase.ExtractAll(const match: IInterface; var &result);
 begin
   if not Assigned(match) then RaiseHelper.ArgumentNil(ExceptionArgument.match);
 
@@ -1817,7 +1817,7 @@ begin
     Result := -1;
 end;
 
-procedure TEnumerableBase.Intersect(const second: IInterface; comparer: Pointer; var result; classType: TClass);
+procedure TEnumerableBase.Intersect(const second: IInterface; comparer: Pointer; var &result; classType: TClass);
 var
   elementType: PTypeInfo;
 begin
@@ -1846,7 +1846,7 @@ begin
     and (TEnumerableExtension(Self).fKind = TExtensionKind.Memoize));
 end;
 
-procedure TEnumerableBase.MaxMin(const comparer: IInterface; var result;
+procedure TEnumerableBase.MaxMin(const comparer: IInterface; var &result;
   getCurrent: TGetCurrent; getValue: TGetCurrentWithSelector);
 var
   enumerator: IEnumerator;
@@ -1952,7 +1952,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.Memoize(var result; classType: TClass);
+procedure TEnumerableBase.Memoize(var &result; classType: TClass);
 begin
   if MemoizeCanReturnThis(classType) then
     IInterface(Result) := IInterface(this)
@@ -2097,7 +2097,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.Ordered(const comparer: IInterface; var result; classType: TClass);
+procedure TEnumerableBase.Ordered(const comparer: IInterface; var &result; classType: TClass);
 begin
   if not Assigned(comparer) then RaiseHelper.ArgumentNil(ExceptionArgument.comparer);
 
@@ -2129,19 +2129,19 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.Reversed(var result; classType: TClass);
+procedure TEnumerableBase.Reversed(var &result; classType: TClass);
 begin
   with TEnumerableExtension.Create(classType, IEnumerable(this), TExtensionKind.Reversed) do
     IInterface(result) := IInterface(@IMT);
 end;
 
-procedure TEnumerableBase.Shuffled(var result; classType: TClass);
+procedure TEnumerableBase.Shuffled(var &result; classType: TClass);
 begin
   with TEnumerableExtension.Create(classType, IEnumerable(this), TExtensionKind.Shuffled) do
     IInterface(result) := IInterface(@IMT);
 end;
 
-procedure TEnumerableBase.Skip(count: Integer; var result; classType: TClass);
+procedure TEnumerableBase.Skip(count: Integer; var &result; classType: TClass);
 var
   maxCount: Integer;
 begin
@@ -2159,7 +2159,7 @@ begin
     end;
 end;
 
-procedure TEnumerableBase.SkipLast(count: Integer; var result; classType: TClass);
+procedure TEnumerableBase.SkipLast(count: Integer; var &result; classType: TClass);
 begin
   if count <= 0 then
     IInterface(result) := IInterface(this)
@@ -2171,7 +2171,7 @@ begin
     end;
 end;
 
-procedure TEnumerableBase.SkipWhile(const predicate: IInterface; var result; classType: TClass);
+procedure TEnumerableBase.SkipWhile(const predicate: IInterface; var &result; classType: TClass);
 begin
   if not Assigned(predicate) then RaiseHelper.ArgumentNil(ExceptionArgument.predicate);
 
@@ -2182,7 +2182,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.SkipWhileIndex(const predicate: IInterface; var result; classType: TClass);
+procedure TEnumerableBase.SkipWhileIndex(const predicate: IInterface; var &result; classType: TClass);
 begin
   if not Assigned(predicate) then RaiseHelper.ArgumentNil(ExceptionArgument.predicate);
 
@@ -2252,7 +2252,7 @@ begin
     Result := Result + getCurrent(enumerator, selector);
 end;
 
-procedure TEnumerableBase.Take(count: Integer; var result; classType: TClass);
+procedure TEnumerableBase.Take(count: Integer; var &result; classType: TClass);
 begin
   with TEnumerableExtension.Create(classType, IEnumerable(this), TExtensionKind.Partition) do
   begin
@@ -2263,7 +2263,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.TakeLast(count: Integer; var result; classType: TClass);
+procedure TEnumerableBase.TakeLast(count: Integer; var &result; classType: TClass);
 begin
   with TEnumerableExtension.Create(classType, IEnumerable(this), TExtensionKind.PartitionFromEnd) do
   begin
@@ -2275,7 +2275,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.TakeWhile(const predicate: IInterface; var result; classType: TClass);
+procedure TEnumerableBase.TakeWhile(const predicate: IInterface; var &result; classType: TClass);
 begin
   if not Assigned(predicate) then RaiseHelper.ArgumentNil(ExceptionArgument.predicate);
 
@@ -2286,7 +2286,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.TakeWhileIndex(const predicate: IInterface; var result; classType: TClass);
+procedure TEnumerableBase.TakeWhileIndex(const predicate: IInterface; var &result; classType: TClass);
 begin
   if not Assigned(predicate) then RaiseHelper.ArgumentNil(ExceptionArgument.predicate);
 
@@ -2297,7 +2297,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.ToArray(var result: Pointer; typeInfo: Pointer; getCurrent: TGetCurrent);
+procedure TEnumerableBase.ToArray(var &result: Pointer; typeInfo: Pointer; getCurrent: TGetCurrent);
 var
   count, capacity, size: NativeInt;
   enumerator: IEnumerator;
@@ -2473,7 +2473,7 @@ begin
     end;
 end;
 
-procedure TEnumerableBase.Union(const second: IInterface; comparer: Pointer; var result; classType: TClass);
+procedure TEnumerableBase.Union(const second: IInterface; comparer: Pointer; var &result; classType: TClass);
 var
   elementType: PTypeInfo;
 begin
@@ -2493,7 +2493,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.Where(const predicate: IInterface; var result; classType: TClass);
+procedure TEnumerableBase.Where(const predicate: IInterface; var &result; classType: TClass);
 begin
   if not Assigned(predicate) then RaiseHelper.ArgumentNil(ExceptionArgument.predicate);
 
@@ -2504,7 +2504,7 @@ begin
   end;
 end;
 
-procedure TEnumerableBase.WhereIndex(const predicate: IInterface; var result; classType: TClass);
+procedure TEnumerableBase.WhereIndex(const predicate: IInterface; var &result; classType: TClass);
 begin
   if not Assigned(predicate) then RaiseHelper.ArgumentNil(ExceptionArgument.predicate);
 
@@ -3512,7 +3512,7 @@ begin
     Result := fHashTable.Count;
 end;
 
-procedure THashMapInnerCollection.ToArray(var result: Pointer; typeInfo: Pointer; assign: TAssign);
+procedure THashMapInnerCollection.ToArray(var &result: Pointer; typeInfo: Pointer; assign: TAssign);
 var
   hashTable: PHashTable;
   source, target: PByte;
@@ -3855,7 +3855,7 @@ begin
     Result := fTree.Count;
 end;
 
-procedure TTreeMapInnerCollection.ToArray(var result: Pointer; typeInfo: Pointer; assign: TAssign);
+procedure TTreeMapInnerCollection.ToArray(var &result: Pointer; typeInfo: Pointer; assign: TAssign);
 var
   tree: TBinaryTree;
   node: PNode;
@@ -5332,7 +5332,7 @@ begin
 end;
 
 class procedure TCollectionThunks<T>.AggregateCurrentWithValue(
-  const enumerator, func: IInterface; var result);
+  const enumerator, func: IInterface; var &result);
 {$IFDEF RSP31615}
 var
   item, res: T;
@@ -5474,7 +5474,7 @@ begin
 end;
 
 class procedure TCollectionThunks<T>.GetCurrentIfGreaterThan(const enumerator,
-  comparer: IInterface; var result);
+  comparer: IInterface; var &result);
 var
   item: T;
 begin
@@ -5489,7 +5489,7 @@ begin
 end;
 
 class procedure TCollectionThunks<T>.GetCurrentIfLessThan(const enumerator,
-  comparer: IInterface; var result);
+  comparer: IInterface; var &result);
 var
   item: T;
 begin
@@ -5719,7 +5719,7 @@ begin
   end;
 end;
 
-procedure TEnumerableExtension.Skip(count: Integer; var result; classType: TClass);
+procedure TEnumerableExtension.Skip(count: Integer; var &result; classType: TClass);
 var
   minIndex: Integer;
   source: Pointer;
@@ -5772,7 +5772,7 @@ begin
   end;
 end;
 
-procedure TEnumerableExtension.Take(count: Integer; var result; classType: TClass);
+procedure TEnumerableExtension.Take(count: Integer; var &result; classType: TClass);
 var
   maxIndex: Integer;
   source: Pointer;

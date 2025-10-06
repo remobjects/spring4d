@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -64,7 +64,7 @@ type
     fInterceptorSelector: IInterceptorSelector;
     fAdditionalInterfaces: TArray<IInterface>;
     function GetProxyTargetAccessor: IProxyTargetAccessor;
-    class procedure ProxyFreeInstance(const Self: TObject); static;
+    class procedure ProxyFreeInstance(const &Self: TObject); static;
   protected
     function CollectInterceptableMethods(
       const hook: IProxyGenerationHook): IEnumerable<TRttiMethod>;
@@ -287,10 +287,10 @@ begin
   Result := TProxyTargetAccessor.Create(Self, fProxies[Self].fInterceptors);
 end;
 
-class procedure TClassProxy.ProxyFreeInstance(const Self: TObject);
+class procedure TClassProxy.ProxyFreeInstance(const &Self: TObject);
 begin
-  GetClassData(ClassParent).FreeInstance(Self); // inherited
-  fProxies.Remove(Self);
+  GetClassData(ClassParent).FreeInstance(&Self); // inherited
+  fProxies.Remove(&Self);
 end;
 
 {$ENDREGION}
