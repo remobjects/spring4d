@@ -190,7 +190,7 @@ begin
   LStmt := FConnection.CreateStatement;
   LStmt.SetSQLCommand('insert into VEIKLOS("VEIKLOSID","KODAS","PAVADINIMAS","SAVAITES_DIENOS",'+
     '"MENESIO_VALANDOS","SAVAITES_VALANDOS","IM_DALIS_SAV","ITERPE","ITERPTAS","KOREGAVO","KOREGUOTAS")'+
-    ' values (''283'',''ZVER282'',''Valymo árenginiai, maðinos'',Null,Null,Null,Null,''SYSDBA'',''2007-02-02 12:26:24'',Null,Null); ');
+    ' values (''283'',''ZVER282'',''Valymo ï¿½renginiai, maï¿½inos'',Null,Null,Null,Null,''SYSDBA'',''2007-02-02 12:26:24'',Null,Null); ');
   LStmt.Execute;
 
   LStmt.SetSQLCommand(Format('SELECT COUNT(*) FROM VEIKLOS WHERE VEIKLOSID = %d', [283]));

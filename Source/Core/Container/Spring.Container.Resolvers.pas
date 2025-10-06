@@ -624,7 +624,7 @@ end;
 function TComponentOwnerResolver.CanResolve(const context: ICreationContext;
   const dependency: TDependencyModel; const argument: TValue): Boolean;
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   if dependency.TypeInfo <> TypeInfo(TComponent) then
     Exit(False);
@@ -635,9 +635,9 @@ begin
   if not (dependency.Target is TRttiParameter) then
     Exit(False);
 
-  method := TRttiMethod(dependency.Target.Parent);
-  Result := (method.VirtualIndex = fVirtualIndex)
-    and (method.Parent.AsInstance.MetaclassType.InheritsFrom(TComponent));
+  &method := TRttiMethod(dependency.Target.Parent);
+  Result := (&method.VirtualIndex = fVirtualIndex)
+    and (&method.Parent.AsInstance.MetaclassType.InheritsFrom(TComponent));
 end;
 
 function TComponentOwnerResolver.Resolve(const context: ICreationContext;

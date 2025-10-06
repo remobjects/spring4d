@@ -76,7 +76,7 @@ type
     fSequence: IMockSequence;
     class function CreateArgMatch(const arguments: TArray<TValue>;
       const parameters: TArray<TRttiParameter>): TArgMatch; static;
-    function CreateMethodCalls(const method: TRttiMethod): TArray<TMethodCall>;
+    function CreateMethodCalls(const &method: TRttiMethod): TArray<TMethodCall>;
     class function CreateEvent(const returnType: PTypeInfo): TMockAction; static;
     class function CreateMock(const returnType: PTypeInfo): TMockAction; static;
     procedure InterceptArrange(const invocation: IInvocation);
@@ -162,17 +162,17 @@ begin
   fReceivedCalls := TCollections.CreateMultiMap<TRttiMethod,TArray<TValue>>();
 end;
 
-function TMockInterceptor.CreateMethodCalls(const method: TRttiMethod): TArray<TMethodCall>;
+function TMockInterceptor.CreateMethodCalls(const &method: TRttiMethod): TArray<TMethodCall>;
 
-  function CastToReturnType(const value: TValue; const method: TRttiMethod): TValue;
+  function CastToReturnType(const value: TValue; const &method: TRttiMethod): TValue;
   var
     rttiType, returnType: TRttiType;
     mock: TMock;
   begin
     Result := value;
-    if Assigned(value.TypeInfo) and method.HasExtendedInfo then
+    if Assigned(value.TypeInfo) and &method.HasExtendedInfo then
     begin
-      returnType := method.ReturnType;
+      returnType := &method.ReturnType;
       if Assigned(returnType) and (value.TypeInfo <> returnType.Handle) then
       begin
         rttiType := value.TypeInfo.RttiType;
@@ -197,7 +197,7 @@ begin
     if PInterface(@fCurrentAction)^ is TResultMockAction then
     begin
       action := PInterface(@fCurrentAction)^ as TResultMockAction;
-      action.Value := CastToReturnType(action.Value, method);
+      action.Value := CastToReturnType(action.Value, &method);
     end;
     Result[0] := TMethodCall.Create(fCurrentAction, fMatch, fSequence)
   end
@@ -210,14 +210,14 @@ begin
       for i := 0 to High(values) do
       begin
         action := TResultMockAction.Create;
-        action.Value := CastToReturnType(values[i], method);
+        action.Value := CastToReturnType(values[i], &method);
         Result[i] := TMethodCall.Create(action, fMatch, fSequence);
       end;
     end
     else
     begin
       for i := 0 to High(values) do
-        values[i] := CastToReturnType(values[i], method);
+        values[i] := CastToReturnType(values[i], &method);
       Result[0] := TMethodCall.Create(
         TResultsMockAction.Create(values, fBehavior), fMatch, fSequence);
     end;
@@ -288,12 +288,12 @@ const
   EventMock_Instance: Pointer = @EventMock_Vtable;
 
 const
-  event: Pointer = @EventMock_Instance;
+  &event: Pointer = @EventMock_Instance;
 begin
   Result :=
     function(const callInfo: TCallInfo): TValue
     begin
-      Result := TValue.From(returnType, event);
+      Result := TValue.From(returnType, &event);
     end;
 end;
 
@@ -351,7 +351,7 @@ end;
 procedure TMockInterceptor.InterceptAct(const invocation: IInvocation);
 var
   methodCall: TMethodCall;
-  method: TRttiMethod;
+  &method: TRttiMethod;
   returnType: TRttiType;
   action: TMockAction;
 begin
@@ -375,11 +375,11 @@ begin
       end
       else
       begin
-        method := invocation.Method;
+        &method := invocation.Method;
         // create results for params
-        if method.HasExtendedInfo and (method.MethodKind = mkFunction) then
+        if &method.HasExtendedInfo and (&method.MethodKind = mkFunction) then
         begin
-          returnType := method.ReturnType;
+          returnType := &method.ReturnType;
           if HasMethodInfo(returnType.Handle) then
             action := CreateMock(returnType.Handle)
           else if returnType.IsGenericTypeOf('Spring.IEvent<>')
@@ -487,11 +487,11 @@ type
   end;
 var
   instance: TValue;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   instance := target;
-  for method in TType.GetType(target.TypeInfo).GetMethods do
-    fExpectedCalls.Add(method, TMethodCall.Create(
+  for &method in TType.GetType(target.TypeInfo).GetMethods do
+    fExpectedCalls.Add(&method, TMethodCall.Create(
       function(const call: TCallInfo): TValue
       begin
         Result := TCallInfoAccess(call).Invocation.Method.Invoke(

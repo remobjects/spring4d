@@ -76,18 +76,18 @@ end;
 
 function TCustomProxy.FindMethod(addr: Pointer): TRttiMethod;
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
   delta, candidateDelta: NativeInt;
 begin
   Result := nil;
   candidateDelta := High(NativeInt);
-  for method in fType.GetMethods do
+  for &method in fType.GetMethods do
   begin
-    delta := NativeInt(addr) - NativeInt(method.CodeAddress);
+    delta := NativeInt(addr) - NativeInt(&method.CodeAddress);
     if (delta > 0) and (delta < candidateDelta) then
     begin
       candidateDelta := delta;
-      Result := method;
+      Result := &method;
     end;
   end;
   if not Assigned(Result) then
@@ -97,16 +97,16 @@ end;
 function TCustomProxy.HandleInvoke(addr: Pointer;
   const args: array of TValue): TValue;
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
   i: Integer;
   arguments: TArray<TValue>;
   interceptors: TArray<IInterceptor>;
   invocation: IInvocation;
 begin
-  method := FindMethod(addr);
+  &method := FindMethod(addr);
   arguments := TArray.Copy<TValue>(args);
-  interceptors := fInterceptorSelector.SelectInterceptors(method, fInterceptors).ToArray;
-  invocation := TInvocation.Create(Self, interceptors, method, arguments);
+  interceptors := fInterceptorSelector.SelectInterceptors(&method, fInterceptors).ToArray;
+  invocation := TInvocation.Create(Self, interceptors, &method, arguments);
   try
     invocation.Proceed;
   finally

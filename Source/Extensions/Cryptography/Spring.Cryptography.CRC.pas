@@ -240,7 +240,7 @@ asm
 
   or    ecx,ecx
   jz    @@end
-@@loop:
+@@&loop:
   mov   edx,eax
   shl   edx,8
   mov   bl,[esi]
@@ -251,7 +251,7 @@ asm
 
   inc   esi
   dec   ecx
-  jnz   @@loop
+  jnz   @@&loop
 
 @@end:
   mov   ecx,eax
@@ -288,7 +288,7 @@ asm
 
   or    ecx,ecx
   jz    @@end
-@@loop:
+@@&loop:
   mov   edx,eax
   shr   edx,8
   and   edx,00ffffffh
@@ -300,7 +300,7 @@ asm
 
   inc   esi
   dec   ecx
-  jnz   @@loop
+  jnz   @@&loop
 
 @@end:
   mov   ecx,eax

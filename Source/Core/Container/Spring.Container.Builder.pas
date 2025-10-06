@@ -306,7 +306,7 @@ procedure TConstructorInspector.DoProcessModel(
 var
   predicate: Predicate<TRttiMethod>;
   injection: IInjection;
-  method: TRttiMethod;
+  &method: TRttiMethod;
   parameters: TArray<TRttiParameter>;
   arguments: TArray<TValue>;
   i: Integer;
@@ -315,11 +315,11 @@ begin
   if model.ComponentTypeInfo.Kind <> tkClass then Exit;
   predicate := TMethodFilters.IsConstructor
     and not TMethodFilters.HasParameterFlags([pfVar, pfArray, pfOut]);
-  for method in model.ComponentType.Methods.Where(predicate) do
+  for &method in model.ComponentType.Methods.Where(predicate) do
   begin
     injection := kernel.Injector.InjectConstructor(model);
-    injection.Initialize(method);
-    parameters := method.GetParameters;
+    injection.Initialize(&method);
+    parameters := &method.GetParameters;
     SetLength(arguments, Length(parameters));
     for i := Low(parameters) to High(parameters) do
       HandleInjectAttribute(parameters[i], injection.Dependencies[i], arguments[i]);
@@ -363,7 +363,7 @@ procedure TMethodInspector.DoProcessModel(const kernel: TKernel;
   const model: TComponentModel);
 var
   condition: Predicate<TRttiMethod>;
-  method: TRttiMethod;
+  &method: TRttiMethod;
   injection: IInjection;
   parameters: TArray<TRttiParameter>;
   arguments: TArray<TValue>;
@@ -373,13 +373,13 @@ begin
     and TMethodFilters.HasAttribute(InjectAttribute)
     and not TMethodFilters.HasParameterFlags([pfVar, pfArray, pfOut])
     and not TMethodFilters.IsConstructor;
-  for method in model.ComponentType.Methods.Where(condition) do
+  for &method in model.ComponentType.Methods.Where(condition) do
   begin
     if not model.MethodInjections.TryGetFirst(injection,
-      TInjectionFilters.ContainsMember(method)) then
-      injection := kernel.Injector.InjectMethod(model, method.Name);
-    injection.Initialize(method);
-    parameters := method.GetParameters;
+      TInjectionFilters.ContainsMember(&method)) then
+      injection := kernel.Injector.InjectMethod(model, &method.Name);
+    injection.Initialize(&method);
+    parameters := &method.GetParameters;
     SetLength(arguments, Length(parameters));
     for i := Low(parameters) to High(parameters) do
       HandleInjectAttribute(parameters[i], injection.Dependencies[i], arguments[i]);
@@ -482,17 +482,17 @@ procedure TInjectionTargetInspector.CheckConstructorInjections(
 var
   filter: Predicate<TRttiMethod>;
   injection: IInjection;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   for injection in model.ConstructorInjections.Where(fHasNoTargetCondition) do
   begin
     filter := TMethodFilters.IsConstructor
       and TInjectionFilters.IsInjectableMethod(kernel, Model, injection.Arguments);
-    method := model.ComponentType.Methods.FirstOrDefault(filter);
-    if not Assigned(method) then
+    &method := model.ComponentType.Methods.FirstOrDefault(filter);
+    if not Assigned(&method) then
       raise EBuilderException.CreateResFmt(@SUnresovableInjection, [
         model.ComponentTypeName]);
-    injection.Initialize(method);
+    injection.Initialize(&method);
   end;
 end;
 
@@ -501,18 +501,18 @@ procedure TInjectionTargetInspector.CheckMethodInjections(
 var
   filter: Predicate<TRttiMethod>;
   injection: IInjection;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   for injection in model.MethodInjections.Where(fHasNoTargetCondition) do
   begin
     filter := TMethodFilters.IsInstanceMethod
       and TMethodFilters.IsNamed(injection.TargetName)
       and TInjectionFilters.IsInjectableMethod(kernel, Model, injection.Arguments);
-    method := model.ComponentType.Methods.FirstOrDefault(filter);
-    if not Assigned(method) then
+    &method := model.ComponentType.Methods.FirstOrDefault(filter);
+    if not Assigned(&method) then
       raise EBuilderException.CreateResFmt(@SUnresovableInjection, [
         model.ComponentTypeName]);
-    injection.Initialize(method);
+    injection.Initialize(&method);
   end;
 end;
 
@@ -603,15 +603,15 @@ procedure TAbstractMethodInspector.DoProcessModel(const kernel: TKernel;
     virtualMethodsGrouped: IEnumerable<IGrouping<SmallInt,TRttiMethod>>;
   begin
     virtualMethods := rttiType.Methods.Where(
-      function(const method: TRttiMethod): Boolean
+      function(const &method: TRttiMethod): Boolean
       begin
-        Result := (method.DispatchKind = dkVtable) and (method.VirtualIndex >= 0);
+        Result := (&method.DispatchKind = dkVtable) and (&method.VirtualIndex >= 0);
       end);
     virtualMethodsGrouped := TEnumerable.GroupBy<TRttiMethod,SmallInt>(
       virtualMethods,
-      function(const method: TRttiMethod): SmallInt
+      function(const &method: TRttiMethod): SmallInt
       begin
-        Result := method.VirtualIndex;
+        Result := &method.VirtualIndex;
       end);
     virtualMethods := TEnumerable.Select<IGrouping<SmallInt,TRttiMethod>, TRttiMethod>(
       virtualMethodsGrouped,
@@ -620,9 +620,9 @@ procedure TAbstractMethodInspector.DoProcessModel(const kernel: TKernel;
         Result := group.First;
       end);
     Result := virtualMethods.Any(
-      function(const method: TRttiMethod): Boolean
+      function(const &method: TRttiMethod): Boolean
       begin
-        Result := method.IsAbstract;
+        Result := &method.IsAbstract;
       end);
   end;
 

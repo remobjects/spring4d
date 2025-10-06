@@ -48,7 +48,7 @@ type
     procedure Proceed;
 
     property Arguments: TArray<TValue> read GetArguments;
-    property Method: TRttiMethod read GetMethod;
+    property &Method: TRttiMethod read GetMethod;
     property Result: TValue read GetResult write SetResult;
     property Target: TValue read GetTarget;
   end;
@@ -71,13 +71,13 @@ type
 
   IProxyGenerationHook = interface
     ['{53C88475-2A5A-4FC3-B0AE-04CB85758746}']
-    procedure NonVirtualMemberNotification(const method: TRttiMethod);
-    function ShouldInterceptMethod(const method: TRttiMethod): Boolean;
+    procedure NonVirtualMemberNotification(const &method: TRttiMethod);
+    function ShouldInterceptMethod(const &method: TRttiMethod): Boolean;
   end;
 
   IInterceptorSelector = interface
     ['{4BE1377C-2710-4867-8CCF-E098FF0DC783}']
-    function SelectInterceptors(const method: TRttiMethod;
+    function SelectInterceptors(const &method: TRttiMethod;
       const interceptors: IEnumerable<IInterceptor>): IEnumerable<IInterceptor>;
   end;
 
@@ -86,13 +86,13 @@ type
     type
       TAllMethodsHook = class(TInterfacedObject, IProxyGenerationHook)
       public
-        procedure NonVirtualMemberNotification(const method: TRttiMethod);
-        function ShouldInterceptMethod(const method: TRttiMethod): Boolean;
+        procedure NonVirtualMemberNotification(const &method: TRttiMethod);
+        function ShouldInterceptMethod(const &method: TRttiMethod): Boolean;
       end;
 
       TAllInterceptorsSelector = class(TInterfacedObject, IInterceptorSelector)
       public
-        function SelectInterceptors(const method: TRttiMethod;
+        function SelectInterceptors(const &method: TRttiMethod;
           const interceptors: IEnumerable<IInterceptor>): IEnumerable<IInterceptor>;
       end;
   private
@@ -426,12 +426,12 @@ end;
 {$REGION 'TProxyGenerationOptions.TAllMethodsHook'}
 
 procedure TProxyGenerationOptions.TAllMethodsHook.NonVirtualMemberNotification(
-  const method: TRttiMethod);
+  const &method: TRttiMethod);
 begin
 end;
 
 function TProxyGenerationOptions.TAllMethodsHook.ShouldInterceptMethod(
-  const method: TRttiMethod): Boolean;
+  const &method: TRttiMethod): Boolean;
 begin
   Result := True;
 end;
@@ -442,7 +442,7 @@ end;
 {$REGION 'TProxyGenerationOptions.TAllInterceptorsSelector'}
 
 function TProxyGenerationOptions.TAllInterceptorsSelector.SelectInterceptors(
-  const method: TRttiMethod;
+  const &method: TRttiMethod;
   const interceptors: IEnumerable<IInterceptor>): IEnumerable<IInterceptor>;
 begin
   Result := interceptors;

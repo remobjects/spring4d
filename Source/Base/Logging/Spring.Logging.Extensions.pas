@@ -73,12 +73,12 @@ type
   strict protected
     constructor Create(eventType: TLogEventType);
 
-    function CanHandleEvent(const event: TLogEvent): Boolean; virtual; abstract;
+    function CanHandleEvent(const &event: TLogEvent): Boolean; virtual; abstract;
     function Execute(const controller: ILoggerController;
-      const event: TLogEvent): string; virtual; abstract;
+      const &event: TLogEvent): string; virtual; abstract;
   public
     function HandleEvent(const controller: ILoggerController;
-      const event: TLogEvent): Boolean;
+      const &event: TLogEvent): Boolean;
   end;
 
   TCallStackEventConverter = class(TLogEventConverterBase)
@@ -86,9 +86,9 @@ type
     fCollector: IStackTraceCollector;
     fFormatter: IStackTraceFormatter;
   strict protected
-    function CanHandleEvent(const event: TLogEvent): Boolean; override;
+    function CanHandleEvent(const &event: TLogEvent): Boolean; override;
     function Execute(const controller: ILoggerController;
-      const event: TLogEvent): string; override;
+      const &event: TLogEvent): string; override;
   public
     constructor Create(const collector: IStackTraceCollector;
       const formatter: IStackTraceFormatter);
@@ -111,22 +111,22 @@ begin
 end;
 
 function TLogEventConverterBase.HandleEvent(const controller: ILoggerController;
-  const event: TLogEvent): Boolean;
+  const &event: TLogEvent): Boolean;
 
   procedure DoExecute;
   var
     msg: string;
     converted: TLogEvent;
   begin
-    msg := Execute(controller, event);
-    converted := TLogEvent.Create(event.Level, fEventType, msg);
+    msg := Execute(controller, &event);
+    converted := TLogEvent.Create(&event.Level, fEventType, msg);
     controller.SendToAppenders(converted);
   end;
 
 begin
-  Result := CanHandleEvent(event);
+  Result := CanHandleEvent(&event);
   if Result then
-    if controller.IsLoggable(event.Level, [fEventType]) then
+    if controller.IsLoggable(&event.Level, [fEventType]) then
       DoExecute;
 end;
 
@@ -148,7 +148,7 @@ begin
 end;
 
 function TCallStackEventConverter.Execute(const controller: ILoggerController;
-  const event: TLogEvent): string;
+  const &event: TLogEvent): string;
 var
   stack: TArray<Pointer>;
   formatted: TArray<string>;
@@ -165,9 +165,9 @@ begin
   end;
 end;
 
-function TCallStackEventConverter.CanHandleEvent(const event: TLogEvent): Boolean;
+function TCallStackEventConverter.CanHandleEvent(const &event: TLogEvent): Boolean;
 begin
-  Result := event.AddStackValue;
+  Result := &event.AddStackValue;
 end;
 
 {$ENDREGION}

@@ -306,15 +306,15 @@ end;
 procedure ApplyPatch;
 var
   ctx: TRttiContext;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   // Fix TRttiIntfMethod.DispatchInvoke
-  method := ctx.GetType(TypeInfo(IIntfMethodHelper)).GetMethod('IntfMethod');
-  RedirectFunction(GetVirtualMethod(method.ClassType, 13), @TRttiMethodFix.IntfDispatchInvoke);
+  &method := ctx.GetType(TypeInfo(IIntfMethodHelper)).GetMethod('IntfMethod');
+  RedirectFunction(GetVirtualMethod(&method.ClassType, 13), @TRttiMethodFix.IntfDispatchInvoke);
 
   // Fix TRttiInstanceMethodEx.DispatchInvoke
-  method := ctx.GetType(TInstanceMethodHelper).GetMethod('InstanceMethod');
-  RedirectFunction(GetVirtualMethod(method.ClassType, 13), @TRttiMethodFix.InstanceDispatchInvoke);
+  &method := ctx.GetType(TInstanceMethodHelper).GetMethod('InstanceMethod');
+  RedirectFunction(GetVirtualMethod(&method.ClassType, 13), @TRttiMethodFix.InstanceDispatchInvoke);
 end;
 
 initialization

@@ -53,9 +53,9 @@ type
     fSomeString: string;
     function GetWriteCalled: Boolean;
   protected
-    procedure DoSend(const event: TLogEvent); override;
+    procedure DoSend(const &event: TLogEvent); override;
   public
-    property Event: TLogEvent read fEvent;
+    property &Event: TLogEvent read fEvent;
     property WriteCalled: Boolean read GetWriteCalled;
     property WriteCount: Integer read fWriteCount;
     property SomeFloat: Extended read fSomeFloat write fSomeFloat;
@@ -66,7 +66,7 @@ type
 
   TAppenderMock2 = class(TLogAppenderBase)
   protected
-    procedure DoSend(const event: TLogEvent); override;
+    procedure DoSend(const &event: TLogEvent); override;
   end;
 
   TLoggerControllerMock = class(TLoggerBase, ILoggerController, ILogAppender)
@@ -76,8 +76,8 @@ type
   public
     procedure AddAppender(const appender: ILogAppender);
     procedure AddEventConverter(const converter: ILogEventConverter);
-    procedure Send(const event: TLogEvent);
-    procedure SendToAppenders(const event: TLogEvent);
+    procedure Send(const &event: TLogEvent);
+    procedure SendToAppenders(const &event: TLogEvent);
     procedure Reset;
     function GetEnabled: Boolean;
     function GetLevels: TLogLevels;
@@ -185,10 +185,10 @@ implementation
 
 {$REGION 'TAppenderMock'}
 
-procedure TAppenderMock.DoSend(const event: TLogEvent);
+procedure TAppenderMock.DoSend(const &event: TLogEvent);
 begin
   Inc(fWriteCount);
-  fEvent := event;
+  fEvent := &event;
 end;
 
 function TAppenderMock.GetWriteCalled: Boolean;
@@ -258,15 +258,15 @@ begin
   fLastEvent := TLogEvent.Create(TLogLevel.Unknown, '');
 end;
 
-procedure TLoggerControllerMock.Send(const event: TLogEvent);
+procedure TLoggerControllerMock.Send(const &event: TLogEvent);
 begin
-  fLastEvent := event;
+  fLastEvent := &event;
   fAppnederOnly := False;
 end;
 
-procedure TLoggerControllerMock.SendToAppenders(const event: TLogEvent);
+procedure TLoggerControllerMock.SendToAppenders(const &event: TLogEvent);
 begin
-  fLastEvent := event;
+  fLastEvent := &event;
   fAppnederOnly := True;
 end;
 
@@ -275,7 +275,7 @@ end;
 
 {$REGION 'TAppenderMock2'}
 
-procedure TAppenderMock2.DoSend(const event: TLogEvent);
+procedure TAppenderMock2.DoSend(const &event: TLogEvent);
 begin
 end;
 

@@ -54,7 +54,7 @@ type
     fOnChanged: TCollectionChangedEventImpl<TComponentModel>;
     function GetOnChanged: ICollectionChangedEvent<TComponentModel>;
   protected
-    function InternalResolveParams(const method: TRttiMethod;
+    function InternalResolveParams(const &method: TRttiMethod;
       const args: TArray<TValue>; paramResolution: TParamResolution): TArray<TValue>;
     procedure InternalRegisterFactory(const model: TComponentModel;
       const invokeEvent: TVirtualInterfaceInvokeEvent);
@@ -98,7 +98,7 @@ type
   private
     function GetKernel: TKernel; inline;
     function GetModel: TComponentModel; inline;
-    procedure InterceptedBy(const interceptorRef: TInterceptorReference; where: TWhere); overload;
+    procedure InterceptedBy(const interceptorRef: TInterceptorReference; &where: TWhere); overload;
     property Kernel: TKernel read GetKernel;
   public
     function Implements(serviceType: PTypeInfo): TRegistration; overload;
@@ -151,11 +151,11 @@ type
     function AsFactory(const resolvedServiceName: string; paramResolution: TParamResolution): TRegistration; overload;
 
     function InterceptedBy(interceptorType: PTypeInfo;
-      where: TWhere = TWhere.Last): TRegistration; overload;
+      &where: TWhere = TWhere.Last): TRegistration; overload;
     function InterceptedBy(const name: string;
-      where: TWhere = TWhere.Last): TRegistration; overload;
+      &where: TWhere = TWhere.Last): TRegistration; overload;
     function InterceptedBy<TInterceptorType>(
-      where: TWhere = TWhere.Last): TRegistration; overload; inline;
+      &where: TWhere = TWhere.Last): TRegistration; overload; inline;
 
     property Model: TComponentModel read GetModel;
   end;
@@ -283,14 +283,14 @@ type
     VTable: PVTable;
   end;
 
-function TComponentRegistry.InternalResolveParams(const method: TRttiMethod;
+function TComponentRegistry.InternalResolveParams(const &method: TRttiMethod;
   const args: TArray<TValue>; paramResolution: TParamResolution): TArray<TValue>;
 var
   params: TArray<TRttiParameter>;
   i: Integer;
 begin
   SetLength(Result, Length(args) - 1);
-  params := method.GetParameters;
+  params := &method.GetParameters;
   for i := 0 to High(params) do
     case paramResolution of
       TParamResolution.ByName:
@@ -307,7 +307,7 @@ procedure TComponentRegistry.InternalRegisterFactory(
 var
   methods: TArray<TRttiMethod>;
   maxVirtualIndex: SmallInt;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   methods := model.ComponentType.GetMethods;
 
@@ -315,16 +315,16 @@ begin
     raise ERegistrationException.CreateResFmt(@SUnsupportedFactoryType, [
       model.ComponentTypeName]);
 
-  for method in methods do
-    if not Assigned(method.ReturnType)
-      or method.Parameters.Any(TParameterFilters.HasFlags([pfOut])) then
+  for &method in methods do
+    if not Assigned(&method.ReturnType)
+      or &method.Parameters.Any(TParameterFilters.HasFlags([pfOut])) then
       raise ERegistrationException.CreateResFmt(@SUnsupportedFactoryMethod, [
-        model.ComponentTypeName, method.ToString]);
+        model.ComponentTypeName, &method.ToString]);
 
   maxVirtualIndex := 2;
-  for method in methods do
-    if maxVirtualIndex < method.VirtualIndex then
-      maxVirtualIndex := method.VirtualIndex;
+  for &method in methods do
+    if maxVirtualIndex < &method.VirtualIndex then
+      maxVirtualIndex := &method.VirtualIndex;
 
   model.ActivatorDelegate :=
     function: TValue
@@ -353,13 +353,13 @@ var
   invokeEvent: TVirtualInterfaceInvokeEvent;
 begin
   invokeEvent :=
-    procedure(method: TRttiMethod; const args: TArray<TValue>; out result: TValue)
+    procedure(&method: TRttiMethod; const args: TArray<TValue>; out result: TValue)
     var
       arguments: TArray<TValue>;
     begin
-      arguments := InternalResolveParams(method, args, paramResolution);
+      arguments := InternalResolveParams(&method, args, paramResolution);
       result := (fKernel as IKernelInternal).Resolve(
-        method.ReturnType.Handle, arguments);
+        &method.ReturnType.Handle, arguments);
     end;
 
   InternalRegisterFactory(model, invokeEvent);
@@ -377,11 +377,11 @@ var
   invokeEvent: TVirtualInterfaceInvokeEvent;
 begin
   invokeEvent :=
-    procedure(method: TRttiMethod; const args: TArray<TValue>; out result: TValue)
+    procedure(&method: TRttiMethod; const args: TArray<TValue>; out result: TValue)
     var
       arguments: TArray<TValue>;
     begin
-      arguments := InternalResolveParams(method, args, paramResolution);
+      arguments := InternalResolveParams(&method, args, paramResolution);
       result := (fKernel as IKernelInternal).Resolve(
         resolvedServiceName, arguments);
     end;
@@ -753,9 +753,9 @@ begin
 end;
 
 procedure TRegistration.InterceptedBy(
-  const interceptorRef: TInterceptorReference; where: TWhere);
+  const interceptorRef: TInterceptorReference; &where: TWhere);
 begin
-  case where of
+  case &where of
     TWhere.First: Model.Interceptors.Insert(0, interceptorRef);
   else
     Model.Interceptors.Add(interceptorRef);
@@ -763,23 +763,23 @@ begin
 end;
 
 function TRegistration.InterceptedBy(interceptorType: PTypeInfo;
-  where: TWhere): TRegistration;
+  &where: TWhere): TRegistration;
 begin
-  InterceptedBy(TInterceptorReference.Create(interceptorType), where);
+  InterceptedBy(TInterceptorReference.Create(interceptorType), &where);
   Result := Self;
 end;
 
 function TRegistration.InterceptedBy(const name: string;
-  where: TWhere): TRegistration;
+  &where: TWhere): TRegistration;
 begin
-  InterceptedBy(TInterceptorReference.Create(name), where);
+  InterceptedBy(TInterceptorReference.Create(name), &where);
   Result := Self;
 end;
 
 function TRegistration.InterceptedBy<TInterceptorType>(
-  where: TWhere = TWhere.Last): TRegistration;
+  &where: TWhere = TWhere.Last): TRegistration;
 begin
-  Result := InterceptedBy(TypeInfo(TInterceptorType), where);
+  Result := InterceptedBy(TypeInfo(TInterceptorType), &where);
 end;
 
 {$ENDREGION}

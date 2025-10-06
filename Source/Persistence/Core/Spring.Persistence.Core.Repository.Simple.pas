@@ -70,7 +70,7 @@ type
   public
     constructor Create(const session: TSession); virtual;
 
-    property Namespace: string read fNamespace;
+    property &Namespace: string read fNamespace;
   end;
 
 implementation

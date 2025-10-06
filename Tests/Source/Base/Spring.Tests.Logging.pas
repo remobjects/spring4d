@@ -412,7 +412,7 @@ var
   collectorMock: Mock<TStackTraceCollector>;
   formatterMock: Mock<TStackTraceFormatter>;
   seq: MockSequence;
-  event: TLogEvent;
+  &event: TLogEvent;
   stack: TArray<Pointer>;
   formatted: TArray<string>;
 begin
@@ -426,32 +426,32 @@ begin
   fController.AddEventConverter(TCallStackEventConverter.Create(collectorMock,
     formatterMock));
   try
-    event := TLogEvent.Create(TLogLevel.Error, 'Message').AddStack;
+    &event := TLogEvent.Create(TLogLevel.Error, 'Message').AddStack;
 
     // Disabled by controller
     appender.EventTypes := LOG_ALL_EVENT_TYPES;
-    fController.Send(event);
+    fController.Send(&event);
     CheckEquals(1, appender.WriteCount);
-    CheckEqualsString(event.Msg, appender.Event.Msg);
+    CheckEqualsString(&event.Msg, appender.Event.Msg);
 
     // Disabled by appender
     appender.EventTypes := LOG_BASIC_EVENT_TYPES;
     (fController as ILoggerProperties).EventTypes := LOG_ALL_EVENT_TYPES;
-    fController.Send(event);
+    fController.Send(&event);
     CheckEquals(2, appender.WriteCount);
-    CheckEqualsString(event.Msg, appender.Event.Msg);
+    CheckEqualsString(&event.Msg, appender.Event.Msg);
     // No calls to collector and formatter expected
 
     // Empty stack
     appender.EventTypes := LOG_ALL_EVENT_TYPES;
     collectorMock.Setup(Seq).Returns<TArray<Pointer>>(nil).When.Collect;
     formatterMock.Setup(Seq).Returns<TArray<string>>(nil).When.Format(nil);
-    fController.Send(event);
+    fController.Send(&event);
     // No calls to formatter expected
     Check(seq.Completed);
     CheckEquals(4, appender.WriteCount);
     CheckEqualsString('', appender.Event.Msg);
-    Check(appender.Event.Level = event.Level);
+    Check(appender.Event.Level = &event.Level);
     Check(appender.Event.EventType = TLogEventType.CallStack);
 
     // One line stack
@@ -460,11 +460,11 @@ begin
     formatted := TArray<string>.Create('$12345678');
     collectorMock.Setup(Seq).Returns<TArray<Pointer>>(stack).When.Collect;
     formatterMock.Setup(Seq).Returns<TArray<string>>(formatted).When.Format(stack);
-    fController.Send(event);
+    fController.Send(&event);
     Check(seq.Completed);
     CheckEquals(6, appender.WriteCount);
     CheckEqualsString(formatted[0], appender.Event.Msg);
-    Check(appender.Event.Level = event.Level);
+    Check(appender.Event.Level = &event.Level);
     Check(appender.Event.EventType = TLogEventType.CallStack);
 
     // Multi line stack
@@ -473,12 +473,12 @@ begin
     formatted := TArray<string>.Create('1', '2');
     collectorMock.Setup(Seq).Returns<TArray<Pointer>>(stack).When.Collect;
     formatterMock.Setup(Seq).Returns<TArray<string>>(formatted).When.Format(stack);
-    fController.Send(event);
+    fController.Send(&event);
     Check(seq.Completed);
     CheckEquals(8, appender.WriteCount);
     CheckEqualsString(formatted[0] + sLineBreak + formatted[1],
       appender.Event.Msg);
-    Check(appender.Event.Level = event.Level);
+    Check(appender.Event.Level = &event.Level);
     Check(appender.Event.EventType = TLogEventType.CallStack);
   finally
     // Release mock references

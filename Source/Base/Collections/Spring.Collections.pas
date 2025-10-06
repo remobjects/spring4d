@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -1769,7 +1769,7 @@ type
     /// <exception cref="Spring|EArgumentNilException">
     ///   <c>predicate</c> is <c>nil</c>.
     /// </exception>
-    function Where(const predicate: Predicate<T>): IEnumerable<T>; overload;
+    function &Where(const predicate: Predicate<T>): IEnumerable<T>; overload;
 
     /// <summary>
     ///   Filters the sequence based on the specified predicate. Each element's
@@ -1786,7 +1786,7 @@ type
     /// <exception cref="Spring|EArgumentNilException">
     ///   <c>predicate</c> is <c>nil</c>.
     /// </exception>
-    function Where(const predicate: Func<T, Integer, Boolean>): IEnumerable<T>; overload;
+    function &Where(const predicate: Func<T, Integer, Boolean>): IEnumerable<T>; overload;
 
     /// <summary>
     ///   Gets the assigned comparer. If no comparer was assigned it returns
@@ -4490,689 +4490,689 @@ type
   {$IFDEF DELPHIXE7_UP}
     class procedure CreateDictionary_Int8_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int8_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int8_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int8_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int8_Method(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int8_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int8_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int8_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateDictionary_Int16_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int16_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int16_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int16_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int16_Method(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int16_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int16_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int16_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateDictionary_Int32_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int32_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int32_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int32_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int32_Method(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int32_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int32_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int32_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateDictionary_Int64_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int64_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int64_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int64_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int64_Method(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int64_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int64_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Int64_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateDictionary_Interface_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Interface_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Interface_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Interface_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Interface_Method(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Interface_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Interface_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Interface_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateDictionary_Object_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Object_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Object_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Object_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Object_Method(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Object_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Object_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_Object_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateDictionary_String_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_String_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_String_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_String_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_String_Method(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_String_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_String_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateDictionary_String_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateBidiDictionary_Int8_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int8_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int8_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int8_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int8_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int8_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int8_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateBidiDictionary_Int16_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int16_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int16_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int16_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int16_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int16_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int16_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateBidiDictionary_Int32_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int32_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int32_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int32_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int32_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int32_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int32_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateBidiDictionary_Int64_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int64_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int64_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int64_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int64_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int64_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Int64_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateBidiDictionary_Interface_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Interface_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Interface_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Interface_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Interface_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Interface_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Interface_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateBidiDictionary_Object_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Object_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Object_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Object_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Object_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Object_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_Object_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateBidiDictionary_String_Int8(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_String_Int16(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_String_Int32(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_String_Int64(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_String_Interface(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_String_Object(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateBidiDictionary_String_String(capacity: Integer;
       keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateListMultiMap_Int8_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int8_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int8_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int8_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int8_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int8_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int8_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateListMultiMap_Int16_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int16_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int16_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int16_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int16_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int16_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int16_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateListMultiMap_Int32_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int32_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int32_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int32_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int32_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int32_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int32_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateListMultiMap_Int64_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int64_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int64_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int64_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int64_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int64_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Int64_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateListMultiMap_Interface_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Interface_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Interface_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Interface_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Interface_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Interface_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Interface_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateListMultiMap_Object_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Object_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Object_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Object_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Object_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Object_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_Object_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateListMultiMap_String_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_String_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_String_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_String_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_String_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_String_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateListMultiMap_String_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateSortedListMultiMap_Int8_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int8_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int8_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int8_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int8_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int8_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int8_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateSortedListMultiMap_Int16_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int16_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int16_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int16_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int16_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int16_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int16_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateSortedListMultiMap_Int32_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int32_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int32_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int32_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int32_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int32_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int32_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateSortedListMultiMap_Int64_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int64_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int64_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int64_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int64_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int64_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Int64_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateSortedListMultiMap_Interface_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Interface_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Interface_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Interface_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Interface_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Interface_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Interface_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateSortedListMultiMap_Object_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Object_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Object_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Object_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Object_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Object_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_Object_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
 
     class procedure CreateSortedListMultiMap_String_Int8(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_String_Int16(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_String_Int32(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_String_Int64(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_String_Interface(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_String_Object(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
     class procedure CreateSortedListMultiMap_String_String(
       keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-      var result; keyType, valueType, elementType: PTypeInfo); static;
+      var &result; keyType, valueType, elementType: PTypeInfo); static;
   {$ENDIF}
 
     // internal helper record because older Delphi compilers could not cope
     // with parameterized methods being passed as parameter
     type Helper<TKey, TValue> = record
       class procedure CreateListCollection(const key;
-        const comparer: IInterface; elementType: PTypeInfo; var result); static;
+        const comparer: IInterface; elementType: PTypeInfo; var &result); static;
       class procedure CreateHashSetCollection(const key;
-        const comparer: IInterface; elementType: PTypeInfo; var result); static;
+        const comparer: IInterface; elementType: PTypeInfo; var &result); static;
       class procedure CreateTreeSetCollection(const key;
-        const comparer: IInterface; elementType: PTypeInfo; var result); static;
+        const comparer: IInterface; elementType: PTypeInfo; var &result); static;
     end;
 
-    class procedure CreateList_Int8(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateList_Int16(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateList_Int32(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateList_Int64(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateList_Method(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateList_Interface(var result; elementType: Pointer); overload; static;
-    class procedure CreateList_Interface(comparer: Pointer; var result; elementType: Pointer); overload; static;
-    class procedure CreateList_Object(var result; elementType: Pointer); overload; static;
-    class procedure CreateList_Object(ownsObjects: Boolean; var result; elementType: Pointer); overload; static;
-    class procedure CreateList_Object(comparer: Pointer; ownsObjects: Boolean; var result; elementType: Pointer); overload; static;
-    class procedure CreateList_String(comparer: Pointer; var result; elementType: Pointer); static;
+    class procedure CreateList_Int8(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateList_Int16(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateList_Int32(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateList_Int64(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateList_Method(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateList_Interface(var &result; elementType: Pointer); overload; static;
+    class procedure CreateList_Interface(comparer: Pointer; var &result; elementType: Pointer); overload; static;
+    class procedure CreateList_Object(var &result; elementType: Pointer); overload; static;
+    class procedure CreateList_Object(ownsObjects: Boolean; var &result; elementType: Pointer); overload; static;
+    class procedure CreateList_Object(comparer: Pointer; ownsObjects: Boolean; var &result; elementType: Pointer); overload; static;
+    class procedure CreateList_String(comparer: Pointer; var &result; elementType: Pointer); static;
 
-    class procedure CreateSortedList_Int8(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateSortedList_Int16(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateSortedList_Int32(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateSortedList_Int64(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateSortedList_Interface(comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateSortedList_Object(comparer: Pointer; ownsObjects: Boolean; var result; elementType: Pointer); static;
-    class procedure CreateSortedList_String(comparer: Pointer; var result; elementType: Pointer); static;
+    class procedure CreateSortedList_Int8(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateSortedList_Int16(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateSortedList_Int32(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateSortedList_Int64(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateSortedList_Interface(comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateSortedList_Object(comparer: Pointer; ownsObjects: Boolean; var &result; elementType: Pointer); static;
+    class procedure CreateSortedList_String(comparer: Pointer; var &result; elementType: Pointer); static;
 
-    class procedure CreateHashSet_Int8(capacity: Integer; comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateHashSet_Int16(capacity: Integer; comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateHashSet_Int32(capacity: Integer; comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateHashSet_Int64(capacity: Integer; comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateHashSet_Interface(capacity: Integer; comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateHashSet_Object(capacity: Integer; comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateHashSet_String(capacity: Integer; comparer: Pointer; var result; elementType: Pointer); static;
+    class procedure CreateHashSet_Int8(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateHashSet_Int16(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateHashSet_Int32(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateHashSet_Int64(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateHashSet_Interface(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateHashSet_Object(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateHashSet_String(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer); static;
 
-    class procedure CreateQueue_Interface(capacity: Integer; comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateQueue_Object(capacity: Integer; comparer: Pointer; ownsObjects: Boolean; var result; elementType: Pointer); static;
+    class procedure CreateQueue_Interface(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateQueue_Object(capacity: Integer; comparer: Pointer; ownsObjects: Boolean; var &result; elementType: Pointer); static;
 
-    class procedure CreateStack_Interface(capacity: Integer; comparer: Pointer; var result; elementType: Pointer); static;
-    class procedure CreateStack_Object(capacity: Integer; comparer: Pointer; ownsObjects: Boolean; var result; elementType: Pointer); static;
+    class procedure CreateStack_Interface(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer); static;
+    class procedure CreateStack_Object(capacity: Integer; comparer: Pointer; ownsObjects: Boolean; var &result; elementType: Pointer); static;
 
-    class procedure CreateObservableList_Interface(var result; elementType: Pointer); static;
-    class procedure CreateObservableList_Object(ownsObjects: Boolean; var result; elementType: Pointer); static;
+    class procedure CreateObservableList_Interface(var &result; elementType: Pointer); static;
+    class procedure CreateObservableList_Object(ownsObjects: Boolean; var &result; elementType: Pointer); static;
   {$ENDREGION}
   public
     class function CreateList<T>: IList<T>; overload; static;
@@ -5333,32 +5333,32 @@ type
   TEnumerable = class
   protected
   {$REGION 'Internal factory methods'}
-    class procedure CreateEmpty_Int8(var result; elementType: Pointer); static;
-    class procedure CreateEmpty_Int16(var result; elementType: Pointer); static;
-    class procedure CreateEmpty_Int32(var result; elementType: Pointer); static;
-    class procedure CreateEmpty_Int64(var result; elementType: Pointer); static;
-    class procedure CreateEmpty_Method(var result; elementType: Pointer); static;
-    class procedure CreateEmpty_Interface(var result; elementType: Pointer); static;
-    class procedure CreateEmpty_Object(var result; elementType: Pointer); static;
-    class procedure CreateEmpty_String(var result; elementType: Pointer); static;
+    class procedure CreateEmpty_Int8(var &result; elementType: Pointer); static;
+    class procedure CreateEmpty_Int16(var &result; elementType: Pointer); static;
+    class procedure CreateEmpty_Int32(var &result; elementType: Pointer); static;
+    class procedure CreateEmpty_Int64(var &result; elementType: Pointer); static;
+    class procedure CreateEmpty_Method(var &result; elementType: Pointer); static;
+    class procedure CreateEmpty_Interface(var &result; elementType: Pointer); static;
+    class procedure CreateEmpty_Object(var &result; elementType: Pointer); static;
+    class procedure CreateEmpty_String(var &result; elementType: Pointer); static;
 
-    class procedure InternalFrom_Int8_DynArray(source: Pointer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Int8_OpenArray(source: Pointer; count: Integer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Int16_DynArray(source: Pointer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Int16_OpenArray(source: Pointer; count: Integer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Int32_DynArray(source: Pointer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Int32_OpenArray(source: Pointer; count: Integer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Int64_DynArray(source: Pointer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Int64_OpenArray(source: Pointer; count: Integer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Method_DynArray(source: Pointer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Method_OpenArray(source: Pointer; count: Integer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_String_DynArray(source: Pointer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_String_OpenArray(source: Pointer; count: Integer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Object_DynArray(source: Pointer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Object_OpenArray(source: Pointer; count: Integer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Interface_DynArray(source: Pointer; var result; elementType: PTypeInfo); static;
-    class procedure InternalFrom_Interface_OpenArray(source: Pointer; count: Integer; var result; elementType: PTypeInfo); static;
-    class procedure InternalOfType_Object(const source: IEnumerable<TObject>; var result; resultType: PTypeInfo); static;
+    class procedure InternalFrom_Int8_DynArray(source: Pointer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Int8_OpenArray(source: Pointer; count: Integer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Int16_DynArray(source: Pointer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Int16_OpenArray(source: Pointer; count: Integer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Int32_DynArray(source: Pointer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Int32_OpenArray(source: Pointer; count: Integer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Int64_DynArray(source: Pointer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Int64_OpenArray(source: Pointer; count: Integer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Method_DynArray(source: Pointer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Method_OpenArray(source: Pointer; count: Integer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_String_DynArray(source: Pointer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_String_OpenArray(source: Pointer; count: Integer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Object_DynArray(source: Pointer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Object_OpenArray(source: Pointer; count: Integer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Interface_DynArray(source: Pointer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalFrom_Interface_OpenArray(source: Pointer; count: Integer; var &result; elementType: PTypeInfo); static;
+    class procedure InternalOfType_Object(const source: IEnumerable<TObject>; var &result; resultType: PTypeInfo); static;
   {$ENDREGION}
   public
     /// <summary>
@@ -5680,7 +5680,7 @@ type
     /// <returns>
     ///   A sequence that contains the specified values.
     /// </returns>
-    class function From<T>(const values: array of T): IReadOnlyList<T>; overload; static;
+    class function &From<T>(const values: array of T): IReadOnlyList<T>; overload; static;
 
     /// <summary>
     ///   Returns a sequence that contains the specified values.
@@ -5694,7 +5694,7 @@ type
     /// <returns>
     ///   A sequence that contains the specified values.
     /// </returns>
-    class function From<T>(const values: TArray<T>): IReadOnlyList<T>; overload; static;
+    class function &From<T>(const values: TArray<T>): IReadOnlyList<T>; overload; static;
 
     /// <summary>
     ///   Groups the elements of a sequence according to a specified key
@@ -7060,742 +7060,742 @@ end;
 {$IFDEF DELPHIXE7_UP}
 class procedure TCollections.CreateDictionary_Int8_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int8,Int8>(Result) := TFoldedDictionary<Int8,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int8_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int8,Int16>(Result) := TFoldedDictionary<Int8,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int8_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int8,Int32>(Result) := TFoldedDictionary<Int8,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int8_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int8,Int64>(Result) := TFoldedDictionary<Int8,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int8_Method(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int8,TMethodPointer>(Result) := TFoldedDictionary<Int8,TMethodPointer>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<TMethodPointer>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int8_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int8,IInterface>(Result) := TFoldedDictionary<Int8,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int8_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int8,TObject>(Result) := TFoldedDictionary<Int8,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int8_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int8,string>(Result) := TFoldedDictionary<Int8,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int16_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int16,Int8>(Result) := TFoldedDictionary<Int16,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int16_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int16,Int16>(Result) := TFoldedDictionary<Int16,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int16_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int16,Int32>(Result) := TFoldedDictionary<Int16,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int16_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int16,Int64>(Result) := TFoldedDictionary<Int16,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int16_Method(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int16,TMethodPointer>(Result) := TFoldedDictionary<Int16,TMethodPointer>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<TMethodPointer>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int16_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int16,IInterface>(Result) := TFoldedDictionary<Int16,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int16_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int16,TObject>(Result) := TFoldedDictionary<Int16,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int16_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int16,string>(Result) := TFoldedDictionary<Int16,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int32_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int32,Int8>(Result) := TFoldedDictionary<Int32,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int32_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int32,Int16>(Result) := TFoldedDictionary<Int32,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int32_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int32,Int32>(Result) := TFoldedDictionary<Int32,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int32_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int32,Int64>(Result) := TFoldedDictionary<Int32,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int32_Method(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int32,TMethodPointer>(Result) := TFoldedDictionary<Int32,TMethodPointer>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<TMethodPointer>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int32_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int32,IInterface>(Result) := TFoldedDictionary<Int32,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int32_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int32,TObject>(Result) := TFoldedDictionary<Int32,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int32_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int32,string>(Result) := TFoldedDictionary<Int32,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int64_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int64,Int8>(Result) := TFoldedDictionary<Int64,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int64_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int64,Int16>(Result) := TFoldedDictionary<Int64,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int64_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int64,Int32>(Result) := TFoldedDictionary<Int64,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int64_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int64,Int64>(Result) := TFoldedDictionary<Int64,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int64_Method(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int64,TMethodPointer>(Result) := TFoldedDictionary<Int64,TMethodPointer>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<TMethodPointer>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int64_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int64,IInterface>(Result) := TFoldedDictionary<Int64,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int64_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int64,TObject>(Result) := TFoldedDictionary<Int64,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Int64_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<Int64,string>(Result) := TFoldedDictionary<Int64,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Interface_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<IInterface,Int8>(Result) := TFoldedDictionary<IInterface,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Interface_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<IInterface,Int16>(Result) := TFoldedDictionary<IInterface,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Interface_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IDictionary<IInterface,Int32>(Result) := TFoldedDictionary<IInterface,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Interface_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<IInterface,Int64>(Result) := TFoldedDictionary<IInterface,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Interface_Method(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<IInterface,TMethodPointer>(Result) := TFoldedDictionary<IInterface,TMethodPointer>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<TMethodPointer>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Interface_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<IInterface,IInterface>(Result) := TFoldedDictionary<IInterface,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Interface_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<IInterface,TObject>(Result) := TFoldedDictionary<IInterface,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Interface_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<IInterface,string>(Result) := TFoldedDictionary<IInterface,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Object_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<TObject,Int8>(Result) := TFoldedDictionary<TObject,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Object_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<TObject,Int16>(Result) := TFoldedDictionary<TObject,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Object_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<TObject,Int32>(Result) := TFoldedDictionary<TObject,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Object_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<TObject,Int64>(Result) := TFoldedDictionary<TObject,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Object_Method(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<TObject,TMethodPointer>(Result) := TFoldedDictionary<TObject,TMethodPointer>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<TMethodPointer>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Object_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<TObject,IInterface>(Result) := TFoldedDictionary<TObject,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Object_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<TObject,TObject>(Result) := TFoldedDictionary<TObject,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_Object_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<TObject,string>(Result) := TFoldedDictionary<TObject,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_String_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<string,Int8>(Result) := TFoldedDictionary<string,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_String_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<string,Int16>(Result) := TFoldedDictionary<string,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_String_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<string,Int32>(Result) := TFoldedDictionary<string,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_String_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<string,Int64>(Result) := TFoldedDictionary<string,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_String_Method(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<string,TMethodPointer>(Result) := TFoldedDictionary<string,TMethodPointer>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<TMethodPointer>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_String_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<string,IInterface>(Result) := TFoldedDictionary<string,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_String_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<string,TObject>(Result) := TFoldedDictionary<string,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateDictionary_String_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IOrderedDictionary<string,string>(Result) := TFoldedDictionary<string,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int8_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int8,Int8>(Result) := TFoldedBidiDictionary<Int8,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int8_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int8,Int16>(Result) := TFoldedBidiDictionary<Int8,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int8_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int8,Int32>(Result) := TFoldedBidiDictionary<Int8,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int8_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int8,Int64>(Result) := TFoldedBidiDictionary<Int8,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int8_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int8,IInterface>(Result) := TFoldedBidiDictionary<Int8,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int8_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int8,TObject>(Result) := TFoldedBidiDictionary<Int8,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int8_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int8,string>(Result) := TFoldedBidiDictionary<Int8,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int8>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int16_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int16,Int8>(Result) := TFoldedBidiDictionary<Int16,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int16_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int16,Int16>(Result) := TFoldedBidiDictionary<Int16,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int16_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int16,Int32>(Result) := TFoldedBidiDictionary<Int16,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int16_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int16,Int64>(Result) := TFoldedBidiDictionary<Int16,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int16_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int16,IInterface>(Result) := TFoldedBidiDictionary<Int16,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int16_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int16,TObject>(Result) := TFoldedBidiDictionary<Int16,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int16_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int16,string>(Result) := TFoldedBidiDictionary<Int16,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int16>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int32_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int32,Int8>(Result) := TFoldedBidiDictionary<Int32,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int32_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int32,Int16>(Result) := TFoldedBidiDictionary<Int32,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int32_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int32,Int32>(Result) := TFoldedBidiDictionary<Int32,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int32_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int32,Int64>(Result) := TFoldedBidiDictionary<Int32,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int32_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int32,IInterface>(Result) := TFoldedBidiDictionary<Int32,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int32_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int32,TObject>(Result) := TFoldedBidiDictionary<Int32,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int32_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int32,string>(Result) := TFoldedBidiDictionary<Int32,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int32>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int64_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int64,Int8>(Result) := TFoldedBidiDictionary<Int64,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int64_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int64,Int16>(Result) := TFoldedBidiDictionary<Int64,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int64_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int64,Int32>(Result) := TFoldedBidiDictionary<Int64,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int64_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int64,Int64>(Result) := TFoldedBidiDictionary<Int64,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int64_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int64,IInterface>(Result) := TFoldedBidiDictionary<Int64,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int64_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int64,TObject>(Result) := TFoldedBidiDictionary<Int64,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Int64_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<Int64,string>(Result) := TFoldedBidiDictionary<Int64,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<Int64>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Interface_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<IInterface,Int8>(Result) := TFoldedBidiDictionary<IInterface,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Interface_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<IInterface,Int16>(Result) := TFoldedBidiDictionary<IInterface,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Interface_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<IInterface,Int32>(Result) := TFoldedBidiDictionary<IInterface,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Interface_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<IInterface,Int64>(Result) := TFoldedBidiDictionary<IInterface,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Interface_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<IInterface,IInterface>(Result) := TFoldedBidiDictionary<IInterface,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Interface_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<IInterface,TObject>(Result) := TFoldedBidiDictionary<IInterface,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Interface_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<IInterface,string>(Result) := TFoldedBidiDictionary<IInterface,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<IInterface>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Object_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<TObject,Int8>(Result) := TFoldedBidiDictionary<TObject,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Object_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<TObject,Int16>(Result) := TFoldedBidiDictionary<TObject,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Object_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<TObject,Int32>(Result) := TFoldedBidiDictionary<TObject,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Object_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<TObject,Int64>(Result) := TFoldedBidiDictionary<TObject,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Object_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<TObject,IInterface>(Result) := TFoldedBidiDictionary<TObject,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Object_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<TObject,TObject>(Result) := TFoldedBidiDictionary<TObject,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_Object_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<TObject,string>(Result) := TFoldedBidiDictionary<TObject,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<TObject>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_String_Int8(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<string,Int8>(Result) := TFoldedBidiDictionary<string,Int8>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<Int8>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_String_Int16(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<string,Int16>(Result) := TFoldedBidiDictionary<string,Int16>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<Int16>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_String_Int32(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<string,Int32>(Result) := TFoldedBidiDictionary<string,Int32>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<Int32>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_String_Int64(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<string,Int64>(Result) := TFoldedBidiDictionary<string,Int64>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<Int64>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_String_Interface(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<string,IInterface>(Result) := TFoldedBidiDictionary<string,IInterface>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<IInterface>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_String_Object(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<string,TObject>(Result) := TFoldedBidiDictionary<string,TObject>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<TObject>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateBidiDictionary_String_String(capacity: Integer;
   keyComparer, valueComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IBidiDictionary<string,string>(Result) := TFoldedBidiDictionary<string,string>.Create(keyType, valueType, elementType, capacity, IEqualityComparer<string>(keyComparer), IEqualityComparer<string>(valueComparer), ownerships);
 end;
 
 class procedure TCollections.CreateListMultiMap_Int8_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,Int8>(Result) := TFoldedMultiMap<Int8,Int8>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int8>(keyComparer),
@@ -7804,7 +7804,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int8_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,Int16>(Result) := TFoldedMultiMap<Int8,Int16>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int8>(keyComparer),
@@ -7813,7 +7813,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int8_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,Int32>(Result) := TFoldedMultiMap<Int8,Int32>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int8>(keyComparer),
@@ -7822,7 +7822,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int8_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,Int64>(Result) := TFoldedMultiMap<Int8,Int64>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int8>(keyComparer),
@@ -7831,7 +7831,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int8_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,IInterface>(Result) := TFoldedMultiMap<Int8,IInterface>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int8>(keyComparer),
@@ -7840,7 +7840,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int8_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,TObject>(Result) := TFoldedMultiMap<Int8,TObject>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int8>(keyComparer),
@@ -7849,7 +7849,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int8_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,string>(Result) := TFoldedMultiMap<Int8,string>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int8>(keyComparer),
@@ -7858,7 +7858,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int16_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,Int8>(Result) := TFoldedMultiMap<Int16,Int8>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int16>(keyComparer),
@@ -7867,7 +7867,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int16_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,Int16>(Result) := TFoldedMultiMap<Int16,Int16>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int16>(keyComparer),
@@ -7876,7 +7876,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int16_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,Int32>(Result) := TFoldedMultiMap<Int16,Int32>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int16>(keyComparer),
@@ -7885,7 +7885,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int16_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,Int64>(Result) := TFoldedMultiMap<Int16,Int64>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int16>(keyComparer),
@@ -7894,7 +7894,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int16_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,IInterface>(Result) := TFoldedMultiMap<Int16,IInterface>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int16>(keyComparer),
@@ -7903,7 +7903,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int16_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,TObject>(Result) := TFoldedMultiMap<Int16,TObject>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int16>(keyComparer),
@@ -7912,7 +7912,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int16_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,string>(Result) := TFoldedMultiMap<Int16,string>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int16>(keyComparer),
@@ -7921,7 +7921,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int32_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,Int8>(Result) := TFoldedMultiMap<Int32,Int8>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int32>(keyComparer),
@@ -7930,7 +7930,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int32_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,Int16>(Result) := TFoldedMultiMap<Int32,Int16>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int32>(keyComparer),
@@ -7939,7 +7939,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int32_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,Int32>(Result) := TFoldedMultiMap<Int32,Int32>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int32>(keyComparer),
@@ -7948,7 +7948,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int32_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,Int64>(Result) := TFoldedMultiMap<Int32,Int64>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int32>(keyComparer),
@@ -7957,7 +7957,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int32_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,IInterface>(Result) := TFoldedMultiMap<Int32,IInterface>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int32>(keyComparer),
@@ -7966,7 +7966,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int32_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,TObject>(Result) := TFoldedMultiMap<Int32,TObject>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int32>(keyComparer),
@@ -7975,7 +7975,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int32_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,string>(Result) := TFoldedMultiMap<Int32,string>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int32>(keyComparer),
@@ -7984,7 +7984,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int64_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,Int8>(Result) := TFoldedMultiMap<Int64,Int8>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int64>(keyComparer),
@@ -7993,7 +7993,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int64_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,Int16>(Result) := TFoldedMultiMap<Int64,Int16>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int64>(keyComparer),
@@ -8002,7 +8002,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int64_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,Int32>(Result) := TFoldedMultiMap<Int64,Int32>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int64>(keyComparer),
@@ -8011,7 +8011,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int64_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,Int64>(Result) := TFoldedMultiMap<Int64,Int64>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int64>(keyComparer),
@@ -8020,7 +8020,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int64_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,IInterface>(Result) := TFoldedMultiMap<Int64,IInterface>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int64>(keyComparer),
@@ -8029,7 +8029,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int64_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,TObject>(Result) := TFoldedMultiMap<Int64,TObject>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int64>(keyComparer),
@@ -8038,7 +8038,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Int64_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,string>(Result) := TFoldedMultiMap<Int64,string>.Create(
     keyType, valueType, elementType, IEqualityComparer<Int64>(keyComparer),
@@ -8047,7 +8047,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Interface_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,Int8>(Result) := TFoldedMultiMap<IInterface,Int8>.Create(
     keyType, valueType, elementType, IEqualityComparer<IInterface>(keyComparer),
@@ -8056,7 +8056,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Interface_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType,valueType, elementType: PTypeInfo);
+  var &result; keyType,valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,Int16>(Result) := TFoldedMultiMap<IInterface,Int16>.Create(
     keyType, valueType, elementType, IEqualityComparer<IInterface>(keyComparer),
@@ -8065,7 +8065,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Interface_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,Int32>(Result) := TFoldedMultiMap<IInterface,Int32>.Create(
     keyType, valueType, elementType, IEqualityComparer<IInterface>(keyComparer),
@@ -8074,7 +8074,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Interface_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,Int64>(Result) := TFoldedMultiMap<IInterface,Int64>.Create(
     keyType, valueType, elementType, IEqualityComparer<IInterface>(keyComparer),
@@ -8083,7 +8083,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Interface_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,IInterface>(Result) := TFoldedMultiMap<IInterface,IInterface>.Create(
     keyType, valueType, elementType, IEqualityComparer<IInterface>(keyComparer),
@@ -8092,7 +8092,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Interface_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,TObject>(Result) := TFoldedMultiMap<IInterface,TObject>.Create(
     keyType, valueType, elementType, IEqualityComparer<IInterface>(keyComparer),
@@ -8101,7 +8101,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Interface_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,string>(Result) := TFoldedMultiMap<IInterface,string>.Create(
     keyType, valueType, elementType, IEqualityComparer<IInterface>(keyComparer),
@@ -8110,7 +8110,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Object_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,Int8>(Result) := TFoldedMultiMap<TObject,Int8>.Create(
     keyType, valueType, elementType, IEqualityComparer<TObject>(keyComparer),
@@ -8119,7 +8119,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Object_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,Int16>(Result) := TFoldedMultiMap<TObject,Int16>.Create(
     keyType, valueType, elementType, IEqualityComparer<TObject>(keyComparer),
@@ -8128,7 +8128,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Object_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,Int32>(Result) := TFoldedMultiMap<TObject,Int32>.Create(
     keyType, valueType, elementType, IEqualityComparer<TObject>(keyComparer),
@@ -8137,7 +8137,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Object_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,Int64>(Result) := TFoldedMultiMap<TObject,Int64>.Create(
     keyType, valueType, elementType, IEqualityComparer<TObject>(keyComparer),
@@ -8146,7 +8146,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Object_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,IInterface>(Result) := TFoldedMultiMap<TObject,IInterface>.Create(
     keyType, valueType, elementType, IEqualityComparer<TObject>(keyComparer),
@@ -8155,7 +8155,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Object_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,TObject>(Result) := TFoldedMultiMap<TObject,TObject>.Create(
     keyType, valueType, elementType, IEqualityComparer<TObject>(keyComparer),
@@ -8164,7 +8164,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_Object_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,string>(Result) := TFoldedMultiMap<TObject,string>.Create(
     keyType, valueType, elementType, IEqualityComparer<TObject>(keyComparer),
@@ -8173,7 +8173,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_String_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,Int8>(Result) := TFoldedMultiMap<string,Int8>.Create(
     keyType, valueType, elementType, IEqualityComparer<string>(keyComparer),
@@ -8182,7 +8182,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_String_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,Int16>(Result) := TFoldedMultiMap<string,Int16>.Create(
     keyType, valueType, elementType, IEqualityComparer<string>(keyComparer),
@@ -8191,7 +8191,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_String_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,Int32>(Result) := TFoldedMultiMap<string,Int32>.Create(
     keyType, valueType, elementType, IEqualityComparer<string>(keyComparer),
@@ -8200,7 +8200,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_String_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,Int64>(Result) := TFoldedMultiMap<string,Int64>.Create(
     keyType, valueType, elementType, IEqualityComparer<string>(keyComparer),
@@ -8209,7 +8209,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_String_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,IInterface>(Result) := TFoldedMultiMap<string,IInterface>.Create(
     keyType, valueType, elementType, IEqualityComparer<string>(keyComparer),
@@ -8218,7 +8218,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_String_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,TObject>(Result) := TFoldedMultiMap<string,TObject>.Create(
     keyType, valueType, elementType, IEqualityComparer<string>(keyComparer),
@@ -8227,7 +8227,7 @@ end;
 
 class procedure TCollections.CreateListMultiMap_String_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,string>(Result) := TFoldedMultiMap<string,string>.Create(
     keyType, valueType, elementType, IEqualityComparer<string>(keyComparer),
@@ -8236,7 +8236,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int8_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,Int8>(Result) := TFoldedSortedMultiMap<Int8,Int8>.Create(
     keyType, valueType, elementType, IComparer<Int8>(keyComparer),
@@ -8245,7 +8245,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int8_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,Int16>(Result) := TFoldedSortedMultiMap<Int8,Int16>.Create(
     keyType, valueType, elementType, IComparer<Int8>(keyComparer),
@@ -8254,7 +8254,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int8_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,Int32>(Result) := TFoldedSortedMultiMap<Int8,Int32>.Create(
     keyType, valueType, elementType, IComparer<Int8>(keyComparer),
@@ -8263,7 +8263,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int8_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,Int64>(Result) := TFoldedSortedMultiMap<Int8,Int64>.Create(
     keyType, valueType, elementType, IComparer<Int8>(keyComparer),
@@ -8272,7 +8272,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int8_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,IInterface>(Result) := TFoldedSortedMultiMap<Int8,IInterface>.Create(
     keyType, valueType, elementType, IComparer<Int8>(keyComparer),
@@ -8281,7 +8281,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int8_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,TObject>(Result) := TFoldedSortedMultiMap<Int8,TObject>.Create(
     keyType, valueType, elementType, IComparer<Int8>(keyComparer),
@@ -8290,7 +8290,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int8_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int8,string>(Result) := TFoldedSortedMultiMap<Int8,string>.Create(
     keyType, valueType, elementType, IComparer<Int8>(keyComparer),
@@ -8299,7 +8299,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int16_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,Int8>(Result) := TFoldedSortedMultiMap<Int16,Int8>.Create(
     keyType, valueType, elementType, IComparer<Int16>(keyComparer),
@@ -8308,7 +8308,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int16_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,Int16>(Result) := TFoldedSortedMultiMap<Int16,Int16>.Create(
     keyType, valueType, elementType, IComparer<Int16>(keyComparer),
@@ -8317,7 +8317,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int16_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,Int32>(Result) := TFoldedSortedMultiMap<Int16,Int32>.Create(
     keyType, valueType, elementType, IComparer<Int16>(keyComparer),
@@ -8326,7 +8326,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int16_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,Int64>(Result) := TFoldedSortedMultiMap<Int16,Int64>.Create(
     keyType, valueType, elementType, IComparer<Int16>(keyComparer),
@@ -8335,7 +8335,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int16_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,IInterface>(Result) := TFoldedSortedMultiMap<Int16,IInterface>.Create(
     keyType, valueType, elementType, IComparer<Int16>(keyComparer),
@@ -8344,7 +8344,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int16_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,TObject>(Result) := TFoldedSortedMultiMap<Int16,TObject>.Create(
     keyType, valueType, elementType, IComparer<Int16>(keyComparer),
@@ -8353,7 +8353,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int16_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int16,string>(Result) := TFoldedSortedMultiMap<Int16,string>.Create(
     keyType, valueType, elementType, IComparer<Int16>(keyComparer),
@@ -8362,7 +8362,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int32_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,Int8>(Result) := TFoldedSortedMultiMap<Int32,Int8>.Create(
     keyType, valueType, elementType, IComparer<Int32>(keyComparer),
@@ -8371,7 +8371,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int32_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,Int16>(Result) := TFoldedSortedMultiMap<Int32,Int16>.Create(
     keyType, valueType, elementType, IComparer<Int32>(keyComparer),
@@ -8380,7 +8380,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int32_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,Int32>(Result) := TFoldedSortedMultiMap<Int32,Int32>.Create(
     keyType, valueType, elementType, IComparer<Int32>(keyComparer),
@@ -8389,7 +8389,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int32_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,Int64>(Result) := TFoldedSortedMultiMap<Int32,Int64>.Create(
     keyType, valueType, elementType, IComparer<Int32>(keyComparer),
@@ -8398,7 +8398,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int32_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,IInterface>(Result) := TFoldedSortedMultiMap<Int32,IInterface>.Create(
     keyType, valueType, elementType, IComparer<Int32>(keyComparer),
@@ -8407,7 +8407,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int32_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,TObject>(Result) := TFoldedSortedMultiMap<Int32,TObject>.Create(
     keyType, valueType, elementType, IComparer<Int32>(keyComparer),
@@ -8416,7 +8416,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int32_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int32,string>(Result) := TFoldedSortedMultiMap<Int32,string>.Create(
     keyType, valueType, elementType, IComparer<Int32>(keyComparer),
@@ -8425,7 +8425,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int64_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,Int8>(Result) := TFoldedSortedMultiMap<Int64,Int8>.Create(
     keyType, valueType, elementType, IComparer<Int64>(keyComparer),
@@ -8434,7 +8434,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int64_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,Int16>(Result) := TFoldedSortedMultiMap<Int64,Int16>.Create(
     keyType, valueType, elementType, IComparer<Int64>(keyComparer),
@@ -8443,7 +8443,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int64_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,Int32>(Result) := TFoldedSortedMultiMap<Int64,Int32>.Create(
     keyType, valueType, elementType, IComparer<Int64>(keyComparer),
@@ -8452,7 +8452,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int64_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,Int64>(Result) := TFoldedSortedMultiMap<Int64,Int64>.Create(
     keyType, valueType, elementType, IComparer<Int64>(keyComparer),
@@ -8461,7 +8461,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int64_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,IInterface>(Result) := TFoldedSortedMultiMap<Int64,IInterface>.Create(
     keyType, valueType, elementType, IComparer<Int64>(keyComparer),
@@ -8470,7 +8470,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int64_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,TObject>(Result) := TFoldedSortedMultiMap<Int64,TObject>.Create(
     keyType, valueType, elementType, IComparer<Int64>(keyComparer),
@@ -8479,7 +8479,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Int64_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<Int64,string>(Result) := TFoldedSortedMultiMap<Int64,string>.Create(
     keyType, valueType, elementType, IComparer<Int64>(keyComparer),
@@ -8488,7 +8488,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Interface_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,Int8>(Result) := TFoldedSortedMultiMap<IInterface,Int8>.Create(
     keyType, valueType, elementType, IComparer<IInterface>(keyComparer),
@@ -8497,7 +8497,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Interface_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType,valueType, elementType: PTypeInfo);
+  var &result; keyType,valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,Int16>(Result) := TFoldedSortedMultiMap<IInterface,Int16>.Create(
     keyType, valueType, elementType, IComparer<IInterface>(keyComparer),
@@ -8506,7 +8506,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Interface_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,Int32>(Result) := TFoldedSortedMultiMap<IInterface,Int32>.Create(
     keyType, valueType, elementType, IComparer<IInterface>(keyComparer),
@@ -8515,7 +8515,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Interface_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,Int64>(Result) := TFoldedSortedMultiMap<IInterface,Int64>.Create(
     keyType, valueType, elementType, IComparer<IInterface>(keyComparer),
@@ -8524,7 +8524,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Interface_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,IInterface>(Result) := TFoldedSortedMultiMap<IInterface,IInterface>.Create(
     keyType, valueType, elementType, IComparer<IInterface>(keyComparer),
@@ -8533,7 +8533,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Interface_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,TObject>(Result) := TFoldedSortedMultiMap<IInterface,TObject>.Create(
     keyType, valueType, elementType, IComparer<IInterface>(keyComparer),
@@ -8542,7 +8542,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Interface_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<IInterface,string>(Result) := TFoldedSortedMultiMap<IInterface,string>.Create(
     keyType, valueType, elementType, IComparer<IInterface>(keyComparer),
@@ -8551,7 +8551,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Object_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,Int8>(Result) := TFoldedSortedMultiMap<TObject,Int8>.Create(
     keyType, valueType, elementType, IComparer<TObject>(keyComparer),
@@ -8560,7 +8560,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Object_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,Int16>(Result) := TFoldedSortedMultiMap<TObject,Int16>.Create(
     keyType, valueType, elementType, IComparer<TObject>(keyComparer),
@@ -8569,7 +8569,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Object_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,Int32>(Result) := TFoldedSortedMultiMap<TObject,Int32>.Create(
     keyType, valueType, elementType, IComparer<TObject>(keyComparer),
@@ -8578,7 +8578,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Object_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,Int64>(Result) := TFoldedSortedMultiMap<TObject,Int64>.Create(
     keyType, valueType, elementType, IComparer<TObject>(keyComparer),
@@ -8587,7 +8587,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Object_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,IInterface>(Result) := TFoldedSortedMultiMap<TObject,IInterface>.Create(
     keyType, valueType, elementType, IComparer<TObject>(keyComparer),
@@ -8596,7 +8596,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Object_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,TObject>(Result) := TFoldedSortedMultiMap<TObject,TObject>.Create(
     keyType, valueType, elementType, IComparer<TObject>(keyComparer),
@@ -8605,7 +8605,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_Object_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<TObject,string>(Result) := TFoldedSortedMultiMap<TObject,string>.Create(
     keyType, valueType, elementType, IComparer<TObject>(keyComparer),
@@ -8614,7 +8614,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_String_Int8(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,Int8>(Result) := TFoldedSortedMultiMap<string,Int8>.Create(
     keyType, valueType, elementType, IComparer<string>(keyComparer),
@@ -8623,7 +8623,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_String_Int16(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,Int16>(Result) := TFoldedSortedMultiMap<string,Int16>.Create(
     keyType, valueType, elementType, IComparer<string>(keyComparer),
@@ -8632,7 +8632,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_String_Int32(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,Int32>(Result) := TFoldedSortedMultiMap<string,Int32>.Create(
     keyType, valueType, elementType, IComparer<string>(keyComparer),
@@ -8641,7 +8641,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_String_Int64(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,Int64>(Result) := TFoldedSortedMultiMap<string,Int64>.Create(
     keyType, valueType, elementType, IComparer<string>(keyComparer),
@@ -8650,7 +8650,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_String_Interface(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,IInterface>(Result) := TFoldedSortedMultiMap<string,IInterface>.Create(
     keyType, valueType, elementType, IComparer<string>(keyComparer),
@@ -8659,7 +8659,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_String_Object(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,TObject>(Result) := TFoldedSortedMultiMap<string,TObject>.Create(
     keyType, valueType, elementType, IComparer<string>(keyComparer),
@@ -8668,7 +8668,7 @@ end;
 
 class procedure TCollections.CreateSortedListMultiMap_String_String(
   keyComparer: Pointer; ownerships: TDictionaryOwnerships;
-  var result; keyType, valueType, elementType: PTypeInfo);
+  var &result; keyType, valueType, elementType: PTypeInfo);
 begin
   IMultiMap<string,string>(Result) := TFoldedSortedMultiMap<string,string>.Create(
     keyType, valueType, elementType, IComparer<string>(keyComparer),
@@ -8677,181 +8677,181 @@ end;
 {$ENDIF}
 
 class procedure TCollections.Helper<TKey, TValue>.CreateListCollection(
-  const key; const comparer: IInterface; elementType: PTypeInfo; var result);
+  const key; const comparer: IInterface; elementType: PTypeInfo; var &result);
 begin
   IGroupingInternal<TKey, TValue>(result) := TValueList<TKey, TValue>.Create(
     TKey(key), elementType);
 end;
 
 class procedure TCollections.Helper<TKey, TValue>.CreateHashSetCollection(
-  const key; const comparer: IInterface; elementType: PTypeInfo; var result);
+  const key; const comparer: IInterface; elementType: PTypeInfo; var &result);
 begin
   IGroupingInternal<TKey, TValue>(result) := TValueHashSet<TKey, TValue>.Create(
     TKey(key), elementType, IEqualityComparer<TValue>(comparer));
 end;
 
 class procedure TCollections.Helper<TKey, TValue>.CreateTreeSetCollection(
-  const key; const comparer: IInterface; elementType: PTypeInfo; var result);
+  const key; const comparer: IInterface; elementType: PTypeInfo; var &result);
 begin
   IGroupingInternal<TKey, TValue>(result) := TValueTreeSet<TKey, TValue>.Create(
     TKey(key), elementType, IComparer<TValue>(comparer));
 end;
 
-class procedure TCollections.CreateList_Int8(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateList_Int8(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<Int8>(result) := TFoldedList<Int8>.Create(elementType, IComparer<Int8>(comparer));
 end;
 
-class procedure TCollections.CreateList_Int16(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateList_Int16(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<Int16>(result) := TFoldedList<Int16>.Create(elementType, IComparer<Int16>(comparer));
 end;
 
-class procedure TCollections.CreateList_Int32(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateList_Int32(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<Int32>(result) := TFoldedList<Int32>.Create(elementType, IComparer<Int32>(comparer));
 end;
 
-class procedure TCollections.CreateList_Int64(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateList_Int64(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<Int64>(result) := TFoldedList<Int64>.Create(elementType, IComparer<Int64>(comparer));
 end;
 
-class procedure TCollections.CreateList_Method(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateList_Method(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<TMethodPointer>(Result) := TFoldedList<TMethodPointer>.Create(elementType, IComparer<TMethodPointer>(comparer));
 end;
 
-class procedure TCollections.CreateList_Interface(var result; elementType: Pointer);
+class procedure TCollections.CreateList_Interface(var &result; elementType: Pointer);
 begin
   IList<IInterface>(Result) := TFoldedList<IInterface>.Create(elementType, nil);
 end;
 
-class procedure TCollections.CreateList_Interface(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateList_Interface(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<IInterface>(Result) := TFoldedList<IInterface>.Create(elementType, IComparer<IInterface>(comparer));
 end;
 
-class procedure TCollections.CreateList_Object(var result; elementType: Pointer);
+class procedure TCollections.CreateList_Object(var &result; elementType: Pointer);
 begin
   IList<TObject>(Result) := TFoldedList<TObject>.Create(elementType, nil, True);
 end;
 
-class procedure TCollections.CreateList_Object(ownsObjects: Boolean; var result; elementType: Pointer);
+class procedure TCollections.CreateList_Object(ownsObjects: Boolean; var &result; elementType: Pointer);
 begin
   IList<TObject>(Result) := TFoldedList<TObject>.Create(elementType, nil, ownsObjects);
 end;
 
-class procedure TCollections.CreateList_Object(comparer: Pointer; ownsObjects: Boolean; var result; elementType: Pointer);
+class procedure TCollections.CreateList_Object(comparer: Pointer; ownsObjects: Boolean; var &result; elementType: Pointer);
 begin
   IList<TObject>(Result) := TFoldedList<TObject>.Create(elementType, IComparer<TObject>(comparer), ownsObjects);
 end;
 
-class procedure TCollections.CreateList_String(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateList_String(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<string>(Result) := TFoldedList<string>.Create(elementType, IComparer<string>(comparer));
 end;
 
-class procedure TCollections.CreateSortedList_Int8(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateSortedList_Int8(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<Int8>(result) := TFoldedSortedList<Int8>.Create(elementType, IComparer<Int8>(comparer));
 end;
 
-class procedure TCollections.CreateSortedList_Int16(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateSortedList_Int16(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<Int16>(result) := TFoldedSortedList<Int16>.Create(elementType, IComparer<Int16>(comparer));
 end;
 
-class procedure TCollections.CreateSortedList_Int32(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateSortedList_Int32(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<Int32>(result) := TFoldedSortedList<Int32>.Create(elementType, IComparer<Int32>(comparer));
 end;
 
-class procedure TCollections.CreateSortedList_Int64(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateSortedList_Int64(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<Int64>(result) := TFoldedSortedList<Int64>.Create(elementType, IComparer<Int64>(comparer));
 end;
 
-class procedure TCollections.CreateSortedList_Interface(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateSortedList_Interface(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<IInterface>(result) := TFoldedSortedList<IInterface>.Create(elementType, IComparer<IInterface>(comparer));
 end;
 
-class procedure TCollections.CreateSortedList_Object(comparer: Pointer; ownsObjects: Boolean; var result; elementType: Pointer);
+class procedure TCollections.CreateSortedList_Object(comparer: Pointer; ownsObjects: Boolean; var &result; elementType: Pointer);
 begin
   IList<TObject>(result) := TFoldedSortedList<TObject>.Create(elementType, IComparer<TObject>(comparer), ownsObjects);
 end;
 
-class procedure TCollections.CreateSortedList_String(comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateSortedList_String(comparer: Pointer; var &result; elementType: Pointer);
 begin
   IList<string>(result) := TFoldedSortedList<string>.Create(elementType, IComparer<string>(comparer));
 end;
 
-class procedure TCollections.CreateHashSet_Int8(capacity: Integer; comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateHashSet_Int8(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer);
 begin
   IOrderedSet<Int8>(result) := TFoldedHashSet<Int8>.Create(elementType, capacity, IEqualityComparer<Int8>(comparer));
 end;
 
-class procedure TCollections.CreateHashSet_Int16(capacity: Integer; comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateHashSet_Int16(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer);
 begin
   IOrderedSet<Int16>(result) := TFoldedHashSet<Int16>.Create(elementType, capacity, IEqualityComparer<Int16>(comparer));
 end;
 
-class procedure TCollections.CreateHashSet_Int32(capacity: Integer; comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateHashSet_Int32(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer);
 begin
   IOrderedSet<Int32>(result) := TFoldedHashSet<Int32>.Create(elementType, capacity, IEqualityComparer<Int32>(comparer));
 end;
 
-class procedure TCollections.CreateHashSet_Int64(capacity: Integer; comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateHashSet_Int64(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer);
 begin
   IOrderedSet<Int64>(result) := TFoldedHashSet<Int64>.Create(elementType, capacity, IEqualityComparer<Int64>(comparer));
 end;
 
-class procedure TCollections.CreateHashSet_Interface(capacity: Integer; comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateHashSet_Interface(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer);
 begin
   IOrderedSet<IInterface>(result) := TFoldedHashSet<IInterface>.Create(elementType, capacity, IEqualityComparer<IInterface>(comparer));
 end;
 
-class procedure TCollections.CreateHashSet_Object(capacity: Integer; comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateHashSet_Object(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer);
 begin
   IOrderedSet<TObject>(result) := TFoldedHashSet<TObject>.Create(elementType, capacity, IEqualityComparer<TObject>(comparer));
 end;
 
-class procedure TCollections.CreateHashSet_String(capacity: Integer; comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateHashSet_String(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer);
 begin
   IOrderedSet<string>(result) := TFoldedHashSet<string>.Create(elementType, capacity, IEqualityComparer<string>(comparer));
 end;
 
-class procedure TCollections.CreateQueue_Object(capacity: Integer; comparer: Pointer; ownsObjects: Boolean; var result; elementType: Pointer);
+class procedure TCollections.CreateQueue_Object(capacity: Integer; comparer: Pointer; ownsObjects: Boolean; var &result; elementType: Pointer);
 begin
   IQueue<TObject>(result) := TFoldedQueue<TObject>.Create(elementType, IComparer<TObject>(comparer), ownsObjects);
   IQueue<TObject>(result).Capacity := capacity;
 end;
 
-class procedure TCollections.CreateQueue_Interface(capacity: Integer; comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateQueue_Interface(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer);
 begin
   IQueue<IInterface>(result) := TFoldedQueue<IInterface>.Create(elementType, IComparer<IInterface>(comparer));
   IQueue<IInterface>(result).Capacity := capacity;
 end;
 
-class procedure TCollections.CreateStack_Interface(capacity: Integer; comparer: Pointer; var result; elementType: Pointer);
+class procedure TCollections.CreateStack_Interface(capacity: Integer; comparer: Pointer; var &result; elementType: Pointer);
 begin
   IStack<IInterface>(result) := TFoldedStack<IInterface>.Create(elementType, IComparer<IInterface>(comparer));
   IStack<IInterface>(result).Capacity := capacity;
 end;
 
-class procedure TCollections.CreateStack_Object(capacity: Integer; comparer: Pointer; ownsObjects: Boolean; var result; elementType: Pointer);
+class procedure TCollections.CreateStack_Object(capacity: Integer; comparer: Pointer; ownsObjects: Boolean; var &result; elementType: Pointer);
 begin
   IStack<TObject>(result) := TFoldedStack<TObject>.Create(elementType, IComparer<TObject>(comparer), ownsObjects);
   IStack<TObject>(result).Capacity := capacity;
 end;
 
-class procedure TCollections.CreateObservableList_Interface(var result; elementType: Pointer);
+class procedure TCollections.CreateObservableList_Interface(var &result; elementType: Pointer);
 begin
   IList<IInterface>(result) := TObservableInterfaceList.Create(elementType, nil);
 end;
 
-class procedure TCollections.CreateObservableList_Object(ownsObjects: Boolean; var result; elementType: Pointer);
+class procedure TCollections.CreateObservableList_Object(ownsObjects: Boolean; var &result; elementType: Pointer);
 begin
   IList<TObject>(result) := TObservableObjectList.Create(elementType, nil, ownsObjects);
 end;
@@ -11489,49 +11489,49 @@ end;
 
 {$REGION 'TEnumerable'}
 
-class procedure TEnumerable.CreateEmpty_Int8(var result; elementType: Pointer);
+class procedure TEnumerable.CreateEmpty_Int8(var &result; elementType: Pointer);
 begin
   with TEnumerableExtension.Create(TEnumerableExtension<Int8>, nil, TExtensionKind.Empty) do
     IInterface(result) := IInterface(@IMT);
 end;
 
-class procedure TEnumerable.CreateEmpty_Int16(var result; elementType: Pointer);
+class procedure TEnumerable.CreateEmpty_Int16(var &result; elementType: Pointer);
 begin
   with TEnumerableExtension.Create(TEnumerableExtension<Int16>, nil, TExtensionKind.Empty) do
     IInterface(result) := IInterface(@IMT);
 end;
 
-class procedure TEnumerable.CreateEmpty_Int32(var result; elementType: Pointer);
+class procedure TEnumerable.CreateEmpty_Int32(var &result; elementType: Pointer);
 begin
   with TEnumerableExtension.Create(TEnumerableExtension<Int32>, nil, TExtensionKind.Empty) do
     IInterface(result) := IInterface(@IMT);
 end;
 
-class procedure TEnumerable.CreateEmpty_Int64(var result; elementType: Pointer);
+class procedure TEnumerable.CreateEmpty_Int64(var &result; elementType: Pointer);
 begin
   with TEnumerableExtension.Create(TEnumerableExtension<Int64>, nil, TExtensionKind.Empty) do
     IInterface(result) := IInterface(@IMT);
 end;
 
-class procedure TEnumerable.CreateEmpty_Interface(var result; elementType: Pointer);
+class procedure TEnumerable.CreateEmpty_Interface(var &result; elementType: Pointer);
 begin
   with TEnumerableExtension.Create(TEnumerableExtension<IInterface>, nil, TExtensionKind.Empty) do
     IInterface(result) := IInterface(@IMT);
 end;
 
-class procedure TEnumerable.CreateEmpty_Method(var result; elementType: Pointer);
+class procedure TEnumerable.CreateEmpty_Method(var &result; elementType: Pointer);
 begin
   with TEnumerableExtension.Create(TEnumerableExtension<TMethodPointer>, nil, TExtensionKind.Empty) do
     IInterface(result) := IInterface(@IMT);
 end;
 
-class procedure TEnumerable.CreateEmpty_Object(var result; elementType: Pointer);
+class procedure TEnumerable.CreateEmpty_Object(var &result; elementType: Pointer);
 begin
   with TEnumerableExtension.Create(TEnumerableExtension<TObject>, nil, TExtensionKind.Empty) do
     IInterface(result) := IInterface(@IMT);
 end;
 
-class procedure TEnumerable.CreateEmpty_String(var result; elementType: Pointer);
+class procedure TEnumerable.CreateEmpty_String(var &result; elementType: Pointer);
 begin
   with TEnumerableExtension.Create(TEnumerableExtension<string>, nil, TExtensionKind.Empty) do
     IInterface(result) := IInterface(@IMT);
@@ -11651,118 +11651,118 @@ begin
 end;
 
 class procedure TEnumerable.InternalFrom_Object_DynArray(source: Pointer;
-  var result; elementType: PTypeInfo);
+  var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<TObject>(Result) :=
     TFoldedArrayIterator<TObject>.Create(TArray<TObject>(source), elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Object_OpenArray(source: Pointer;
-  count: Integer; var result; elementType: PTypeInfo);
+  count: Integer; var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<TObject>(Result) :=
     TFoldedArrayIterator<TObject>.Create(source, count, elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_String_DynArray(source: Pointer;
-  var result; elementType: PTypeInfo);
+  var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<string>(Result) :=
     TFoldedArrayIterator<string>.Create(TArray<string>(source), elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_String_OpenArray(source: Pointer;
-  count: Integer; var result; elementType: PTypeInfo);
+  count: Integer; var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<string>(Result) :=
     TFoldedArrayIterator<string>.Create(source, count, elementType);
 end;
 
 class procedure TEnumerable.InternalOfType_Object(const source: IEnumerable<TObject>;
-  var result; resultType: PTypeInfo);
+  var &result; resultType: PTypeInfo);
 begin
   IEnumerable<TObject>(Result) := TOfTypeIterator.Create(source, GetTypeData(resultType).ClassType);
 end;
 
 class procedure TEnumerable.InternalFrom_Int8_DynArray(source: Pointer;
-  var result; elementType: PTypeInfo);
+  var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<Int8>(Result) :=
     TFoldedArrayIterator<Int8>.Create(TArray<Int8>(source), elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Int8_OpenArray(source: Pointer;
-  count: Integer; var result; elementType: PTypeInfo);
+  count: Integer; var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<Int8>(Result) :=
     TFoldedArrayIterator<Int8>.Create(source, count, elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Int16_DynArray(source: Pointer;
-  var result; elementType: PTypeInfo);
+  var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<Int16>(Result) :=
     TFoldedArrayIterator<Int16>.Create(TArray<Int16>(source), elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Int16_OpenArray(source: Pointer;
-  count: Integer; var result; elementType: PTypeInfo);
+  count: Integer; var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<Int16>(Result) :=
     TFoldedArrayIterator<Int16>.Create(source, count, elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Int32_DynArray(source: Pointer;
-  var result; elementType: PTypeInfo);
+  var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<Int32>(Result) :=
     TFoldedArrayIterator<Int32>.Create(TArray<Int32>(source), elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Int32_OpenArray(source: Pointer;
-  count: Integer; var result; elementType: PTypeInfo);
+  count: Integer; var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<Int32>(Result) :=
     TFoldedArrayIterator<Int32>.Create(source, count, elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Int64_DynArray(source: Pointer;
-  var result; elementType: PTypeInfo);
+  var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<Int64>(Result) :=
     TFoldedArrayIterator<Int64>.Create(TArray<Int64>(source), elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Int64_OpenArray(source: Pointer;
-  count: Integer; var result; elementType: PTypeInfo);
+  count: Integer; var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<Int64>(Result) :=
     TFoldedArrayIterator<Int64>.Create(source, count, elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Interface_DynArray(source: Pointer;
-  var result; elementType: PTypeInfo);
+  var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<IInterface>(Result) :=
     TFoldedArrayIterator<IInterface>.Create(TArray<IInterface>(source), elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Interface_OpenArray(source: Pointer;
-  count: Integer; var result; elementType: PTypeInfo);
+  count: Integer; var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<IInterface>(Result) :=
     TFoldedArrayIterator<IInterface>.Create(source, count, elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Method_DynArray(source: Pointer;
-  var result; elementType: PTypeInfo);
+  var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<TMethodPointer>(Result) :=
     TFoldedArrayIterator<TMethodPointer>.Create(TArray<TMethodPointer>(source), elementType);
 end;
 
 class procedure TEnumerable.InternalFrom_Method_OpenArray(source: Pointer;
-  count: Integer; var result; elementType: PTypeInfo);
+  count: Integer; var &result; elementType: PTypeInfo);
 begin
   IReadOnlyList<TMethodPointer>(Result) :=
     TFoldedArrayIterator<TMethodPointer>.Create(source, count, elementType);

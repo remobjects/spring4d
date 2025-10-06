@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -48,18 +48,18 @@ type
   PVirtualMethodTable = ^Pointer;
 {$POINTERMATH OFF}
 
-  TEquals = function (const Self: TObject; Obj: TObject): Boolean;
-  TGetHashCode = function (const Self: TObject): Integer;
-  TToString = function (const Self: TObject): string;
-  TSafeCallException = function (const Self: TObject; ExceptObject: TObject;
+  TEquals = function (const &Self: TObject; Obj: TObject): Boolean;
+  TGetHashCode = function (const &Self: TObject): Integer;
+  TToString = function (const &Self: TObject): string;
+  TSafeCallException = function (const &Self: TObject; ExceptObject: TObject;
     ExceptAddr: Pointer): HResult;
-  TAfterConstruction = procedure (const Self: TObject);
-  TBeforeDestruction = procedure (const Self: TObject);
-  TDispatch = procedure (const Self: TObject; var Message);
-  TDefaultHandler = procedure (const Self: TObject; var Message);
+  TAfterConstruction = procedure (const &Self: TObject);
+  TBeforeDestruction = procedure (const &Self: TObject);
+  TDispatch = procedure (const &Self: TObject; var Message);
+  TDefaultHandler = procedure (const &Self: TObject; var Message);
   TNewInstance = function (Self: TClass): TObject;
-  TFreeInstance = procedure (const Self: TObject);
-  TDestroy = procedure (const Self: TObject; OuterMost: ShortInt);
+  TFreeInstance = procedure (const &Self: TObject);
+  TDestroy = procedure (const &Self: TObject; OuterMost: ShortInt);
 
   PClass = ^TClass;
   PClassData = ^TClassData;
@@ -138,8 +138,8 @@ function GetClassData(classType: TClass): PClassData; inline;
 
 function GetVirtualMethodAddress(classType: TClass; virtualIndex: Integer): Pointer;
 function GetVirtualMethodCount(classType: TClass): Integer;
-function GetVirtualMethodIndex(classType: TClass; method: Pointer): Integer;
-function IsVirtualMethodOverride(baseClass, classType: TClass; method: Pointer): Boolean;
+function GetVirtualMethodIndex(classType: TClass; &method: Pointer): Integer;
+function IsVirtualMethodOverride(baseClass, classType: TClass; &method: Pointer): Boolean;
 
 implementation
 
@@ -174,7 +174,7 @@ begin
   FreeMem(PByte(classType) + vmtSelfPtr);
 end;
 
-function GetVirtualMethodIndex(classType: TClass; method: Pointer): Integer;
+function GetVirtualMethodIndex(classType: TClass; &method: Pointer): Integer;
 var
   classData: PClassData;
   i: Integer;
@@ -183,7 +183,7 @@ begin
   begin
     classData := GetClassData(classType);
     for i := MinVirtualIndex to classData.VirtualMethodCount - 1 do
-      if classData.VirtualMethods[i] = method then
+      if classData.VirtualMethods[i] = &method then
         Exit(i);
     classType := classType.ClassParent;
   end;
@@ -208,13 +208,13 @@ begin
     Result := nil;
 end;
 
-function IsVirtualMethodOverride(baseClass, classType: TClass; method: Pointer): Boolean;
+function IsVirtualMethodOverride(baseClass, classType: TClass; &method: Pointer): Boolean;
 var
   virtualMethodIndex: Integer;
 begin
-  virtualMethodIndex := GetVirtualMethodIndex(baseClass, method);
+  virtualMethodIndex := GetVirtualMethodIndex(baseClass, &method);
   if virtualMethodIndex >= MinVirtualIndex then
-    Result := method <> GetVirtualMethodAddress(classType, virtualMethodIndex)
+    Result := &method <> GetVirtualMethodAddress(classType, virtualMethodIndex)
   else
     Result := False;
 end;
@@ -275,15 +275,15 @@ var
   classType: Pointer;
 begin
   for classType in fClasses do
-    
-	// when this code runs after finalization of this unit
-	// there might still be object instances being proxified
-	// with these classes - any deallocation here would cause
-	// issues such as access violations and alike during the 
-	// finalization/destruction of these objects
-	// to avoid such issues the deallocation is left to the
-	// operation system when the process ends and they are
-	// exluced from memory leak reporting
+
+  // when this code runs after finalization of this unit
+  // there might still be object instances being proxified
+  // with these classes - any deallocation here would cause
+  // issues such as access violations and alike during the
+  // finalization/destruction of these objects
+  // to avoid such issues the deallocation is left to the
+  // operation system when the process ends and they are
+  // exluced from memory leak reporting
     RegisterExpectedMemoryLeak(PByte(classType) + vmtSelfPtr);
 
   fLock.Free;

@@ -72,7 +72,7 @@ function TMongoDBRepository<T, TID>.Query(const query: string;
 var
   LQuery: string;
 begin
-  LQuery := Format('S[%s]%s', [Namespace, query]);
+  LQuery := Format('S[%s]%s', [&Namespace, query]);
   Result := inherited Query(LQuery, params);
 end;
 

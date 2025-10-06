@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -47,7 +47,7 @@ type
 ///   function, it only supports unicode strings and doesn't provide overloads
 ///   for WideStrings and AnsiStrings.
 /// </remarks>
-function GetByteLength(const s: string): Integer; overload; inline;
+function GetByteLength(const s: String): Integer; overload; inline;
 
 /// <summary>
 ///   Retrieves the byte length of a WideString.
@@ -70,7 +70,7 @@ function GetByteLength(const s: RawByteString): Integer; overload; inline;
 ///   of the buffer, the corresponding array element contains an additional
 ///   empty string is removeEmptyEntries is not True
 /// </remarks>
-function SplitString(const buffer: string; const separators: TSysCharSet;
+function SplitString(const buffer: String; const separators: TSysCharSet;
   removeEmptyEntries: Boolean = False): TStringDynArray; overload;
 function SplitString(const buffer: TCharArray; const separators: TSysCharSet;
   removeEmptyEntries: Boolean = False): TStringDynArray; overload;

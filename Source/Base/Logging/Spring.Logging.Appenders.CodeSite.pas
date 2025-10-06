@@ -35,7 +35,7 @@ uses
 type
   TCodeSiteAppender = class(TLogAppenderBase)
   protected
-    procedure DoSend(const event: TLogEvent); override;
+    procedure DoSend(const &event: TLogEvent); override;
   end;
 
 implementation
@@ -48,57 +48,57 @@ uses
 
 {$REGION 'TCodeSiteAppender'}
 
-procedure TCodeSiteAppender.DoSend(const event: TLogEvent);
+procedure TCodeSiteAppender.DoSend(const &event: TLogEvent);
 begin
-  if event.Color = clDefault then
+  if &event.Color = clDefault then
     CodeSite.CategoryColor := $FFFFFF
   else
-    CodeSite.CategoryColor := event.Color;
+    CodeSite.CategoryColor := &event.Color;
 
-  case event.EventType of
+  case &event.EventType of
     TLogEventType.Text:
-      if Assigned(event.Exception) then
-        CodeSite.SendException(TLogAppenderBase.FormatMsg(event), event.Exception)
+      if Assigned(&event.Exception) then
+        CodeSite.SendException(TLogAppenderBase.FormatMsg(&event), &event.Exception)
       else
-        case event.Level of
+        case &event.Level of
           TLogLevel.Unknown: ;
 
           TLogLevel.Trace:
-            CodeSite.SendNote(event.Msg);
+            CodeSite.SendNote(&event.Msg);
 
           TLogLevel.Debug,
           TLogLevel.Text:
-            CodeSite.SendMsg(event.Msg);
+            CodeSite.SendMsg(&event.Msg);
 
           TLogLevel.Info:
-            CodeSite.SendReminder(event.Msg);
+            CodeSite.SendReminder(&event.Msg);
 
           TLogLevel.Warn:
-            CodeSite.SendWarning(event.Msg);
+            CodeSite.SendWarning(&event.Msg);
 
           TLogLevel.Error,
           TLogLevel.Fatal:
-            CodeSite.SendError(event.Msg);
+            CodeSite.SendError(&event.Msg);
         end;
 
     TLogEventType.Value:
-      case event.Data.Kind of
-        tkClass: CodeSite.Send(event.Msg, event.Data.AsObject);
+      case &event.Data.Kind of
+        tkClass: CodeSite.Send(&event.Msg, &event.Data.AsObject);
       else
-        CodeSite.Send(event.Msg, event.Data.ToString);
+        CodeSite.Send(&event.Msg, &event.Data.ToString);
       end;
 
     TLogEventType.Entering:
       CodeSite.EnterMethod(
-        TLogAppenderBase.FormatMethodName(event.ClassType, event.Msg));
+        TLogAppenderBase.FormatMethodName(&event.ClassType, &event.Msg));
 
     TLogEventType.Leaving:
       CodeSite.ExitMethod(
-        TLogAppenderBase.FormatMethodName(event.ClassType, event.Msg));
+        TLogAppenderBase.FormatMethodName(&event.ClassType, &event.Msg));
 
     TLogEventType.CallStack,
     TLogEventType.SerializedData:
-      CodeSite.Send(event.Msg);
+      CodeSite.Send(&event.Msg);
   end;
 end;
 

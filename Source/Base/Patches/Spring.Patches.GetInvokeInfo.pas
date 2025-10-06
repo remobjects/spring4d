@@ -133,11 +133,11 @@ var
   OrgInvokeInfoAddParameter: procedure(AInvokeInfo: TObject; AType: PTypeInfo; ByRef: Boolean);
 
 procedure FixInvokeInfoAddParameter(AInvokeInfo: TObject; AType: PTypeInfo; ByRef: Boolean;
-  p: TRttiParameter; Method: TRttiMethod);
+  p: TRttiParameter; &Method: TRttiMethod);
 begin
   OrgInvokeInfoAddParameter(AInvokeInfo, p.ParamType.Handle,
     ([pfVar, pfOut] * p.Flags <> []) or
-    PassByRef(p.ParamType.Handle, Method.CallingConvention, pfConst in p.Flags));
+    PassByRef(p.ParamType.Handle, &Method.CallingConvention, pfConst in p.Flags));
 end;
 
 procedure FixInvokeInfoAddParameterEnter(AInvokeInfo: TObject; AType: PTypeInfo; ByRef: Boolean);

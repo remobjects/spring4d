@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -52,7 +52,7 @@ type
     procedure HandleRegistryChanged(Sender: TObject;
       const model: TComponentModel; action: TCollectionChangedAction);
 
-    procedure ResolveInternal(var result; serviceType: PTypeInfo);
+    procedure ResolveInternal(var &result; serviceType: PTypeInfo);
     function RegisterInstanceInternal(serviceType: PTypeInfo; const instance;
       const serviceName: string): TRegistration;
 
@@ -494,12 +494,12 @@ begin
   end;
 end;
 
-procedure TContainer.ResolveInternal(var result; serviceType: PTypeInfo);
+procedure TContainer.ResolveInternal(var &result; serviceType: PTypeInfo);
 var
   value: TValue;
 begin
   value := Resolve(serviceType, []);
-  value.ExtractRawData(@Result);
+  value.ExtractRawData(@&result);
 end;
 
 function TContainer.Resolve<T>: T;

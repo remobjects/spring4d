@@ -250,7 +250,7 @@ type
 
   ILogger = interface(ILoggerBase)
     ['{8655E906-C12D-4EB3-8291-30CEAB769B26}']
-    procedure Log(const event: TLogEvent); overload;
+    procedure Log(const &event: TLogEvent); overload;
 
     procedure LogValue(const name: string; const value: TValue); overload;
     procedure LogValue(level: TLogLevel; const name: string;
@@ -343,7 +343,7 @@ type
 
   ILogAppender = interface(ILoggerBase)
     ['{70DDEB60-3D01-48FB-92CF-A738A8C4BC85}']
-    procedure Send(const event: TLogEvent);
+    procedure Send(const &event: TLogEvent);
   end;
 
   {$ENDREGION}
@@ -367,7 +367,7 @@ type
     /// <summary>
     ///   Send the event directly to appenders and skip converters.
     /// </summary>
-    procedure SendToAppenders(const event: TLogEvent);
+    procedure SendToAppenders(const &event: TLogEvent);
   end;
 
   {$ENDREGION}
@@ -435,7 +435,7 @@ type
     ///   <c>True</c> if the event was processed or <c>False</c> otherwise.
     /// </returns>
     function HandleEvent(const controller: ILoggerController;
-      const event: TLogEvent): Boolean;
+      const &event: TLogEvent): Boolean;
 
     property EventType: TLogEventType read GetEventType;
   end;

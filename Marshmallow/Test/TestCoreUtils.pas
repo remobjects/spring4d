@@ -29,24 +29,24 @@ procedure TTestCoreUtils.TryConvert_Nullable;
 var
   LFrom, LResult: TValue;
   bOK: Boolean;
-  LValue: Nullable<Double>;
-  LSpringValue: Nullable<string>;
+  LValue: &Nullable<Double>;
+  LSpringValue: &Nullable<string>;
 begin
   LFrom := 'Bob';
-  bOK := LFrom.TryConvert(TypeInfo(Nullable<string>), LResult);
+  bOK := LFrom.TryConvert(TypeInfo(&Nullable<string>), LResult);
   CheckTrue(bOK);
   CheckEquals('Nullable<System.string>', LResult.TypeInfo.TypeName);
-  CheckTrue(LResult.TryAsType<Nullable<string>>(LSpringValue));
+  CheckTrue(LResult.TryAsType<&Nullable<string>>(LSpringValue));
   CheckTrue(LSpringValue.HasValue);
 
   CheckTrue(LResult.TryGetNullableValue(LFrom));
   CheckEquals('Bob', LFrom.AsString);
 
   LFrom := 256.12;
-  bOK := LFrom.TryConvert(TypeInfo(Nullable<Double>), LResult);
+  bOK := LFrom.TryConvert(TypeInfo(&Nullable<Double>), LResult);
   CheckTrue(bOK);
   CheckEquals('Nullable<System.Double>', LResult.TypeInfo.TypeName);
-  CheckTrue(LResult.TryAsType<Nullable<Double>>(LValue));
+  CheckTrue(LResult.TryAsType<&Nullable<Double>>(LValue));
   CheckTrue(LValue.HasValue);
   CheckEquals(256.12, LValue.Value, 0.001);
 
@@ -68,7 +68,7 @@ begin
 
   sw := TStopwatch.StartNew;
   for i := 1 to LCount do
-    bOK := LFrom.TryConvert(TypeInfo(Nullable<string>), LResult);
+    bOK := LFrom.TryConvert(TypeInfo(&Nullable<string>), LResult);
 
   sw.Stop;
   CheckTrue(bOK);
@@ -78,14 +78,14 @@ begin
 
   sw := TStopwatch.StartNew;
   for i := 1 to LCount do
-    bOK := LFrom.TryConvert(TypeInfo(Nullable<string>), LResult);
+    bOK := LFrom.TryConvert(TypeInfo(&Nullable<string>), LResult);
   sw.Stop;
   CheckTrue(bOK);
   Status(Format('Set %d simple string values in %d ms', [LCount, sw.ElapsedMilliseconds]));
 
   sw := TStopwatch.StartNew;
   for i := 1 to LCount do
-    bOK := LFrom.TryConvert(TypeInfo(Nullable<Double>), LResult);
+    bOK := LFrom.TryConvert(TypeInfo(&Nullable<Double>), LResult);
   sw.Stop;
   CheckTrue(bOK);
   CheckEquals('Nullable<System.Double>', string(LResult.TypeInfo.Name));

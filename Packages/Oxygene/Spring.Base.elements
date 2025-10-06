@@ -6,9 +6,10 @@
     <Architecture>i386;x86_64</Architecture>
     <DelphiSDK>Delphi 12</DelphiSDK>
     <DelphiCompatibility>True</DelphiCompatibility>
-    <DefaultUsesPrefixes>Delphi</DefaultUsesPrefixes>
+    <DefaultUsesPrefixes>Delphi;Delphi.System</DefaultUsesPrefixes>
     <ProjectGuid>{8F00FFD6-085B-4B31-B6A2-D3157F252221}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <DefaultUses>Delphi.System</DefaultUses>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
@@ -158,6 +159,7 @@
       <CopyLocal>True</CopyLocal>
     </Reference>
     <Compile Include="..\..\Source\Spring.inc" />
+    <Compile Include="..\..\Source\jedi.inc" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\RemObjects Software\Elements\RemObjects.Elements.targets" />
 </Project>

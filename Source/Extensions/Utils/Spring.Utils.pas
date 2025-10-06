@@ -2411,7 +2411,7 @@ var
   p: PInstruction;
 begin
   inherited Create;
-  New(p);
+  &New(p);
   Move(Instruction, p^, SizeOf(Instruction));
   PInteger(@p[8])^ := Integer(objectAddress);
   PInteger(@p[13])^ := Longint(methodAddress) - (Longint(p) + SizeOf(Instruction));

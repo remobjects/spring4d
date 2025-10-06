@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -52,7 +52,7 @@ type
   protected
     procedure InternalInvokeMethod(UserData: Pointer;
       const Args: TArray<TValue>; out Result: TValue); virtual;
-    procedure InternalInvokeDelegate(Method: TRttiMethod;
+    procedure InternalInvokeDelegate(&Method: TRttiMethod;
       const Args: TArray<TValue>; out Result: TValue); virtual;
   {$ELSE}
   private
@@ -99,7 +99,7 @@ type
     fMethodInfo: TMethodInfo;
     fMethodInvoke: Pointer;
     procedure InvokeEventHandlerStub;
-    class procedure InvokeMethod(const Method: TMethod; Parameters: PParameters; StackSize: Integer); static;
+    class procedure InvokeMethod(const &Method: TMethod; Parameters: PParameters; StackSize: Integer); static;
   protected
     procedure Invoke;
     procedure InternalInvoke(Params: PParameters; StackSize: Integer); virtual;
@@ -170,13 +170,13 @@ type
   EventHelper = record
   private type
     IMethodEventInternal = interface(IInvokableEvent<TMethodPointer>)
-      procedure GetInvoke(var result);
+      procedure GetInvoke(var &result);
       procedure Add(const handler);
       procedure Remove(const handler);
     end;
 
     IDelegateEventInternal = interface(IInvokableEvent<IInterface>)
-      procedure GetInvoke(var result);
+      procedure GetInvoke(var &result);
       procedure Add(const handler);
       procedure Remove(const handler);
     end;
@@ -187,7 +187,7 @@ type
       procedure Add(handler: TMethodPointer); overload;
       procedure Remove(handler: TMethodPointer); overload;
 
-      procedure GetInvoke(var result); overload;
+      procedure GetInvoke(var &result); overload;
       procedure Add(const handler); overload;
       procedure Remove(const handler); overload;
     end;
@@ -198,7 +198,7 @@ type
       procedure Add(handler: IInterface); overload;
       procedure Remove(handler: IInterface); overload;
 
-      procedure GetInvoke(var result); overload;
+      procedure GetInvoke(var &result); overload;
       procedure Add(const handler); overload;
       procedure Remove(const handler); overload;
     end;
@@ -208,7 +208,7 @@ type
   public
     function GetCanInvoke: Boolean;
     function GetEnabled: Boolean;
-    procedure GetInvoke(var result; typeInfo: PTypeInfo);
+    procedure GetInvoke(var &result; typeInfo: PTypeInfo);
     function GetOnChanged: TNotifyEvent;
     function GetUseFreeNotification: Boolean;
     procedure SetEnabled(const value: Boolean; typeInfo: PTypeInfo);
@@ -219,7 +219,7 @@ type
     procedure Remove(const handler);
     procedure Clear;
     procedure RemoveAll(instance: Pointer);
-    procedure EnsureInstance(var result; typeInfo: PTypeInfo);
+    procedure EnsureInstance(var &result; typeInfo: PTypeInfo);
   end;
 
   {$ENDREGION}
@@ -238,14 +238,14 @@ uses
   Spring.ResourceStrings;
 
 const
-  PointerSize = SizeOf(Pointer); //FI:O803
+  PointerSize = sizeOf(Pointer); //FI:O803
 
 
 {$REGION 'Proxy generators'}
 
 {$IFNDEF USE_RTTI_FOR_PROXY}
 
-procedure GetMethodTypeData(Method: TRttiMethod; var TypeData: PTypeData);
+procedure GetMethodTypeData(&Method: TRttiMethod; var TypeData: PTypeData);
 
   procedure WriteByte(var Dest: PByte; b: Byte);
   begin
@@ -270,8 +270,8 @@ var
   i: NativeInt;
   p: PByte;
 begin
-  TypeData.MethodKind := Method.MethodKind;
-  params := Method.GetParameters;
+  TypeData.MethodKind := &Method.MethodKind;
+  params := &Method.GetParameters;
   TypeData.ParamCount := Byte(Length(params));
   p := @TypeData.ParamList;
   for i := Low(params) to High(params) do
@@ -280,17 +280,17 @@ begin
     WritePackedShortString(p, params[i].Name);
     WritePackedShortString(p, params[i].ParamType.Name);
   end;
-  if method.MethodKind = mkFunction then
+  if &method.MethodKind = mkFunction then
   begin
-    WritePackedShortString(p, method.ReturnType.Name);
-    WritePointer(p, method.ReturnType.Handle);
+    WritePackedShortString(p, &method.ReturnType.Name);
+    WritePointer(p, &method.ReturnType.Handle);
   end;
-  WriteByte(p, Byte(method.CallingConvention));
+  WriteByte(p, Byte(&method.CallingConvention));
   for i := Low(params) to High(params) do
     WritePointer(p, Pointer(NativeInt(params[i].ParamType.Handle) - PointerSize));
 end;
 
-class procedure TEvent.InvokeMethod(const Method: TMethod;
+class procedure TEvent.InvokeMethod(const &Method: TMethod;
   Parameters: PParameters; StackSize: Integer);
 {$IFNDEF CPUX64}
 asm
@@ -323,7 +323,7 @@ asm
   sub r8,32
   sub rsp,r8                          // allocate additional stack space
 
-  mov [rbp+$30],Method                // preserve Method
+  mov [rbp+$30],&Method                // preserve Method
   mov [rbp+$38],Parameters            // preserve Parameters
 
   test r8,r8                          // if StackSize > 32
@@ -511,7 +511,7 @@ end;
 
 constructor TEvent.Create(typeInfo: PTypeInfo);
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
 {$IFNDEF USE_RTTI_FOR_PROXY}
   typeData: PTypeData;
   invokeEvent: procedure(Params: PParameters; StackSize: Integer) of object;
@@ -540,16 +540,16 @@ begin
     end;
     tkInterface:
     begin
-      method := typeInfo.RttiType.GetMethod('Invoke');
-      if not Assigned(method) then
+      &method := typeInfo.RttiType.GetMethod('Invoke');
+      if not Assigned(&method) then
         raise EInvalidOperationException.CreateResFmt(@STypeParameterContainsNoRtti, [typeInfo.Name]);
 {$IFDEF USE_RTTI_FOR_PROXY}
       TVirtualInterface.Create(typeInfo, InternalInvokeDelegate)
         .QueryInterface(typeInfo.TypeData.Guid, fProxy);
 {$ELSE}
-      New(typeData);
+      &New(typeData);
       try
-        GetMethodTypeData(method, typeData);
+        GetMethodTypeData(&method, typeData);
         fMethodInfo := TMethodInfo.Create(typeData);
         invokeEvent := InternalInvoke;
         fMethodInvoke := TMethod(invokeEvent).Code;
@@ -603,7 +603,7 @@ begin
   end;
 end;
 
-procedure TEvent.InternalInvokeDelegate(Method: TRttiMethod;
+procedure TEvent.InternalInvokeDelegate(&Method: TRttiMethod;
   const Args: TArray<TValue>;
   out Result: TValue); //FI:O804
 var
@@ -624,7 +624,7 @@ begin
       begin
         reference := MethodToMethodReference(handlers[i]);
         TValue.Make(@reference, TypeInfo(IInterface), value);
-        method.Invoke(value, argsWithoutSelf);
+        &method.Invoke(value, argsWithoutSelf);
       end;
     finally
       guard.Release;
@@ -843,11 +843,11 @@ begin
     fInstance.Clear;
 end;
 
-procedure EventHelper.EnsureInstance(var result; typeInfo: PTypeInfo);
+procedure EventHelper.EnsureInstance(var &result; typeInfo: PTypeInfo);
 begin
   if not Assigned(fInstance) then
     CreateEventHandler(typeInfo);
-  IInterface(result) := fInstance;
+  IInterface(&result) := fInstance;
 end;
 
 function EventHelper.GetCanInvoke: Boolean;
@@ -866,11 +866,11 @@ begin
     Result := True
 end;
 
-procedure EventHelper.GetInvoke(var result; typeInfo: PTypeInfo);
+procedure EventHelper.GetInvoke(var &result; typeInfo: PTypeInfo);
 begin
   if not Assigned(fInstance) then
     CreateEventHandler(typeInfo);
-  fInstance.GetInvoke(result);
+  fInstance.GetInvoke(&result);
 end;
 
 function EventHelper.GetOnChanged: TNotifyEvent;
@@ -942,7 +942,7 @@ begin
   inherited Remove(TMethod(handler));
 end;
 
-procedure EventHelper.TMethodEvent.GetInvoke(var result);
+procedure EventHelper.TMethodEvent.GetInvoke(var &result);
 begin
   TMethodPointer(result) := fInvoke;
 end;
@@ -981,7 +981,7 @@ begin
   inherited Remove(MethodReferenceToMethod(handler));
 end;
 
-procedure EventHelper.TDelegateEvent.GetInvoke(var result);
+procedure EventHelper.TDelegateEvent.GetInvoke(var &result);
 begin
 {$IFDEF USE_RTTI_FOR_PROXY}
   IInterface(result) := IInterface(fProxy);

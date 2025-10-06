@@ -130,7 +130,7 @@ type
     function AllocRecordBuffer: TRecordBuffer; override;
     procedure FreeRecordBuffer(var Buffer: TRecordBuffer); override;
 
-    procedure DataEvent(Event: TDataEvent; Info: {$IFDEF DELPHIXE2_UP}NativeInt{$ELSE}LongInt{$ENDIF}); override;
+    procedure DataEvent(&Event: TDataEvent; Info: {$IFDEF DELPHIXE2_UP}NativeInt{$ELSE}LongInt{$ENDIF}); override;
 
     {$IFDEF DELPHIXE4_UP}
     procedure GetBookmarkData(Buffer: TRecBuf; Data: TBookmark); override;
@@ -477,16 +477,16 @@ begin
   Result := TBlobStream.Create(Field as TBlobField, Mode);
 end;
 
-procedure TBaseVirtualDataSet.DataEvent(Event: TDataEvent;
+procedure TBaseVirtualDataSet.DataEvent(&Event: TDataEvent;
   Info: {$IFDEF DELPHIXE2_UP}NativeInt{$ELSE}LongInt{$ENDIF});
 begin
-  case Event of
+  case &Event of
     deLayoutChange:
       if Active and Assigned(Reserved)
         and (FieldListCheckSum(Self) <> NativeInt(Reserved)) then
         Reserved := nil;
   end;
-  inherited DataEvent(Event, Info);
+  inherited DataEvent(&Event, Info);
 end;
 
 procedure TBaseVirtualDataSet.DoDeleteRecord(Index: Integer);

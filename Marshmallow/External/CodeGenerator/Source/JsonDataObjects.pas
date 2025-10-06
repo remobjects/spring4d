@@ -5790,7 +5790,7 @@ asm
   add rcx, 1
   jz @@Leave
 
-@@Loop:
+@@&Loop:
   add rax, rax
   // rax = 2*Result
   lea rax, [rax+rax*4]
@@ -5801,7 +5801,7 @@ asm
   add rax, rdx
 
   add rcx, 1
-  jnz @@Loop
+  jnz @@&Loop
 
 @@Leave:
   ret
@@ -5830,7 +5830,7 @@ asm
   add edi, 1
   jz @@PopLeave
 
-@@Loop:
+@@&Loop:
   add eax, eax
   adc edx, edx
   // eax:edx = 2*Result
@@ -5850,7 +5850,7 @@ asm
   adc edx, 0
 
   add edi, 1
-  jnz @@Loop
+  jnz @@&Loop
 
 @@PopLeave:
   pop ebx
@@ -6316,7 +6316,7 @@ asm
   add rcx, 2
   jz @@Leave
 
-@@Loop:
+@@&Loop:
   add rax, rax
   // rax = 2*Result
   lea rax, [rax+rax*4]
@@ -6327,7 +6327,7 @@ asm
   add rax, rdx
 
   add rcx, 2
-  jnz @@Loop
+  jnz @@&Loop
 
 @@Leave:
   ret
@@ -6356,7 +6356,7 @@ asm
   add edi, 2
   jz @@PopLeave
 
-@@Loop:
+@@&Loop:
   add eax, eax
   adc edx, edx
   // eax:edx = 2*Result
@@ -6376,7 +6376,7 @@ asm
   adc edx, 0
 
   add edi, 2
-  jnz @@Loop
+  jnz @@&Loop
 
 @@PopLeave:
   pop ebx

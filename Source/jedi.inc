@@ -1,4 +1,4 @@
-{$IFNDEF JEDI_INC}
+﻿{$IFNDEF JEDI_INC}
 {$DEFINE JEDI_INC}
 
 {**************************************************************************************************}
@@ -87,7 +87,7 @@
   CPU386              Defined when target platform is native x86 (win32)
   CPUx86_64           Defined when target platform is native x86_64 (win64)
   CPU32               Defined when target is 32-bit
-  CPU64	              Defined when target is 64-bit
+  CPU64               Defined when target is 64-bit
   CPUASM              Defined when target assembler is available
 
 - Visual library Directives
@@ -1932,8 +1932,8 @@
 {------------------------------------------------------------------------------}
 
 {$IFDEF FPC}
-  {$IFDEF  VER1_0}
-     Please use FPC 2.0 or higher to compile this.
+  {$IFDEF VER1_0}
+    {$ERROR Please use FPC 2.0 or higher to compile this.}
   {$ELSE}
     { FPC_FULLVERSION is available from 2.2.4 on }
 

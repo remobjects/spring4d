@@ -143,7 +143,7 @@ type
     /// <summary>
     ///   Add a restriction to constrain the results to be retrieved.
     /// </summary>
-    function Where(const criterion: ICriterion): ICriteria<T>;
+    function &Where(const criterion: ICriterion): ICriteria<T>;
 
     /// <summary>
     ///   Add an ordering to the result set.

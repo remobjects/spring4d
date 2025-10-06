@@ -1,4 +1,4 @@
-{***************************************************************************}
+﻿{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -64,7 +64,7 @@ type
     fInterceptorSelector: IInterceptorSelector;
     fAdditionalInterfaces: TArray<IInterface>;
     function GetProxyTargetAccessor: IProxyTargetAccessor;
-    class procedure ProxyFreeInstance(const Self: TObject); static;
+    class procedure ProxyFreeInstance(const &Self: TObject); static;
   protected
     function CollectInterceptableMethods(
       const hook: IProxyGenerationHook): IEnumerable<TRttiMethod>;
@@ -145,38 +145,38 @@ function TClassProxy.CollectInterceptableMethods(
   const hook: IProxyGenerationHook): IEnumerable<TRttiMethod>;
 begin
   Result := TType.GetType(ProxyClass).Methods.Where(
-    function(const method: TRttiMethod): Boolean
+    function(const &method: TRttiMethod): Boolean
     begin
-      if not method.HasExtendedInfo then
+      if not &method.HasExtendedInfo then
         Exit(False);
-      if not (method.MethodKind in [mkFunction, mkProcedure]) then
+      if not (&method.MethodKind in [mkFunction, mkProcedure]) then
         Exit(False);
-      if method.DispatchKind <> dkVtable then
+      if &method.DispatchKind <> dkVtable then
       begin
-        hook.NonVirtualMemberNotification(method);
+        hook.NonVirtualMemberNotification(&method);
         Exit(False);
       end;
-      if method.VirtualIndex < 0 then
+      if &method.VirtualIndex < 0 then
         Exit(False);
-      if fIntercepts[method.VirtualIndex] <> nil then
+      if fIntercepts[&method.VirtualIndex] <> nil then
         Exit(False);
-      Result := not Assigned(hook) or hook.ShouldInterceptMethod(method);
+      Result := not Assigned(hook) or hook.ShouldInterceptMethod(&method);
     end);
 end;
 
 procedure TClassProxy.HandleInvoke(UserData: Pointer;
   const Args: TArray<TValue>; out Result: TValue);
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
   arguments: TArray<TValue>;
   interceptors: TArray<IInterceptor>;
   invocation: IInvocation;
   i: Integer;
 begin
-  method := TMethodIntercept(UserData).Method;
+  &method := TMethodIntercept(UserData).Method;
   arguments := Copy(Args, 1);
-  interceptors := fInterceptorSelector.SelectInterceptors(method, fInterceptors).ToArray;
-  invocation := TInvocation.Create(Args[0], interceptors, method, arguments);
+  interceptors := fInterceptorSelector.SelectInterceptors(&method, fInterceptors).ToArray;
+  invocation := TInvocation.Create(Args[0], interceptors, &method, arguments);
   try
     invocation.Proceed;
   finally
@@ -188,18 +188,18 @@ end;
 
 procedure TClassProxy.GenerateIntercepts(const options: TProxyGenerationOptions);
 var
-  method: TRttiMethod;
+  &method: TRttiMethod;
   virtualMethodCount: Integer;
   intercept: TMethodIntercept;
 begin
   virtualMethodCount := GetVirtualMethodCount(ProxyClass);
   fIntercepts.Count := virtualMethodCount;
 
-  for method in CollectInterceptableMethods(options.Hook) do
+  for &method in CollectInterceptableMethods(options.Hook) do
   begin
-    intercept := TMethodIntercept.Create(method, HandleInvoke);
-    fIntercepts[method.VirtualIndex] := intercept;
-    PVirtualMethodTable(ProxyClass)[method.VirtualIndex] := intercept.CodeAddress;
+    intercept := TMethodIntercept.Create(&method, HandleInvoke);
+    fIntercepts[&method.VirtualIndex] := intercept;
+    PVirtualMethodTable(ProxyClass)[&method.VirtualIndex] := intercept.CodeAddress;
   end;
 end;
 
@@ -287,10 +287,10 @@ begin
   Result := TProxyTargetAccessor.Create(Self, fProxies[Self].fInterceptors);
 end;
 
-class procedure TClassProxy.ProxyFreeInstance(const Self: TObject);
+class procedure TClassProxy.ProxyFreeInstance(const &Self: TObject);
 begin
-  GetClassData(ClassParent).FreeInstance(Self); // inherited
-  fProxies.Remove(Self);
+  GetClassData(ClassParent).FreeInstance(&Self); // inherited
+  fProxies.Remove(&Self);
 end;
 
 {$ENDREGION}

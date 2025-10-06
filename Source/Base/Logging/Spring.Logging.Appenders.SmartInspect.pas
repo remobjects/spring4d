@@ -35,7 +35,7 @@ uses
 type
   TSmartInspectAppender = class(TLogAppenderBase)
   protected
-    procedure DoSend(const event: TLogEvent); override;
+    procedure DoSend(const &event: TLogEvent); override;
   public
     constructor Create;
   end;
@@ -57,68 +57,68 @@ begin
   Si.Enabled := True;
 end;
 
-procedure TSmartInspectAppender.DoSend(const event: TLogEvent);
+procedure TSmartInspectAppender.DoSend(const &event: TLogEvent);
 begin
-  case event.EventType of
+  case &event.EventType of
     TLogEventType.Text:
-      if Assigned(event.Exception) then
-        SiMain.LogException(event.Exception, TLogAppenderBase.FormatMsg(event))
+      if Assigned(&event.Exception) then
+        SiMain.LogException(&event.Exception, TLogAppenderBase.FormatMsg(&event))
       else
-        case event.Level of
+        case &event.Level of
           TLogLevel.Unknown: ;
 
           TLogLevel.Trace:
-            SiMain.LogVerbose(event.Msg);
+            SiMain.LogVerbose(&event.Msg);
 
           TLogLevel.Debug:
-            SiMain.LogDebug(event.Msg);
+            SiMain.LogDebug(&event.Msg);
 
           TLogLevel.Text,
           TLogLevel.Info:
-            SiMain.LogMessage(event.Msg);
+            SiMain.LogMessage(&event.Msg);
 
           TLogLevel.Warn:
-            SiMain.LogWarning(event.Msg);
+            SiMain.LogWarning(&event.Msg);
 
           TLogLevel.Error:
-            SiMain.LogError(event.Msg);
+            SiMain.LogError(&event.Msg);
 
           TLogLevel.Fatal:
-            SiMain.LogFatal(event.Msg);
+            SiMain.LogFatal(&event.Msg);
         end;
 
     TLogEventType.Value:
-      case event.Data.Kind of
-        tkInteger: SiMain.LogValue(event.Msg, event.Data.AsInteger);
+      case &event.Data.Kind of
+        tkInteger: SiMain.LogValue(&event.Msg, &event.Data.AsInteger);
         tkEnumeration:
-          if event.Data.TypeInfo = TypeInfo(Boolean) then
-            SiMain.LogValue(event.Msg, event.Data.AsBoolean)
+          if &event.Data.TypeInfo = TypeInfo(Boolean) then
+            SiMain.LogValue(&event.Msg, &event.Data.AsBoolean)
           else
             SiMain.SendCustomLogEntry(
-              Format('%s = %s', [event.Msg, event.Data.ToString]),
+              Format('%s = %s', [&event.Msg, &event.Data.ToString]),
               ltVariableValue, viTitle);
-        tkFloat: SiMain.LogValue(event.Msg, event.Data.AsExtended);
+        tkFloat: SiMain.LogValue(&event.Msg, &event.Data.AsExtended);
         tkSet: SiMain.SendCustomLogEntry(
-          Format('%s = %s', [event.Msg, event.Data.ToString]),
+          Format('%s = %s', [&event.Msg, &event.Data.ToString]),
           ltVariableValue, viTitle);
-        tkClass: SiMain.LogObject(event.Msg, event.Data.AsObject);
-        tkInt64: SiMain.LogValue(event.Msg, event.Data.AsInt64);
-        tkPointer: SiMain.LogPointer(event.Msg, event.Data.AsType<Pointer>);
+        tkClass: SiMain.LogObject(&event.Msg, &event.Data.AsObject);
+        tkInt64: SiMain.LogValue(&event.Msg, &event.Data.AsInt64);
+        tkPointer: SiMain.LogPointer(&event.Msg, &event.Data.AsType<Pointer>);
       else
-        SiMain.LogValue(event.Msg, event.Data.ToString);
+        SiMain.LogValue(&event.Msg, &event.Data.ToString);
       end;
 
     TLogEventType.Entering:
       SiMain.EnterMethod(
-        TLogAppenderBase.FormatMethodName(event.ClassType, event.Msg));
+        TLogAppenderBase.FormatMethodName(&event.ClassType, &event.Msg));
 
     TLogEventType.Leaving:
       SiMain.LeaveMethod(
-        TLogAppenderBase.FormatMethodName(event.ClassType, event.Msg));
+        TLogAppenderBase.FormatMethodName(&event.ClassType, &event.Msg));
 
     TLogEventType.CallStack,
     TLogEventType.SerializedData:
-      SiMain.LogMessage(event.Msg);
+      SiMain.LogMessage(&event.Msg);
   end;
 end;
 

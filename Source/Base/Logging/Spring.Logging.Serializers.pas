@@ -42,9 +42,9 @@ type
   TSerializerBase = class abstract(TLogEventConverterBase, ITypeSerializer)
   strict protected
     class function ValueToStr(const value: TValue): string; static; inline;
-    function CanHandleEvent(const event: TLogEvent): Boolean; override;
+    function CanHandleEvent(const &event: TLogEvent): Boolean; override;
     function Execute(const controller: ILoggerController;
-      const event: TLogEvent): string; override;
+      const &event: TLogEvent): string; override;
   public
     constructor Create;
 
@@ -155,14 +155,14 @@ begin
 end;
 
 function TSerializerBase.Execute(const controller: ILoggerController;
-  const event: TLogEvent): string;
+  const &event: TLogEvent): string;
 begin
-  Result := Serialize(controller as ISerializerController, event.Data);
+  Result := Serialize(controller as ISerializerController, &event.Data);
 end;
 
-function TSerializerBase.CanHandleEvent(const event: TLogEvent): Boolean;
+function TSerializerBase.CanHandleEvent(const &event: TLogEvent): Boolean;
 begin
-  Result := not event.Data.IsEmpty and CanHandleType(event.Data.TypeInfo);
+  Result := not &event.Data.IsEmpty and CanHandleType(&event.Data.TypeInfo);
 end;
 
 class function TSerializerBase.ValueToStr(const value: TValue): string;

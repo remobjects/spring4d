@@ -53,13 +53,13 @@ type
     procedure InvokeMethodOnTarget; virtual; abstract;
   public
     constructor Create(const target: TValue;
-      const interceptors: TArray<IInterceptor>; const method: TRttiMethod;
+      const interceptors: TArray<IInterceptor>; const &method: TRttiMethod;
       const arguments: TArray<TValue>);
 
     procedure Proceed;
 
     property Arguments: TArray<TValue> read GetArguments;
-    property Method: TRttiMethod read GetMethod;
+    property &Method: TRttiMethod read GetMethod;
     property Result: TValue read GetResult;
     property Target: TValue read GetTarget;
   end;
@@ -73,14 +73,14 @@ uses
 {$REGION 'TAbstractInvocation'}
 
 constructor TAbstractInvocation.Create(const target: TValue;
-  const interceptors: TArray<IInterceptor>; const method: TRttiMethod;
+  const interceptors: TArray<IInterceptor>; const &method: TRttiMethod;
   const arguments: TArray<TValue>);
 begin
   inherited Create;
   fArguments := arguments;
   fCurrentInterceptorIndex := -1;
   fInterceptors := interceptors;
-  fMethod := method;
+  fMethod := &method;
   fTarget := target;
 end;
 

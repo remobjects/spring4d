@@ -263,11 +263,11 @@ end;
 procedure ApplyPatch;
 var
   ctx: TRttiContext;
-  method: TRttiMethod;
+  &method: TRttiMethod;
 begin
   // Fix TRttiRecordMethod.DispatchInvoke
-  method := ctx.GetType(TypeInfo(TRecordMethodHelper)).GetMethod('RecordMethod');
-  RedirectFunction(GetVirtualMethod(method.ClassType, 13), @TRttiMethodFix.RecordDispatchInvoke);
+  &method := ctx.GetType(TypeInfo(TRecordMethodHelper)).GetMethod('RecordMethod');
+  RedirectFunction(GetVirtualMethod(&method.ClassType, 13), @TRttiMethodFix.RecordDispatchInvoke);
 end;
 
 initialization

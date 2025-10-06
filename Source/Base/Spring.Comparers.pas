@@ -122,7 +122,7 @@ asm
   cmp       ecx, -16
   ja        @@lessThan16
 
-@@loop:
+@@&loop:
   movdqu    xmm1, [esi+ecx]
   movdqu    xmm2, [edi+ecx]
   pcmpeqb   xmm1, xmm2
@@ -132,7 +132,7 @@ asm
   add       ecx, 16
   jz        @@equal
   cmp       ecx, -16
-  jna       @@loop
+  jna       @@&loop
 
 @@lessThan16:
   cmp       ecx, -8
@@ -209,7 +209,7 @@ asm
   cmp       size, -16
   ja        @@lessThan16
 
-@@loop:
+@@&loop:
   movdqu    xmm1, dqword [left+size]
   movdqu    xmm2, dqword [right+size]
   pcmpeqb   xmm1, xmm2
@@ -219,7 +219,7 @@ asm
   add       size, 16
   jz        @@equal
   cmp       size, -16
-  jna       @@loop
+  jna       @@&loop
 
 @@lessThan16:
   cmp       size, -8

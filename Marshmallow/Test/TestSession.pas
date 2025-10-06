@@ -69,7 +69,7 @@ type
     procedure Page;
     procedure ExecuteScalar;
     procedure Execute;
-    procedure Nullable;
+    procedure &Nullable;
     procedure GetLazyValue;
     procedure GetLazyNullable;
     procedure GetLazyStream;
@@ -171,7 +171,7 @@ function InsertCustomer(AAge: Integer = 25; AName: string = 'Demo'; AHeight: Dou
 function InsertCustomerOrder(ACustID: Integer; ACustPaymID: Integer; AOrderStatusCode: Integer; ATotalPrice: Double): Variant;
 procedure ClearTable(const ATableName: string);
 function GetTableRecordCount(const ATablename: string; AConnection: TSQLiteDatabase = nil; const OnQuery: THookQuery = nil): Int64;
-function GetValueFromDB(const table, columnName, where: string): Variant;
+function GetValueFromDB(const table, columnName, &where: string): Variant;
 function PrettyPrintVariant(const value: Variant): string;
 
 
@@ -302,9 +302,9 @@ begin
   Result := TestDB.GetUniTableIntf(ASql).Fields[0].Value;
 end;
 
-function GetValueFromDB(const table, columnName, where: string): Variant;
+function GetValueFromDB(const table, columnName, &where: string): Variant;
 begin
-  Result := TestDB.GetUniTableIntf(Format('select %s from %s where %s', [columnName, table, where])).Fields[0].Value;
+  Result := TestDB.GetUniTableIntf(Format('select %s from %s where %s', [columnName, table, &where])).Fields[0].Value;
 end;
 
 function GetTableRecordCount(const ATablename: string; AConnection: TSQLiteDatabase = nil; const OnQuery: THookQuery = nil): Int64;
@@ -1428,7 +1428,7 @@ var
   id: Integer;
   customers: IList<TCustomer>;
   order: TCustomer_Orders;
-  date: Nullable<TDateTime>;
+  date: &Nullable<TDateTime>;
 begin
   id := InsertCustomer(18, 'Foo');
   InsertCustomerOrder(id, 1, 5, 0);

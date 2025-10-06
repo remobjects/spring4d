@@ -41,7 +41,7 @@ uses
 {$SCOPEDENUMS ON}
 
 type
-  TMockBehavior = (Dynamic, Strict);
+  TMockBehavior = (&Dynamic, Strict);
 
   Times = Spring.Times.Times;
 
@@ -68,7 +68,7 @@ type
     constructor Create(const invocation: IInvocation; callCount: Integer);
     property Args[index: Integer]: TValue read GetArg write SetArg; default;
     property CallCount: Integer read GetCallCount;
-    property Method: TRttiMethod read GetMethod;
+    property &Method: TRttiMethod read GetMethod;
   end;
 
   TMockAction = reference to function(const callInfo: TCallInfo): TValue;
@@ -252,7 +252,7 @@ type
 
   Mock = record
   public
-    class function From<T: IInterface>(const value: T): Mock<T>; static;
+    class function &From<T: IInterface>(const value: T): Mock<T>; static;
   end;
 
   MockSequence = record

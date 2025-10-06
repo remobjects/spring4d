@@ -68,7 +68,7 @@ type
     fLock: TCriticalSection;
   protected
     fFile: PTextFile;
-    procedure DoSend(const event: TLogEvent); override;
+    procedure DoSend(const &event: TLogEvent); override;
   public
 
     /// <summary>
@@ -98,8 +98,8 @@ type
     constructor CreateInternal(ownsStream: Boolean;
       const encoding: TEncoding);
     procedure SetStream(const stream: TStream);
-    procedure DoSend(const event: TLogEvent); override;
-    function FormatBuffer(const event: TLogEvent): TBytes; virtual;
+    procedure DoSend(const &event: TLogEvent); override;
+    function FormatBuffer(const &event: TLogEvent): TBytes; virtual;
     property Encoding: TEncoding read fEncoding;
   public
     constructor Create(const stream: TStream; ownsStream: Boolean = True;
@@ -128,7 +128,7 @@ type
 {$IFDEF MSWINDOWS}
   TTraceLogAppender = class(TLogAppenderWithTimeStampFormat)
   protected
-    procedure DoSend(const event: TLogEvent); override;
+    procedure DoSend(const &event: TLogEvent); override;
   end;
 {$ENDIF}
 
@@ -142,7 +142,7 @@ type
   private
     fService: IFMXLoggingService;
   protected
-    procedure DoSend(const event: TLogEvent); override;
+    procedure DoSend(const &event: TLogEvent); override;
   public
     constructor Create;
   end;
@@ -159,7 +159,7 @@ type
     fTagMarshaller: TMarshaller;
     fTag: MarshaledAString; //fTag is valid as long as marshaller is referenced
   protected
-    procedure DoSend(const event: TLogEvent); override;
+    procedure DoSend(const &event: TLogEvent); override;
   public
     /// <summary>
     ///   Creates Android logcat log appender, the tag can be used to
@@ -250,12 +250,12 @@ begin
   inherited;
 end;
 
-procedure TTextLogAppender.DoSend(const event: TLogEvent);
+procedure TTextLogAppender.DoSend(const &event: TLogEvent);
 begin
   fLock.Enter;
   try
-    Writeln(fFile^, FormatTimeStamp(event.TimeStamp), ': ',
-      LEVEL_FIXED[event.Level], ' ', FormatMsg(event));
+    Writeln(fFile^, FormatTimeStamp(&event.TimeStamp), ': ',
+      LEVEL_FIXED[&event.Level], ' ', FormatMsg(&event));
     Flush(fFile^);
   finally
     fLock.Leave;
@@ -296,11 +296,11 @@ begin
   inherited Destroy;
 end;
 
-procedure TStreamLogAppender.DoSend(const event: TLogEvent);
+procedure TStreamLogAppender.DoSend(const &event: TLogEvent);
 var
   buffer: TBytes;
 begin
-  buffer := FormatBuffer(event);
+  buffer := FormatBuffer(&event);
   fLock.Enter;
   try
     fStream.WriteBuffer(buffer[0], Length(buffer));
@@ -309,10 +309,10 @@ begin
   end;
 end;
 
-function TStreamLogAppender.FormatBuffer(const event: TLogEvent): TBytes;
+function TStreamLogAppender.FormatBuffer(const &event: TLogEvent): TBytes;
 begin
-  Result := fEncoding.GetBytes(FormatTimeStamp(event.TimeStamp) + ': ' +
-    LEVEL_FIXED[event.Level] + ' ' + FormatMsg(event) + sLineBreak);
+  Result := fEncoding.GetBytes(FormatTimeStamp(&event.TimeStamp) + ': ' +
+    LEVEL_FIXED[&event.Level] + ' ' + FormatMsg(&event) + sLineBreak);
 end;
 
 procedure TStreamLogAppender.SetStream(const stream: TStream);
@@ -349,12 +349,12 @@ end;
 {$REGION 'TTraceLogAppender'}
 
 {$IFDEF MSWINDOWS}
-procedure TTraceLogAppender.DoSend(const event: TLogEvent);
+procedure TTraceLogAppender.DoSend(const &event: TLogEvent);
 var
   buffer: string;
 begin
-  buffer := FormatTimeStamp(event.TimeStamp) + ': ' + LEVEL[event.Level] + ' ' +
-    FormatMsg(event);
+  buffer := FormatTimeStamp(&event.TimeStamp) + ': ' + LEVEL[&event.Level] + ' ' +
+    FormatMsg(&event);
   OutputDebugString(PChar(buffer));
 end;
 {$ENDIF}
@@ -371,10 +371,10 @@ begin
     IFMXLoggingService) as IFMXLoggingService;
 end;
 
-procedure TFMXLogAppender.DoSend(const event: TLogEvent);
+procedure TFMXLogAppender.DoSend(const &event: TLogEvent);
 begin
-  fService.Log(FormatTimeStamp(event.TimeStamp) + ': ' + LEVEL[event.Level] + ' ' +
-    FormatMsg(event), []);
+  fService.Log(FormatTimeStamp(&event.TimeStamp) + ': ' + LEVEL[&event.Level] + ' ' +
+    FormatMsg(&event), []);
 end;
 {$ENDIF}{$ENDIF}
 
@@ -390,7 +390,7 @@ begin
   fTag := FTagMarshaller.AsAnsi(Tag).ToPointer;
 end;
 
-procedure TAndroidLogAppender.DoSend(const event: TLogEvent);
+procedure TAndroidLogAppender.DoSend(const &event: TLogEvent);
 const
   LEVEL: array[TLogLevel] of android_LogPriority = (
     ANDROID_LOG_UNKNOWN,
@@ -406,8 +406,8 @@ var
   m: TMarshaller;
   buffer: string;
 begin
-  buffer := FormatTimeStamp(event.TimeStamp) + ': ' + FormatMsg(event);
-  __android_log_write(LEVEL[event.Level], fTag, m.AsAnsi(buffer).ToPointer);
+  buffer := FormatTimeStamp(&event.TimeStamp) + ': ' + FormatMsg(&event);
+  __android_log_write(LEVEL[&event.Level], fTag, m.AsAnsi(buffer).ToPointer);
 end;
 {$ENDIF}
 
