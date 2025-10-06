@@ -37,3 +37,7 @@ Tests/Bin/
 
 # TestInsight files
 TestInsightSettings.ini
+
+# Oxygene files (Water and Fire local or user config)
+*.water*
+*.fire*
