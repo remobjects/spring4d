@@ -19,10 +19,13 @@ Changes so far include:
 
 We have not yet added our Elements project files. To create one yourself, open Water or Fire (RemObjects' Windows and Mac IDEs) and go to File > Import > Delphi project and select Spring.Base.
 
-Other than basic compilation, some areas may need reconsideration: for example, Oxygene has nullable types built into the language, so how would S4D's Nullable<> be handled -- mapped to the language, perhaps?
+Other than basic compilation, some areas may need reconsideration: for example, Oxygene has nullable types built into the language, so how would S4D's `Nullable<>` be handled -- mapped to the language, perhaps? Or, should we add support for some of the more modern language features, like [sequences](https://www.remobjects.com/elements/oxygene/language.aspx#sequences) when iterating over collections? Our goal is to get the main portion of the library building and address these on a case-by-case basis.
 
 Please support Spring4D
 -----------------
+
+The below is the donate button from the original project (before we forked it.) We absolutely recommend supporting them.
+
 [![btn_donate_LG.gif](https://bitbucket.org/repo/jxX7Lj/images/1283204942-btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KG4H9QT3MSDN8)
 
 
