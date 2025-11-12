@@ -6,22 +6,22 @@ It consists of a number of different modules that contain a base class library (
 
 Join us on the [Spring4D Google Group](https://groups.google.com/forum/#!forum/spring4d).
 
-Installation
+Oxygene Version
 ------------
-Just run the Build.exe and select the Delphi versions you want to install Spring4D for.  
-Alternatively open the project group in your IDE and compile the packages. Add the `Library\<delphiversion>\<config>` folder to your library path to access the precompiled units.
 
-Current version
----------------
-2.0.1 (15.04.2024)
+Oxygene is an Object Pascal compiler made by RemObjects which supports the majority of Delphi-style Object Pascal, with a [significant number of modernizations](https://www.remobjects.com/elements/oxygene/language.aspx#sequences). It compiles to many more platforms, including Windows ARM and Linux ARM (natively via LLVM), plus support .Net and JVM targets too.
 
-Known issues
-------------
-* Some warnings when compiling for mobile compilers.
-* The deployment of the unit test project might fail for mobile compilers (iOS ARM and Android).
-* Compilation on some older versions for iOS and Android might fail due to compiler bugs.
+The repo is not yet complete but is intended to include tweaks necessary to get Spring4D to build with Oxygene.
 
-Please support us
+Changes so far include:
+* Updated Jedi.inc to recognise Oxygene (also [contributed to Jedi](https://github.com/project-jedi/jedi/pull/24))
+* `method` is a reserved word in Oxygene ([see list of keywords](https://docs.elementscompiler.com/Oxygene/Keywords/))
+
+We have not yet added our Elements project files. To create one yourself, open Water or Fire (RemObjects' Windows and Mac IDEs) and go to File > Import > Delphi project and select Spring.Base.
+
+Other than basic compilation, some areas may need reconsideration: for example, Oxygene has nullable types built into the language, so how would S4D's Nullable<> be handled -- mapped to the language, perhaps?
+
+Please support Spring4D
 -----------------
 [![btn_donate_LG.gif](https://bitbucket.org/repo/jxX7Lj/images/1283204942-btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KG4H9QT3MSDN8)
 
