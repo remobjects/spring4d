@@ -169,7 +169,7 @@ type
     procedure SetBookmarkFlag(Buffer: TRecordBuffer; Value: TBookmarkFlag); override;
 
     function InternalGetRecord(Buffer: TRecordBuffer; GetMode: TGetMode; DoCheck: Boolean): TGetResult; virtual;
-    procedure SetFieldData(const field: TField; const buffer: Variant); overload;
+    procedure SetFieldData(const &field: TField; const buffer: Variant); overload;
 
     property FilterCache: IDictionary<string, Variant> read fFilterCache;
     property IndexList: TIndexList read fIndexList;
@@ -1084,26 +1084,26 @@ procedure TBaseVirtualDataSet.InternalInitFieldDefs;
     const fieldDefs: TFieldDefs);
   var
     i: Integer;
-    field: TField;
+    &field: TField;
     fieldDef: TFieldDef;
   begin
     for i := 0 to fields.Count - 1 do
     begin
-      field := fields[i];
-      if fieldDefs.IndexOf(field.FieldName) = -1 then
+      &field := fields[i];
+      if fieldDefs.IndexOf(&field.FieldName) = -1 then
       begin
         fieldDef := fieldDefs.AddFieldDef;
-        fieldDef.Name := field.FieldName;
-        fieldDef.DataType := field.DataType;
-        fieldDef.Size := field.Size;
-        if field.Required then
+        fieldDef.Name := &field.FieldName;
+        fieldDef.DataType := &field.DataType;
+        fieldDef.Size := &field.Size;
+        if &field.Required then
           fieldDef.Attributes := [faRequired];
-        if field.ReadOnly then
+        if &field.ReadOnly then
           fieldDef.Attributes := fieldDef.Attributes + [DB.faReadonly];
-        if (field.DataType = ftBCD) and (field is TBCDField) then
-          fieldDef.Precision := TBCDField(field).Precision;
-        if field is TObjectField then
-          InitFieldDefsFromFields(TObjectField(field).Fields, fieldDef.ChildDefs);
+        if (&field.DataType = ftBCD) and (&field is TBCDField) then
+          fieldDef.Precision := TBCDField(&field).Precision;
+        if &field is TObjectField then
+          InitFieldDefsFromFields(TObjectField(&field).Fields, fieldDef.ChildDefs);
       end;
     end;
   end;
@@ -1387,7 +1387,7 @@ begin
     DataEvent(deFieldChange, NativeInt(Field));
 end;
 
-procedure TBaseVirtualDataSet.SetFieldData(const field: TField;
+procedure TBaseVirtualDataSet.SetFieldData(const &field: TField;
   const buffer: Variant);
 var
   recBuf: TRecordBuffer;
@@ -1397,22 +1397,22 @@ begin
 
   GetActiveRecBuf(recBuf);
 
-  if field.FieldNo > 0 then
+  if &field.FieldNo > 0 then
   begin
     if ReadOnly and not(State in [dsSetKey, dsFilter]) then
-      DatabaseErrorFmt(SFieldReadOnly, [field.DisplayName]);
+      DatabaseErrorFmt(SFieldReadOnly, [&field.DisplayName]);
 
-    if not fModifiedFields.Contains(field) then
+    if not fModifiedFields.Contains(&field) then
     begin
-      PVariantList(fOldValueBuffer + SizeOf(TArrayRecInfo))[field.Index] := field.OldValue;
-      fModifiedFields.Add(field);
+      PVariantList(fOldValueBuffer + SizeOf(TArrayRecInfo))[&field.Index] := &field.OldValue;
+      fModifiedFields.Add(&field);
     end;
   end;
 
-  PVariantList(recBuf + SizeOf(TArrayRecInfo))[field.Index] := buffer;
+  PVariantList(recBuf + SizeOf(TArrayRecInfo))[&field.Index] := buffer;
 
   if not (State in [dsCalcFields, dsInternalCalc, dsFilter, dsNewValue]) then
-    DataEvent(deFieldChange, NativeInt(field));
+    DataEvent(deFieldChange, NativeInt(&field));
 end;
 
 procedure TBaseVirtualDataSet.SetFiltered(Value: Boolean);

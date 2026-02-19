@@ -43,7 +43,7 @@ type
     function GetQueryLanguage: TQueryLanguage; override;
     function GenerateGetLastInsertId(const identityColumn: ColumnAttribute): string; override;
     function GeneratePagedQuery(const sql: string; limit, offset: Integer): string; override;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; override;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; override;
   end;
 
 implementation
@@ -96,9 +96,9 @@ begin
   Result := qlASA;
 end;
 
-function TASASQLGenerator.GetSQLDataTypeName(const field: TSQLCreateField): string;
+function TASASQLGenerator.GetSQLDataTypeName(const &field: TSQLCreateField): string;
 begin
-  Result := inherited GetSQLDataTypeName(field);
+  Result := inherited GetSQLDataTypeName(&field);
   if Result = 'BLOB' then
     Result := 'IMAGE'
   else if Result = 'TIMESTAMP' then

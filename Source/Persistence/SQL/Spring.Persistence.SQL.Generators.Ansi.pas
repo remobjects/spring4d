@@ -55,8 +55,8 @@ type
     function GetColumnDefinition(const column: TSQLCreateField): string; virtual;
 
     function GetTableNameWithAlias(const table: TSQLTable): string; virtual;
-    function GetQualifiedFieldName(const field: TSQLField): string; virtual;
-    function GetEscapedFieldName(const field: TSQLField): string; virtual;
+    function GetQualifiedFieldName(const &field: TSQLField): string; virtual;
+    function GetEscapedFieldName(const &field: TSQLField): string; virtual;
     function GetGroupByAsString(const groupFields: IList<TSQLGroupByField>): string; virtual;
     function GetJoinAsString(const join: TSQLJoin): string; virtual;
     function GetJoinsAsString(const joinFields: IList<TSQLJoin>): string; virtual;
@@ -68,7 +68,7 @@ type
     function GetCopyFieldsAsString(const createFields: IList<TSQLCreateField>;
       const copyFields: IList<string>): string; virtual;
     function GetTempTableName: string; virtual;
-    function GetPrimaryKeyDefinition(const field: TSQLCreateField): string; virtual;
+    function GetPrimaryKeyDefinition(const &field: TSQLCreateField): string; virtual;
     function GetSplitStatementSymbol: string; virtual;
     procedure ParseFullTableName(const fullTableName: string;
       out tableName, schemaName: string); virtual;
@@ -77,7 +77,7 @@ type
       const versionColumn: VersionAttribute; const version, primaryKey: Variant): Variant; override;
   public
     function GetQueryLanguage: TQueryLanguage; override;
-    function GenerateWhere(const field: TSQLWhereField): string; override;
+    function GenerateWhere(const &field: TSQLWhereField): string; override;
     function GenerateSelect(const command: TSelectCommand): string; override;
     function GenerateInsert(const command: TInsertCommand): string; override;
     function GenerateUpdate(const command: TUpdateCommand): string; override;
@@ -89,7 +89,7 @@ type
     function GenerateGetLastInsertId(const identityColumn: ColumnAttribute): string; override;
     function GeneratePagedQuery(const sql: string; limit, offset: Integer): string; override;
     function GenerateGetQueryCount(const sql: string): string; override;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; override;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; override;
     function GetSQLTableCount(const tableName: string): string; override;
     function GetSQLSequenceCount(const sequenceName: string): string; override;
     function GetTableColumns(const tableName: string): string; override;
@@ -185,24 +185,24 @@ function TAnsiSQLGenerator.GenerateCreateForeignKey(
   const command: TCreateForeignKeyCommand): IList<string>;
 var
   sqlBuilder: TStringBuilder;
-  field: TSQLForeignKeyField;
+  &field: TSQLForeignKeyField;
 begin
   Result := TCollections.CreateList<string>;
   sqlBuilder := TStringBuilder.Create;
   try
-    for field in command.ForeignKeys do
+    for &field in command.ForeignKeys do
     begin
       sqlBuilder.Clear;
       sqlBuilder.AppendFormat('ALTER TABLE %0:s ', [command.Table.Name])
         .AppendLine
-        .AppendFormat('ADD CONSTRAINT %0:s', [field.ForeignKeyName])
+        .AppendFormat('ADD CONSTRAINT %0:s', [&field.ForeignKeyName])
         .AppendLine
-        .AppendFormat('FOREIGN KEY(%0:s)', [GetEscapedFieldName(field)])
+        .AppendFormat('FOREIGN KEY(%0:s)', [GetEscapedFieldName(&field)])
         .AppendLine
-        .AppendFormat(' REFERENCES %0:s (%1:s)', [field.ReferencedTableName,
-          AnsiQuotedStr(field.ReferencedColumnName, GetEscapeChar)])
+        .AppendFormat(' REFERENCES %0:s (%1:s)', [&field.ReferencedTableName,
+          AnsiQuotedStr(&field.ReferencedColumnName, GetEscapeChar)])
         .AppendLine
-        .Append(field.ConstraintsAsString);
+        .Append(&field.ConstraintsAsString);
 
       Result.Add(sqlBuilder.ToString);
     end;
@@ -237,7 +237,7 @@ function TAnsiSQLGenerator.GenerateDelete(const command: TDeleteCommand): string
 var
   sqlBuilder: TStringBuilder;
   i: Integer;
-  field: TSQLWhereField;
+  &field: TSQLWhereField;
 begin
   Assert(Assigned(command));
 
@@ -247,7 +247,7 @@ begin
 
     for i := 0 to command.WhereFields.Count - 1 do
     begin
-      field := command.WhereFields[i];
+      &field := command.WhereFields[i];
       if i = 0 then
         sqlBuilder.AppendLine.Append(' WHERE ')
       else
@@ -256,7 +256,7 @@ begin
       {TODO -oLinas -cGeneral : implement where operators}
 
       sqlBuilder.AppendFormat('%0:s = %1:s',
-        [GetEscapedFieldName(field), field.ParamName]);
+        [GetEscapedFieldName(&field), &field.ParamName]);
     end;
 
     sqlBuilder.Append(GetSplitStatementSymbol);
@@ -305,7 +305,7 @@ end;
 function TAnsiSQLGenerator.GenerateInsert(const command: TInsertCommand): string;
 var
   i: Integer;
-  field: TSQLInsertField;
+  &field: TSQLInsertField;
   fields, params: string;
 begin
   Assert(Assigned(command));
@@ -318,15 +318,15 @@ begin
 
   for i := 0 to command.InsertFields.Count - 1 do
   begin
-    field := command.InsertFields[i];
+    &field := command.InsertFields[i];
     if i > 0 then
     begin
       fields := fields + ', ';
       params := params + ', ';
     end;
 
-    fields := fields + GetEscapedFieldName(field);
-    params := params + field.ParamName;
+    fields := fields + GetEscapedFieldName(&field);
+    params := params + &field.ParamName;
   end;
 
   Result := Result + command.Table.Name + ' (' + sLineBreak + '  ' + fields + ')' + sLineBreak +
@@ -418,51 +418,51 @@ begin
   end;
 end;
 
-function TAnsiSQLGenerator.GenerateWhere(const field: TSQLWhereField): string;
+function TAnsiSQLGenerator.GenerateWhere(const &field: TSQLWhereField): string;
 begin
-  if field is TSQLWherePropertyField then
+  if &field is TSQLWherePropertyField then
     Result := Format('(%s %s %s)', [
-      field.Table.Alias + '.' + field.LeftSQL,
-      WhereOperatorNames[field.WhereOperator],
-      TSQLWherePropertyField(field).OtherTable.Alias + '.' + field.RightSQL])
+      &field.Table.Alias + '.' + &field.LeftSQL,
+      WhereOperatorNames[&field.WhereOperator],
+      TSQLWherePropertyField(&field).OtherTable.Alias + '.' + &field.RightSQL])
   else
-    case field.WhereOperator of
+    case &field.WhereOperator of
       woIsNull, woIsNotNull:
-        Result := GetQualifiedFieldName(field) + ' ' + WhereOperatorNames[field.WhereOperator];
+        Result := GetQualifiedFieldName(&field) + ' ' + WhereOperatorNames[&field.WhereOperator];
       woLike, woNotLike, woIn, woNotIn:
         // TODO: support parameter
-        if field.IgnoreCase then
+        if &field.IgnoreCase then
           Result := Format('UPPER(%s) %s %s', [
-            GetQualifiedFieldName(field),
-            WhereOperatorNames[field.WhereOperator],
-            field.RightSQL])
+            GetQualifiedFieldName(&field),
+            WhereOperatorNames[&field.WhereOperator],
+            &field.RightSQL])
         else
           Result := Format('%s %s %s', [
-            GetQualifiedFieldName(field),
-            WhereOperatorNames[field.WhereOperator],
-            field.RightSQL]);
+            GetQualifiedFieldName(&field),
+            WhereOperatorNames[&field.WhereOperator],
+            &field.RightSQL]);
       woOr, woAnd:
         Result := Format('(%s %s %s)', [
-          field.LeftSQL,
-          WhereOperatorNames[field.WhereOperator],
-          field.RightSQL]);
+          &field.LeftSQL,
+          WhereOperatorNames[&field.WhereOperator],
+          &field.RightSQL]);
       woNot:
         Result := Format('%s (%s)', [
-          WhereOperatorNames[field.WhereOperator],
-          field.LeftSQL]);
+          WhereOperatorNames[&field.WhereOperator],
+          &field.LeftSQL]);
       woOrEnd, woAndEnd, woNotEnd: Result := '';
-      woJunction: Result := Format('(%s)', [field.LeftSQL]);
+      woJunction: Result := Format('(%s)', [&field.LeftSQL]);
       woBetween:
         Result := Format('(%s %s %s AND %s)', [
-          GetQualifiedFieldName(field),
-          WhereOperatorNames[field.WhereOperator],
-          field.ParamName,
-          field.ParamName2]);
+          GetQualifiedFieldName(&field),
+          WhereOperatorNames[&field.WhereOperator],
+          &field.ParamName,
+          &field.ParamName2]);
     else
       Result := Format('%s %s %s', [
-        GetQualifiedFieldName(field),
-        WhereOperatorNames[field.WhereOperator],
-        field.ParamName]);
+        GetQualifiedFieldName(&field),
+        WhereOperatorNames[&field.WhereOperator],
+        &field.ParamName]);
     end;
 end;
 
@@ -482,9 +482,9 @@ begin
   end;
 end;
 
-function TAnsiSQLGenerator.GetQualifiedFieldName(const field: TSQLField): string;
+function TAnsiSQLGenerator.GetQualifiedFieldName(const &field: TSQLField): string;
 begin
-  Result := field.Table.Alias + '.' + GetEscapedFieldName(field);
+  Result := &field.Table.Alias + '.' + GetEscapedFieldName(&field);
 end;
 
 function TAnsiSQLGenerator.GetColumnDefinition(
@@ -502,18 +502,18 @@ function TAnsiSQLGenerator.GetCopyFieldsAsString(
   const copyFields: IList<string>): string;
 var
   i: Integer;
-  field: TSQLCreateField;
+  &field: TSQLCreateField;
 begin
   Result := '';
 
   for i := 0 to createFields.Count - 1 do
   begin
-    field := createFields[i];
+    &field := createFields[i];
     if i > 0 then
       Result := Result + ', ';
 
-    if copyFields.Contains(field.Name) then
-      Result := Result + GetEscapedFieldname(field)
+    if copyFields.Contains(&field.Name) then
+      Result := Result + GetEscapedFieldname(&field)
     else
       Result := Result + 'NULL';
   end;
@@ -534,11 +534,11 @@ begin
   end;
 end;
 
-function TAnsiSQLGenerator.GetEscapedFieldName(const field: TSQLField): string;
+function TAnsiSQLGenerator.GetEscapedFieldName(const &field: TSQLField): string;
 begin
-  Result := AnsiQuotedStr(field.Name, GetEscapeChar);
-  if (field is TSQLSelectField) and TSQLSelectField(field).NeedsAlias then
-    Result := Result + ' AS ' + field.Table.Alias + '$' + field.Name;
+  Result := AnsiQuotedStr(&field.Name, GetEscapeChar);
+  if (&field is TSQLSelectField) and TSQLSelectField(&field).NeedsAlias then
+    Result := Result + ' AS ' + &field.Table.Alias + '$' + &field.Name;
 end;
 
 function TAnsiSQLGenerator.GetEscapeChar: Char;
@@ -587,12 +587,12 @@ end;
 
 function TAnsiSQLGenerator.GetJoinsAsString(const joinFields: IList<TSQLJoin>): string;
 var
-  field: TSQLJoin;
+  &field: TSQLJoin;
 begin
   Result := '';
 
-  for field in joinFields do
-    Result := Result + sLineBreak + ' ' + GetJoinAsString(field);
+  for &field in joinFields do
+    Result := Result + sLineBreak + ' ' + GetJoinAsString(&field);
 end;
 
 function TAnsiSQLGenerator.GetOrderAsString(
@@ -614,7 +614,7 @@ begin
   end;
 end;
 
-function TAnsiSQLGenerator.GetPrimaryKeyDefinition(const field: TSQLCreateField): string;
+function TAnsiSQLGenerator.GetPrimaryKeyDefinition(const &field: TSQLCreateField): string;
 begin
   Result := 'PRIMARY KEY';
 end;
@@ -663,30 +663,30 @@ begin
   Result := ';';
 end;
 
-function TAnsiSQLGenerator.GetSQLDataTypeName(const field: TSQLCreateField): string;
+function TAnsiSQLGenerator.GetSQLDataTypeName(const &field: TSQLCreateField): string;
 var
   typeInfo: PTypeInfo;
   createField: TSQLCreateField;
 begin
-  Assert(Assigned(field));
+  Assert(Assigned(&field));
   Result := 'INTEGER';
 
-  typeInfo := field.TypeInfo;
+  typeInfo := &field.TypeInfo;
 
   case typeInfo.Kind of
     tkUnknown: ;
     tkInteger, tkSet:
-      if field.Precision > 0 then
-        Result := Format('NUMERIC(%0:d, %1:d)', [field.Precision, field.Scale]);
+      if &field.Precision > 0 then
+        Result := Format('NUMERIC(%0:d, %1:d)', [&field.Precision, &field.Scale]);
     tkEnumeration:
       if typeInfo = System.TypeInfo(Boolean) then
         Result := 'BIT';
     tkInt64:
-      if field.Precision > 0 then
-        Result := Format('NUMERIC(%0:d, %1:d)', [field.Precision, field.Scale])
+      if &field.Precision > 0 then
+        Result := Format('NUMERIC(%0:d, %1:d)', [&field.Precision, &field.Scale])
       else
         Result := 'BIGINT';
-    tkChar: Result := Format('CHAR(%d)', [field.Length]);
+    tkChar: Result := Format('CHAR(%d)', [&field.Length]);
     tkFloat:
       if typeInfo = System.TypeInfo(TDate) then
         Result := 'DATE'
@@ -695,19 +695,19 @@ begin
       else if typeInfo = System.TypeInfo(TTime) then
         Result := 'TIME'
       else
-        if field.Precision > 0 then
-          Result := Format('NUMERIC(%0:d, %1:d)', [field.Precision, field.Scale])
+        if &field.Precision > 0 then
+          Result := Format('NUMERIC(%0:d, %1:d)', [&field.Precision, &field.Scale])
         else
           Result := 'FLOAT';
-    tkString, tkLString: Result := Format('VARCHAR(%d)', [field.Length]);
+    tkString, tkLString: Result := Format('VARCHAR(%d)', [&field.Length]);
     tkClass, tkArray, tkDynArray, tkVariant: Result := 'BLOB';
     tkMethod: ;
-    tkWChar: Result := Format('NCHAR(%d)', [field.Length]);
-    tkWString, tkUString: Result := Format('NVARCHAR(%d)', [field.Length]);
+    tkWChar: Result := Format('NCHAR(%d)', [&field.Length]);
+    tkWString, tkUString: Result := Format('NVARCHAR(%d)', [&field.Length]);
     tkRecord:
       if IsNullable(typeInfo) or IsLazyType(typeInfo) then
       begin
-        createField := field.Clone;
+        createField := &field.Clone;
         try
           createField.TypeInfo := typeInfo.RttiType.GetGenericArguments[0].Handle;
           Result := GetSQLDataTypeName(createField);
@@ -764,7 +764,7 @@ end;
 function TAnsiSQLGenerator.GetWhereAsString(const whereFields: IList<TSQLWhereField>): string;
 var
   i, index: Integer;
-  field: TSQLWhereField;
+  &field: TSQLWhereField;
 begin
   Result := '';
 
@@ -776,16 +776,16 @@ begin
 
     index := i;
 
-    field := whereFields[i];
+    &field := whereFields[i];
     if i = 0 then
       Result := sLineBreak + '  WHERE '
     else
       Result := Result + ' AND ';
 
-    if field.WhereOperator in StartOperators then
-      index := FindEnd(whereFields, i, field.WhereOperator, GetEndOperator(field.WhereOperator));
+    if &field.WhereOperator in StartOperators then
+      index := FindEnd(whereFields, i, &field.WhereOperator, GetEndOperator(&field.WhereOperator));
 
-    Result := Result + GenerateWhere(field);
+    Result := Result + GenerateWhere(&field);
     Inc(index);
   end;
 end;

@@ -49,7 +49,7 @@ type
     function GenerateCreateSequence(const command: TCreateSequenceCommand): string; override;
     function GenerateGetLastInsertId(const identityColumn: ColumnAttribute): string; override;
     function GenerateGetNextSequenceValue(const sequence: SequenceAttribute): string; override;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; override;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; override;
     function GetEscapeChar: Char; override;
   end;
 
@@ -112,9 +112,9 @@ begin
   Result := qlMySQL;
 end;
 
-function TMySQLGenerator.GetSQLDataTypeName(const field: TSQLCreateField): string;
+function TMySQLGenerator.GetSQLDataTypeName(const &field: TSQLCreateField): string;
 begin
-  Result := inherited GetSQLDataTypeName(field);
+  Result := inherited GetSQLDataTypeName(&field);
   if StartsText('NUMERIC', Result) then
     Result := 'DECIMAL' + Copy(Result, 8, Length(Result))
   else if StartsText('NCHAR', Result) then

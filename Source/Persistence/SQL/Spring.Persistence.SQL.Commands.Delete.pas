@@ -112,15 +112,15 @@ end;
 procedure TDeleteExecutor.ExecuteById(const id: TValue);
 var
   statement: IDBStatement;
-  field: TSQLWhereField;
+  &field: TSQLWhereField;
   param: TDBParam;
 begin
   statement := Connection.CreateStatement;
   statement.SetSQLCommand(SQL);
   SQLParameters.Clear;
-  field := fCommand.WhereFields.First;
+  &field := fCommand.WhereFields.First;
 
-  param := Generator.CreateParam(field, id);
+  param := Generator.CreateParam(&field, id);
   SQLParameters.Add(param);
   statement.SetParams(SQLParameters);
   statement.Execute;

@@ -238,7 +238,7 @@ function TReflectionTypeSerializer.Serialize(
 var
   prefix: string;
   valueType: TRttiType;
-  field: TRttiField;
+  &field: TRttiField;
   prop: TRttiProperty;
   instance: Pointer;
   v: TValue;
@@ -265,12 +265,12 @@ begin
   begin
     prefix := #$A + DupeString('  ', nestingLevel + 1);
 
-    for field in valueType.GetFields do
+    for &field in valueType.GetFields do
     begin
-      if field.Visibility in fVisibility then
+      if &field.Visibility in fVisibility then
       begin
-        Result := Result + prefix + field.Name + ' = ';
-        v := field.GetValue(instance);
+        Result := Result + prefix + &field.Name + ' = ';
+        v := &field.GetValue(instance);
         if UseNested then
           Result := Result + SerializeNested(controller, v, nestingLevel + 1)
         else

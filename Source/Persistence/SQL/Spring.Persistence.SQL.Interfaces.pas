@@ -62,7 +62,7 @@ type
   ISQLGenerator = interface
     ['{8F46D275-50E4-4DE8-9E56-7D6599935E32}']
     function GetQueryLanguage: TQueryLanguage;
-    function GenerateWhere(const field: TSQLWhereField): string;
+    function GenerateWhere(const &field: TSQLWhereField): string;
     function GenerateSelect(const command: TSelectCommand): string;
     function GenerateInsert(const command: TInsertCommand): string;
     function GenerateUpdate(const command: TUpdateCommand): string;

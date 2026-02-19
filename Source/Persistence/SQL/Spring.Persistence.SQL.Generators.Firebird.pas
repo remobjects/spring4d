@@ -54,7 +54,7 @@ type
     function GenerateGetNextSequenceValue(const sequence: SequenceAttribute): string; override;
     function GeneratePagedQuery(const sql: string; limit, offset: Integer): string; override;
     function GetSQLSequenceCount(const sequenceName: string): string; override;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; override;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; override;
     function GetSQLTableExists(const tableName: string): string; override;
   end;
 
@@ -153,9 +153,9 @@ begin
 end;
 
 function TFirebirdSQLGenerator.GetSQLDataTypeName(
-  const field: TSQLCreateField): string;
+  const &field: TSQLCreateField): string;
 begin
-  Result := inherited GetSQLDataTypeName(field);
+  Result := inherited GetSQLDataTypeName(&field);
   if StartsText('NCHAR', Result) then
     Result := Copy(Result, 2, Length(Result)) + ' CHARACTER SET UNICODE_FSS'
   else if StartsText('NVARCHAR', Result) then

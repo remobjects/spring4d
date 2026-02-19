@@ -531,16 +531,16 @@ procedure TCreateTableCommand.SetCommandFieldsFromColumns(
   const columns: IList<ColumnAttribute>);
 var
   column: ColumnAttribute;
-  field: TSQLCreateField;
+  &field: TSQLCreateField;
 begin
   fColumns.Clear;
   fColumnNames.Clear;
 
   for column in columns do
   begin
-    field := TSQLCreateField.Create(column.ColumnName, fTable);
-    field.SetFromAttribute(column);
-    fColumns.Add(field);
+    &field := TSQLCreateField.Create(column.ColumnName, fTable);
+    &field.SetFromAttribute(column);
+    fColumns.Add(&field);
   end;
 end;
 

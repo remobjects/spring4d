@@ -460,7 +460,7 @@ type
 {$ENDIF}
     procedure AddDefaultField(fieldType: PTypeInfo; const value: Variant; offset: Integer);
     procedure AddDefaultProperty(fieldType: PTypeInfo; const value: Variant; propInfo: PPropInfo);
-    procedure AddManagedField(const field: TRttiField; const attribute: ManagedAttribute);
+    procedure AddManagedField(const &field: TRttiField; const attribute: ManagedAttribute);
     class function GetCodePointer(instance: TObject; p: Pointer): Pointer; static; inline;
   public
     class constructor Create;
@@ -2548,7 +2548,7 @@ type
   private
     type
       TCompareFunc = function(const left, right): Integer of object;
-      TMergeFunc = procedure(left: Pointer; leftLen: Integer; right: Pointer; rightLen: Integer; self: PTimSort);
+      TMergeFunc = procedure(left: Pointer; leftLen: Integer; right: Pointer; rightLen: Integer; &self: PTimSort);
       TComparerMethod<T> = function(const left, right: T): Integer of object;
       {$POINTERMATH ON}
       PSlice = ^TSlice;
@@ -3252,7 +3252,7 @@ function MethodPointerToMethodReference(const &method: TMethodPointer): IInterfa
 function HasMethodInfo(typeInfo: PTypeInfo): Boolean;
 function IsMethodReference(typeInfo: PTypeInfo): Boolean;
 
-function GetInterfaceByTypeInfo(self: TObject; intf: PTypeInfo; out obj): Boolean;
+function GetInterfaceByTypeInfo(&self: TObject; intf: PTypeInfo; out obj): Boolean;
 
 {$IFDEF MSWINDOWS}
 function UTF8IdentIdentCompare(left, right: PByte): Boolean;
@@ -3791,11 +3791,11 @@ var
   getProc: TGetProc;
 begin
   if (implGetter and PROPSLOT_MASK) = PROPSLOT_FIELD then
-    Result := IInterface(PPointer(PByte(self) + (implGetter and not PROPSLOT_MASK))^)
+    Result := IInterface(PPointer(PByte(&self) + (implGetter and not PROPSLOT_MASK))^)
   else
   begin
     if (implGetter and PROPSLOT_MASK) = PROPSLOT_VIRTUAL then
-      getProc := PPointer(PNativeInt(self)^ + SmallInt(implGetter))^
+      getProc := PPointer(PNativeInt(&self)^ + SmallInt(implGetter))^
     else
       getProc := Pointer(implGetter);
 {$IF Defined(MSWINDOWS) or Defined(OSX32)}
@@ -3833,20 +3833,20 @@ asm
 end;
 {$ENDIF}
 
-function GetInterfaceByTypeInfo(self: TObject; intf: PTypeInfo; out Obj): Boolean;
+function GetInterfaceByTypeInfo(&self: TObject; intf: PTypeInfo; out Obj): Boolean;
 var
   InterfaceEntry: PInterfaceEntry;
 begin
   Pointer(obj) := nil;
-  InterfaceEntry := GetInterfaceEntryByTypeInfo(self.ClassType, intf);
+  InterfaceEntry := GetInterfaceEntryByTypeInfo(&self.ClassType, intf);
   if InterfaceEntry <> nil then
     if InterfaceEntry^.IOffset <> 0 then
     begin
-      Pointer(obj) := Pointer(PByte(self) + InterfaceEntry^.IOffset);
+      Pointer(obj) := Pointer(PByte(&self) + InterfaceEntry^.IOffset);
       if Pointer(obj) <> nil then IInterface(obj)._AddRef;
     end
     else
-      InvokeImplGetter(self, InterfaceEntry^.ImplGetter, IInterface(obj));
+      InvokeImplGetter(&self, InterfaceEntry^.ImplGetter, IInterface(obj));
   Result := Pointer(obj) <> nil;
 end;
 
@@ -5444,7 +5444,7 @@ begin
   end;
 end;
 
-procedure TInitTable.AddManagedField(const field: TRttiField;
+procedure TInitTable.AddManagedField(const &field: TRttiField;
   const attribute: ManagedAttribute);
 var
   fieldType: PTypeInfo;
@@ -5455,8 +5455,8 @@ var
   managedField: TFinalizableField;
   entry: PInterfaceEntry;
 begin
-  fieldType := field.FieldType.Handle;
-  offset := field.Offset;
+  fieldType := &field.FieldType.Handle;
+  offset := &field.Offset;
   createInstance := attribute.CreateInstance;
   cls := attribute.InstanceClass;
   initializer := attribute.Initializer;
@@ -5475,7 +5475,7 @@ begin
         if entry = nil then
           raise EInvalidOperationException.CreateFmt(
             'class %s is not compatible with interface %s (field %s)', [
-            cls.ClassName, fieldType.TypeName, field.Name]);
+            cls.ClassName, fieldType.TypeName, &field.Name]);
       end
       else
         entry := nil;
@@ -6014,7 +6014,7 @@ function EqualsRec2Rec(const left, right: TValue): Boolean;
   function RawEquals(const recordType: TRttiType): Boolean;
   var
     leftRec, rightRec: Pointer;
-    field: TRttiField;
+    &field: TRttiField;
     leftValue, rightValue: TValue;
   begin
     if left.TypeInfo = right.TypeInfo then
@@ -6023,10 +6023,10 @@ function EqualsRec2Rec(const left, right: TValue): Boolean;
       begin
         leftRec := left.GetReferenceToRawData;
         rightRec := right.GetReferenceToRawData;
-        for field in recordType.GetFields do
+        for &field in recordType.GetFields do
         begin
-          leftValue := field.GetValue(leftRec);
-          rightValue := field.GetValue(rightRec);
+          leftValue := &field.GetValue(leftRec);
+          rightValue := &field.GetValue(rightRec);
           if not leftValue.Equals(rightValue) then
             Exit(False);
         end;
@@ -8902,7 +8902,7 @@ end;
 constructor TNullableHelper.Create(typeInfo: PTypeInfo);
 var
   p: PByte;
-  field: PRecordTypeField;
+  &field: PRecordTypeField;
 begin
   p := @typeInfo.TypeData.ManagedFldCount;
   // skip TTypeData.ManagedFldCount and TTypeData.ManagedFields
@@ -8912,12 +8912,12 @@ begin
   // skip TTypeData.RecFldCnt
   Inc(p, SizeOf(Integer));
   // get TTypeData.RecFields[0]
-  field := PRecordTypeField(p);
-  fValueType := field.Field.TypeRef^;
+  &field := PRecordTypeField(p);
+  fValueType := &field.Field.TypeRef^;
   // get TTypeData.RecFields[1]
-  field := PRecordTypeField(PByte(SkipShortString(@field.Name)) + SizeOf(TAttrData));
-  fHasValueOffset := field.Field.FldOffset;
-  fHasValueKind := field.Field.TypeRef^.Kind;
+  &field := PRecordTypeField(PByte(SkipShortString(@&field.Name)) + SizeOf(TAttrData));
+  fHasValueOffset := &field.Field.FldOffset;
+  fHasValueKind := &field.Field.TypeRef^.Kind;
 end;
 
 function TNullableHelper.GetValue(instance: Pointer): TValue;

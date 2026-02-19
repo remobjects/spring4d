@@ -53,7 +53,7 @@ type
     function GetQueryLanguage: TQueryLanguage; override;
     function GenerateCreateForeignKey(const command: TCreateForeignKeyCommand): IList<string>; override;
     function GenerateGetLastInsertId(const identityColumn: ColumnAttribute): string; override;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; override;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; override;
     function GetSQLTableExists(const tableName: string): string; override;
   end;
 
@@ -98,7 +98,7 @@ var
   sqlBuilder: TStringBuilder;
   createTableString: string;
   i: Integer;
-  field: TSQLForeignKeyField;
+  &field: TSQLForeignKeyField;
   backup: TArray<string>;
 begin
   Assert(Assigned(command));
@@ -119,12 +119,12 @@ begin
     sqlBuilder.Append(createTableString).Append(',').AppendLine;
     for i := 0 to command.ForeignKeys.Count - 1 do
     begin
-      field := command.ForeignKeys[i];
+      &field := command.ForeignKeys[i];
       if i > 0 then
         sqlBuilder.Append(',').AppendLine;
 
       sqlBuilder.AppendFormat(' CONSTRAINT %0:s FOREIGN KEY (%1:s) REFERENCES %2:s (%3:s)',
-        [field.ForeignKeyName, field.Name, field.ReferencedTableName, field.ReferencedColumnName]);
+        [&field.ForeignKeyName, &field.Name, &field.ReferencedTableName, &field.ReferencedColumnName]);
 
     end;
     sqlBuilder.Append(');');
@@ -162,18 +162,18 @@ begin
 end;
 
 function TSQLiteSQLGenerator.GetSQLDataTypeName(
-  const field: TSQLCreateField): string;
+  const &field: TSQLCreateField): string;
 var
   typeInfo: PTypeInfo;
 begin
-  typeInfo := field.TypeInfo;
+  typeInfo := &field.TypeInfo;
   if (typeInfo = System.TypeInfo(TDateTime))
     or (typeInfo = System.TypeInfo(TTime)) then
     Exit('DATETIME')
   else if (typeInfo = System.TypeInfo(TDate)) then
     Exit('DATE');
 
-  Result := inherited GetSQLDataTypeName(field);
+  Result := inherited GetSQLDataTypeName(&field);
   if ContainsStr(Result, 'CHAR') then
     Result := 'TEXT';
 end;

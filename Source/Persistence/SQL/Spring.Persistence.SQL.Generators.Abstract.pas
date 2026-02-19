@@ -44,7 +44,7 @@ type
   TAbstractSQLGenerator = class(TInterfacedObject, ISQLGenerator)
   protected
     function GetQueryLanguage: TQueryLanguage; virtual; abstract;
-    function GenerateWhere(const field: TSQLWhereField): string; virtual; abstract;
+    function GenerateWhere(const &field: TSQLWhereField): string; virtual; abstract;
     function GenerateSelect(const command: TSelectCommand): string; virtual; abstract;
     function GenerateInsert(const command: TInsertCommand): string; virtual; abstract;
     function GenerateUpdate(const command: TUpdateCommand): string; virtual; abstract;
@@ -56,7 +56,7 @@ type
     function GenerateGetLastInsertId(const identityColumn: ColumnAttribute): string; virtual; abstract;
     function GeneratePagedQuery(const sql: string; limit, offset: Integer): string; virtual; abstract;
     function GenerateGetQueryCount(const sql: string): string; virtual; abstract;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; virtual; abstract;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; virtual; abstract;
     function GetSQLTableCount(const tableName: string): string; virtual; abstract;
     function GetSQLSequenceCount(const sequenceName: string): string; virtual; abstract;
     function GetTableColumns(const tableName: string): string; virtual; abstract;

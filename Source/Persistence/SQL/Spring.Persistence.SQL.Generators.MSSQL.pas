@@ -43,9 +43,9 @@ type
     function GetQueryLanguage: TQueryLanguage; override;
     function GenerateGetLastInsertId(const identityColumn: ColumnAttribute): string; override;
     function GeneratePagedQuery(const sql: string; limit, offset: Integer): string; override;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; override;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; override;
     function GetTempTableName: string; override;
-    function GetPrimaryKeyDefinition(const field: TSQLCreateField): string; override;
+    function GetPrimaryKeyDefinition(const &field: TSQLCreateField): string; override;
     function GetSQLTableExists(const tableName: string): string; override;
   end;
 
@@ -95,10 +95,10 @@ begin
 end;
 
 function TMSSQLServerSQLGenerator.GetPrimaryKeyDefinition(
-  const field: TSQLCreateField): string;
+  const &field: TSQLCreateField): string;
 begin
   Result := Format('CONSTRAINT PK_%0:s_%1:s PRIMARY KEY',
-    [field.Table.NameWithoutSchema, field.Name]);
+    [&field.Table.NameWithoutSchema, &field.Name]);
 end;
 
 function TMSSQLServerSQLGenerator.GetQueryLanguage: TQueryLanguage;
@@ -107,15 +107,15 @@ begin
 end;
 
 function TMSSQLServerSQLGenerator.GetSQLDataTypeName(
-  const field: TSQLCreateField): string;
+  const &field: TSQLCreateField): string;
 begin
-  Result := inherited GetSQLDataTypeName(field);
+  Result := inherited GetSQLDataTypeName(&field);
   if Result = 'BLOB' then
     Result := 'IMAGE'
   else if Result = 'TIMESTAMP' then
     Result := 'DATETIME';
 
-  if field.IsIdentity then
+  if &field.IsIdentity then
     Result := Result + ' IDENTITY(1,1)';
 end;
 

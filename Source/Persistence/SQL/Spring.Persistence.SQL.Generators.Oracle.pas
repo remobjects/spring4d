@@ -55,7 +55,7 @@ type
     function GenerateGetNextSequenceValue(const sequence: SequenceAttribute): string; override;
     function GeneratePagedQuery(const sql: string; limit, offset: Integer): string; override;
     function GetSQLSequenceCount(const sequenceName: string): string; override;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; override;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; override;
     function GetSQLTableExists(const tableName: string): string; override;
 
     function GetParamClass: TDBParamClass; override;
@@ -202,9 +202,9 @@ begin
 end;
 
 function TOracleSQLGenerator.GetSQLDataTypeName(
-  const field: TSQLCreateField): string;
+  const &field: TSQLCreateField): string;
 begin
-  Result := inherited GetSQLDataTypeName(field);
+  Result := inherited GetSQLDataTypeName(&field);
   if StartsText('NUMERIC', Result) then
     Result := 'NUMBER' + Copy(Result, 8, Length(Result))
   else if StartsText('NVARCHAR', Result) and (not StartsText('NVARCHAR2', Result)) then

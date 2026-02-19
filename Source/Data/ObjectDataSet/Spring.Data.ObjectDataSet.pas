@@ -99,7 +99,7 @@ type
     procedure DoOnDataListChange(Sender: TObject; const Item: TObject; Action: TCollectionChangedAction);
 
     function CompareRecords(const left, right: TObject): Integer; virtual;
-    function InternalGetFieldValue(field: TField; const obj: TObject): Variant; virtual;
+    function InternalGetFieldValue(&field: TField; const obj: TObject): Variant; virtual;
     function ParserGetVariableValue(Sender: TObject; const VarName: string; var Value: Variant): Boolean; virtual;
     function ParserGetFunctionValue(Sender: TObject; const FuncName: string;
       const Args: Variant; var ResVal: Variant): Boolean; virtual;
@@ -430,7 +430,7 @@ var
   newItem: TObject;
   sortNeeded: Boolean;
   i: Integer;
-  field: TField;
+  &field: TField;
   fieldValue: Variant;
   value: TValue;
   prop: TRttiProperty;
@@ -445,15 +445,15 @@ begin
   try
     for i := 0 to ModifiedFields.Count - 1 do
     begin
-      field := ModifiedFields[i];
+      &field := ModifiedFields[i];
 
       if not sortNeeded and Sorted then
-        sortNeeded := FieldInSortIndex(field);
+        sortNeeded := FieldInSortIndex(&field);
 
       // Fields not found in dictionary are calculated or lookup fields, do not post them
-      if fProperties.TryGetFirst(prop, TPropertyFilters.IsNamed(field.FieldName)) then
+      if fProperties.TryGetFirst(prop, TPropertyFilters.IsNamed(&field.FieldName)) then
       begin
-        fieldValue := field.Value;
+        fieldValue := &field.Value;
         if VarIsNull(fieldValue) then
           prop.SetValue(newItem, TValue.Empty)
         else
@@ -548,7 +548,7 @@ procedure TObjectDataSet.InitRttiPropertiesFromItemType;
 var
   itemType: TRttiType;
   prop: TRttiProperty;
-  field: TField;
+  &field: TField;
 begin
   if fItemTypeInfo = nil then
     Exit;
@@ -565,12 +565,12 @@ begin
 
       if Fields.Count > 0 then
       begin
-        field := Fields.FindField(prop.Name);
-        if Assigned(field) and (field.FieldKind = fkData) then
+        &field := Fields.FindField(prop.Name);
+        if Assigned(&field) and (&field.FieldKind = fkData) then
         begin
           fProperties.Add(prop);
           if not prop.IsWritable then
-            field.ReadOnly := True;
+            &field.ReadOnly := True;
         end;
         Continue;
       end;
@@ -604,19 +604,19 @@ begin
     CreateFields;
 end;
 
-function TObjectDataSet.InternalGetFieldValue(field: TField; const obj: TObject): Variant;
+function TObjectDataSet.InternalGetFieldValue(&field: TField; const obj: TObject): Variant;
 var
   prop: TRttiProperty;
 begin
-  if fProperties.TryGetFirst(prop, TPropertyFilters.IsNamed(field.FieldName)) then
+  if fProperties.TryGetFirst(prop, TPropertyFilters.IsNamed(&field.FieldName)) then
     Result := prop.GetValue(obj).ToVariant
   else
-    if field.FieldKind = fkData then
-      if fDisabledFields.Add(field) then
+    if &field.FieldKind = fkData then
+      if fDisabledFields.Add(&field) then
       begin
-        field.ReadOnly := True;
-        field.Visible := False;
-        raise EObjectDataSetException.CreateFmt(SPropertyNotFound, [field.FieldName]);
+        &field.ReadOnly := True;
+        &field.Visible := False;
+        raise EObjectDataSetException.CreateFmt(SPropertyNotFound, [&field.FieldName]);
       end;
 end;
 
@@ -689,7 +689,7 @@ end;
 procedure TObjectDataSet.LoadFieldDefsFromFields(Fields: TFields; FieldDefs: TFieldDefs);
 var
   i: integer;
-  field: TField;
+  &field: TField;
   fieldDef: TFieldDef;
   itemType: TRttiType;
   prop: TRttiProperty;
@@ -697,26 +697,26 @@ begin
   itemType := TType.GetType(fItemTypeInfo);
   for i := 0 to Fields.Count - 1 do
   begin
-    field := Fields[i];
-    if FieldDefs.IndexOf(field.FieldName) = -1 then
+    &field := Fields[i];
+    if FieldDefs.IndexOf(&field.FieldName) = -1 then
     begin
       fieldDef := FieldDefs.AddFieldDef;
-      fieldDef.Name := field.FieldName;
-      fieldDef.DataType := field.DataType;
-      fieldDef.Size := field.Size;
-      if field.Required then
+      fieldDef.Name := &field.FieldName;
+      fieldDef.DataType := &field.DataType;
+      fieldDef.Size := &field.Size;
+      if &field.Required then
         fieldDef.Attributes := [DB.faRequired];
-      if field.ReadOnly then
+      if &field.ReadOnly then
         fieldDef.Attributes := fieldDef.Attributes + [DB.faReadonly];
-      if (field.DataType = ftBCD) and (field is TBCDField) then
-        fieldDef.Precision := TBCDField(field).Precision;
-      if field is TObjectField then
-        LoadFieldDefsFromFields(TObjectField(field).Fields, fieldDef.ChildDefs);
+      if (&field.DataType = ftBCD) and (&field is TBCDField) then
+        fieldDef.Precision := TBCDField(&field).Precision;
+      if &field is TObjectField then
+        LoadFieldDefsFromFields(TObjectField(&field).Fields, fieldDef.ChildDefs);
     end;
 
-    if Assigned(itemType) and (field.FieldKind = fkData) then
+    if Assigned(itemType) and (&field.FieldKind = fkData) then
     begin
-      prop := itemType.GetProperty(field.FieldName);
+      prop := itemType.GetProperty(&field.FieldName);
       if Assigned(prop) then
         fProperties.Add(prop);
     end;
@@ -887,15 +887,15 @@ end;
 function TObjectDataSet.ParserGetVariableValue(Sender: TObject;
   const VarName: string; var Value: Variant): Boolean;
 var
-  field: TField;
+  &field: TField;
 begin
   Result := FilterCache.TryGetValue(VarName, Value);
   if not Result then
   begin
-    field := FindField(Varname);
-    if Assigned(field) then
+    &field := FindField(Varname);
+    if Assigned(&field) then
     begin
-      Value := InternalGetFieldValue(field, IndexList.Items[Index]);
+      Value := InternalGetFieldValue(&field, IndexList.Items[Index]);
       FilterCache.Add(VarName, Value);
       Result := True;
     end;

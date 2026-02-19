@@ -248,7 +248,7 @@ type
     function IsType<T>: Boolean; overload;
     function IsType(typeInfo: PTypeInfo): Boolean; overload; inline;
 
-    function TryGetField(const name: string; out field: TRttiField): Boolean;
+    function TryGetField(const name: string; out &field: TRttiField): Boolean;
     function TryGetProperty(const name: string; out prop: TRttiProperty): Boolean;
     function TryGetMethod(const name: string; out &method: TRttiMethod): Boolean;
 
@@ -763,22 +763,22 @@ class procedure TType.SetFieldValue(const instance: TObject;
   const fieldName: string; const value: TValue);
 var
   rttiType: TRttiType;
-  field: TRttiField;
+  &field: TRttiField;
 begin
 {$IFDEF SPRING_ENABLE_GUARD}
   Guard.CheckNotNull(instance, 'instance');
 {$ENDIF}
 
   if TryGetType(instance.ClassInfo, rttiType)
-    and rttiType.TryGetField(fieldName, field) then
-    field.SetValue(instance, value);
+    and rttiType.TryGetField(fieldName, &field) then
+    &field.SetValue(instance, value);
 end;
 
 class procedure TType.SetMemberValue(const instance: TObject;
   const name: string; const value: TValue);
 var
   rttiType: TRttiType;
-  field: TRttiField;
+  &field: TRttiField;
   prop: TRttiProperty;
 begin
 {$IFDEF SPRING_ENABLE_GUARD}
@@ -786,8 +786,8 @@ begin
 {$ENDIF}
 
   if TryGetType(instance.ClassInfo, rttiType) then
-    if rttiType.TryGetField(name, field) then
-      field.SetValue(instance, value)
+    if rttiType.TryGetField(name, &field) then
+      &field.SetValue(instance, value)
     else if rttiType.TryGetProperty(name, prop) then
       prop.SetValue(instance, value);
 end;
@@ -1296,10 +1296,10 @@ begin
 end;
 
 function TRttiTypeHelper.TryGetField(const name: string;
-  out field: TRttiField): Boolean;
+  out &field: TRttiField): Boolean;
 begin
-  field := GetField(name);
-  Result := Assigned(field);
+  &field := GetField(name);
+  Result := Assigned(&field);
 end;
 
 function TRttiTypeHelper.TryGetMethod(const name: string;

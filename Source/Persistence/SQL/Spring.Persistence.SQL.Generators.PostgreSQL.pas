@@ -48,7 +48,7 @@ type
     function GenerateGetLastInsertId(const identityColumn: ColumnAttribute): string; override;
     function GenerateGetNextSequenceValue(const sequence: SequenceAttribute): string; override;
     function GeneratePagedQuery(const sql: string; limit, offset: Integer): string; override;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; override;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; override;
 
     function CreateParam(const paramField: TSQLParamField; const value: TValue): TDBParam; override;
   end;
@@ -116,9 +116,9 @@ begin
 end;
 
 function TPostgreSQLGenerator.GetSQLDataTypeName(
-  const field: TSQLCreateField): string;
+  const &field: TSQLCreateField): string;
 begin
-  Result := inherited GetSQLDataTypeName(field);
+  Result := inherited GetSQLDataTypeName(&field);
   if Result = 'FLOAT' then
     Result := 'DOUBLE PRECISION'
   else if StartsText('NCHAR', Result) then

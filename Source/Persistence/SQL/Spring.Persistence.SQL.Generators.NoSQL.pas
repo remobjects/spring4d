@@ -52,7 +52,7 @@ type
 
     function GetSQLSequenceCount(const sequenceName: string): string; override;
     function GetTableColumns(const tableName: string): string; override;
-    function GetSQLDataTypeName(const field: TSQLCreateField): string; override;
+    function GetSQLDataTypeName(const &field: TSQLCreateField): string; override;
     function GetSQLTableExists(const tableName: string): string; override;
     function GetEscapeChar: Char; override;
   end;
@@ -101,7 +101,7 @@ begin
   Result := qlNoSQL;
 end;
 
-function TNoSQLGenerator.GetSQLDataTypeName(const field: TSQLCreateField): string;
+function TNoSQLGenerator.GetSQLDataTypeName(const &field: TSQLCreateField): string;
 begin
   Result := '';
 end;
