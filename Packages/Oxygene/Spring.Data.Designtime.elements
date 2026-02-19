@@ -6,6 +6,7 @@
     <Architecture>i386</Architecture>
     <DelphiSDK>Delphi 12</DelphiSDK>
     <DelphiCompatibility>True</DelphiCompatibility>
+    <UseLegacyPreprocessor>True</UseLegacyPreprocessor>
     <DefaultUsesPrefixes>Delphi</DefaultUsesPrefixes>
     <ProjectGuid>{74111A14-7F4C-484F-934C-5ED889C0D028}</ProjectGuid>
     <OutputType>Library</OutputType>
