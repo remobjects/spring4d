@@ -1,4 +1,4 @@
-﻿{***************************************************************************}
+{***************************************************************************}
 {                                                                           }
 {           Spring Framework for Delphi                                     }
 {                                                                           }
@@ -454,15 +454,14 @@ end;
 
 function TAbstractArrayList<T>.CanInlineEquals: Boolean;
 begin
-  {$IFDEF DELPHIXE7_UP}
   Result :=
+{$IFDEF DELPHIXE7_UP}
     (GetTypeKind(T) = tkClass)
     or ((GetTypeKind(T) in FastComparableTypes) and (SizeOf(T) in [1, 2, 4, 8])
     and (Pointer(fComparer) = DefaultComparer));
-  PTypeInfo(TypeInfo(T)).Kind = tkClass;
-  {$ELSE}
-  Result := PTypeInfo(TypeInfo(T)).Kind = tkClass;
-  {$ENDIF}
+{$ELSE}
+    PTypeInfo(TypeInfo(T)).Kind = tkClass;
+{$ENDIF}
 end;
 
 function TAbstractArrayList<T>.GetCapacity: Integer;
@@ -476,10 +475,8 @@ begin
   if GetTypeKind(T) <> tkClass then
     Result := fCount
   else
-    Result := fCount and CountMask;
-  {$ELSE}
-  result := fCount and CountMask;
   {$ENDIF}
+  Result := fCount and CountMask;
 end;
 
 function TAbstractArrayList<T>.GetNonEnumeratedCount: Integer;
@@ -488,19 +485,13 @@ begin
   if GetTypeKind(T) <> tkClass then
     Result := fCount
   else
-    Result := fCount and CountMask;
-  {$ELSE}
-  result := fCount and CountMask;
   {$ENDIF}
+  Result := fCount and CountMask;
 end;
 
 function TAbstractArrayList<T>.GetOwnsObjects: Boolean;
 begin
-  {$IFDEF DELPHIXE7_UP}
-  Result := (GetTypeKind(T) = tkClass) and (fCount < 0);
-  {$ELSE}
-  Result := (fCount < 0);
-  {$ENDIF}
+  Result := {$IFDEF DELPHIXE7_UP}(GetTypeKind(T) = tkClass) and {$ENDIF}(fCount < 0);
 end;
 
 function TAbstractArrayList<T>.Add(const item: T): Integer;
@@ -2553,5 +2544,6 @@ begin
 end;
 
 {$ENDREGION}
+
 
 end.

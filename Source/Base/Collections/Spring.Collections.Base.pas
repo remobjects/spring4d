@@ -103,7 +103,7 @@ type
 
   TActionCall = procedure(const enumerator, action: IInterface);
   TAssign = procedure(var target; const source);
-  TCompare = function(self: Pointer; const left, right): Integer;
+  TCompare = function(&self: Pointer; const left, right): Integer;
   TContains = function(const collection: IInterface; const value; const comparer: IInterface): Boolean;
   TEqualsCurrentWithOtherEnumerator = function(const enumerator1, enumerator2, comparer: IInterface): Boolean;
   TEqualsValue = function(const enumerator, comparer: IInterface; const value): Boolean;
@@ -403,8 +403,8 @@ type
     &Where, WhereIndex, Select);
 
   TIteratorMethods = packed record
-    MoveNext: function(self: Pointer): Boolean;
-    Finalize: function(self: Pointer): Boolean;
+    MoveNext: function(&self: Pointer): Boolean;
+    Finalize: function(&self: Pointer): Boolean;
   end;
 
   TEnumerableExtension = class sealed(TEnumerableBase)
@@ -464,7 +464,7 @@ type
     Parent: TRefCountedObject;
 
     Methods: TIteratorMethods;
-    DoMoveNext: function(self: Pointer): Boolean;
+    DoMoveNext: function(&self: Pointer): Boolean;
     Enumerator: IEnumerator;
 
     Source: IEnumerable;
@@ -507,7 +507,7 @@ type
     Parent: TRefCountedObject;
 
     Methods: TIteratorMethods;
-    DoMoveNext: function(self: Pointer): Boolean;
+    DoMoveNext: function(&self: Pointer): Boolean;
     Enumerator: IEnumerator<T>;
 
     Source: IEnumerable<T>;
@@ -560,25 +560,25 @@ type
   TCollectionThunks<T> = record
   public type
     {$IFDEF RSP31615}
-    FuncInternal = reference to procedure({$IFDEF CPUX64}var &result{$ENDIF}const arg1, arg2: T{$IFDEF CPUX86} var &result{$ENDIF})
+    FuncInternal = reference to procedure({$IFDEF CPUX64}var &result;{$ENDIF}const arg1, arg2: T{$IFDEF CPUX86}; var &result{$ENDIF});
     {$ENDIF}
     ICollectionInternal = interface(IReadOnlyCollection<T>)
       // IMPORTANT NOTICE:
       // keep this in sync with ICollection<T> in Spring.Collections
-      function GetOnChanged: ICollectionChangedEvent<T>
-      function Add(const item: T): Boolean
+      function GetOnChanged: ICollectionChangedEvent<T>;
+      function Add(const item: T): Boolean;
       // internal helper type to solve compiler issue with using Slice on the
       // overloaded AddRange method in older Delphi versions
-      procedure AddRange(const values: array of T)
-      {$IFDEF RSP31615}overload
-      procedure AddRange(const values: IEnumerable<T>) overload
-      procedure Extract({$IFDEF CPUX64}var &result {$ENDIF}const item: T{$IFDEF CPUX86} var &result{$ENDIF})
+      procedure AddRange(const values: array of T);
+      {$IFDEF RSP31615}overload;
+      procedure AddRange(const values: IEnumerable<T>); overload;
+      procedure Extract({$IFDEF CPUX64}var &result; {$ENDIF}const item: T{$IFDEF CPUX86}; var &result{$ENDIF});
       {$ENDIF}
-    end
+    end;
   public
-    class procedure AggregateCurrentWithValue(const enumerator, func: IInterface var &result) static
-    class procedure Assign(var target const source) static
-    class procedure CallActionOnCurrent(const enumerator, action: IInterface) static;
+    class procedure AggregateCurrentWithValue(const enumerator, func: IInterface; var &result); static;
+    class procedure Assign(var target; const source); static;
+    class procedure CallActionOnCurrent(const enumerator, action: IInterface); static;
     class function Contains(const collection: IInterface; const value; const comparer: IInterface): Boolean; static;
     class function EqualsCurrentWithOtherEnumerator(const enumerator1, enumerator2, comparer: IInterface): Boolean; static;
     class function EqualsCurrentWithArrayElement(const enumerator: IInterface; comparer, values: Pointer; index: NativeInt): Boolean; static;
@@ -660,7 +660,7 @@ type
     fCurrent: T;
     fThreadId: TThreadID;
     fState: Integer;
-    fTryMoveNext: function (self: TObject; var current: T): Boolean;
+    fTryMoveNext: function (&self: TObject; var current: T): Boolean;
     const
       STATE_INITIAL    = -2; // initial state, before GetEnumerator
       STATE_FINISHED   = -1; // end of enumerator
@@ -840,7 +840,7 @@ type
   {$ENDREGION}
   end;
 
-  TCompareMethod = function(self: Pointer; const left, right): Integer;
+  TCompareMethod = function(&self: Pointer; const left, right): Integer;
   TTreeMapInnerCollection = class(TEnumerableBase)
   public type
   {$REGION 'Nested Types'}
@@ -4569,7 +4569,7 @@ const
     MoveNext: @TIteratorBlock.MoveNextEmpty
   );
 type
-  TInit = procedure(self: Pointer; extension: TEnumerableExtension);
+  TInit = procedure(&self: Pointer; extension: TEnumerableExtension);
 var
   Result: PIteratorBlock;
 begin
