@@ -42,10 +42,7 @@ type
   // info is re-generated for them. Also make them public to allow the test
   // to access them. We also need to skip the destruction code that does not
   // expect empty instance.
-  {$RTTI EXPLICIT
-    METHODS([vcPrivate..vcPublished])
-    PROPERTIES(DefaultPropertyRttiVisibility)
-    FIELDS(DefaultFieldRttiVisibility)}
+  {$RTTI EXPLICIT METHODS([vcPrivate..vcPublished]) PROPERTIES(DefaultPropertyRttiVisibility) FIELDS(DefaultFieldRttiVisibility)}
   TTestSQLConnection = class(TSQLConnection)
   public
     destructor Destroy; override;

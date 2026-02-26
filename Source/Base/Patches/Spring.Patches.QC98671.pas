@@ -49,7 +49,7 @@ type
   end;
 
 var
-  TParamLoc_SetArg: procedure(var Self: TParamLoc; AFrame: PInterceptFrame; const Value: TValue);
+  TParamLoc_SetArg: procedure(var &Self: TParamLoc; AFrame: PInterceptFrame; const Value: TValue);
 
 procedure TParamLoc.SetArg(AFrame: PInterceptFrame; const Value: TValue);
 begin

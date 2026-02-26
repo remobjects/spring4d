@@ -698,7 +698,7 @@ type
   /// </remarks>
   TCollectionBase<T> = class abstract(TEnumerableBase<T>)
   private type
-    TNotify = procedure(Self: TObject; const item: T; action: TCollectionChangedAction);
+    TNotify = procedure(&Self: TObject; const item: T; action: TCollectionChangedAction);
   private
     fOnChanged: TCollectionChangedEventImpl<T>;
     fNotify: TNotify;
@@ -4571,7 +4571,7 @@ const
 type
   TInit = procedure(&self: Pointer; extension: TEnumerableExtension);
 var
-  Result: PIteratorBlock;
+  &Result: PIteratorBlock;
 begin
   if extension.fKind <> Empty then
   begin

@@ -43,7 +43,7 @@ type
   TVirtualInterfaceInvokeEvent = Rtti.TVirtualInterfaceInvokeEvent;
 {$ELSE}
   TVirtualInterfaceInvokeEvent = reference to procedure(&Method: TRttiMethod;
-    const Args: TArray<TValue>; out Result: TValue);
+    const Args: TArray<TValue>; out &Result: TValue);
 {$ENDIF}
 
 {$IFDEF DELPHIXE2_UP}
@@ -61,7 +61,7 @@ type
     function _ReleaseFromIntf: Integer;
   protected
     procedure DoInvoke(UserData: Pointer;
-      const Args: TArray<TValue>; out Result: TValue);
+      const Args: TArray<TValue>; out &Result: TValue);
     procedure ErrorProc;
     function _AddRef: Integer; virtual; stdcall;
     function _Release: Integer; virtual; stdcall;
@@ -145,10 +145,10 @@ begin
 end;
 
 procedure TVirtualInterface.DoInvoke(UserData: Pointer;
-  const Args: TArray<TValue>; out Result: TValue);
+  const Args: TArray<TValue>; out &Result: TValue);
 begin
   if Assigned(fOnInvoke) then
-    fOnInvoke(TMethodIntercept(UserData).Method, Args, Result);
+    fOnInvoke(TMethodIntercept(UserData).Method, Args, &Result);
 end;
 
 procedure TVirtualInterface.ErrorProc;

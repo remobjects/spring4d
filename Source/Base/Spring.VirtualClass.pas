@@ -57,7 +57,7 @@ type
   TBeforeDestruction = procedure (const &Self: TObject);
   TDispatch = procedure (const &Self: TObject; var Message);
   TDefaultHandler = procedure (const &Self: TObject; var Message);
-  TNewInstance = function (Self: TClass): TObject;
+  TNewInstance = function (&Self: TClass): TObject;
   TFreeInstance = procedure (const &Self: TObject);
   TDestroy = procedure (const &Self: TObject; OuterMost: ShortInt);
 

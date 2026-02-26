@@ -34,10 +34,7 @@ uses
 
 type
   // See TestSQLConnection for more info
-  {$RTTI EXPLICIT
-    METHODS([vcPrivate..vcPublished])
-    PROPERTIES(DefaultPropertyRttiVisibility)
-    FIELDS(DefaultFieldRttiVisibility)}
+  {$RTTI EXPLICIT METHODS([vcPrivate..vcPublished]) PROPERTIES(DefaultPropertyRttiVisibility) FIELDS(DefaultFieldRttiVisibility)}
   TTestFDConnection = class(TFDConnection)
   public
     function GetConnected: Boolean; override; abstract;

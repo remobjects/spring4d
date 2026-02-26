@@ -34,10 +34,7 @@ uses
 
 type
   // See TestSQLConnection for more info
-  {$RTTI EXPLICIT
-    METHODS([vcPrivate..vcPublished])
-    PROPERTIES(DefaultPropertyRttiVisibility)
-    FIELDS(DefaultFieldRttiVisibility)}
+  {$RTTI EXPLICIT METHODS([vcPrivate..vcPublished]) PROPERTIES(DefaultPropertyRttiVisibility) FIELDS(DefaultFieldRttiVisibility)}
   TTestUniConnection = class(TUniConnection)
   public
     destructor Destroy; override;

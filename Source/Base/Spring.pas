@@ -364,7 +364,7 @@ type
     constructor Create(const initializer: TFieldInitializer); overload;
   public
     constructor Create(createInstance: Boolean = True); overload;
-    constructor Create(instanceClass: TClass) overload;
+    constructor Create(instanceClass: TClass); overload;
 
     property CreateInstance: Boolean read fCreateInstance;
     property InstanceClass: TClass read fInstanceClass;
@@ -1173,10 +1173,7 @@ type
     property Invoke: TNotifyEvent<T> read GetInvoke;
   end;
 
-  {$RTTI INHERIT
-      METHODS(DefaultMethodRttiVisibility)
-      FIELDS(DefaultFieldRttiVisibility)
-      PROPERTIES(DefaultPropertyRttiVisibility)}
+  {$RTTI INHERIT METHODS(DefaultMethodRttiVisibility) FIELDS(DefaultFieldRttiVisibility) PROPERTIES(DefaultPropertyRttiVisibility)}
 
   {$ENDREGION}
 
@@ -1846,10 +1843,7 @@ type
     property ValueType: PTypeInfo read fValueType;
   end;
 
-  {$RTTI INHERIT
-      METHODS(DefaultMethodRttiVisibility)
-      FIELDS(DefaultFieldRttiVisibility)
-      PROPERTIES(DefaultPropertyRttiVisibility)}
+  {$RTTI INHERIT METHODS(DefaultMethodRttiVisibility) FIELDS(DefaultFieldRttiVisibility) PROPERTIES(DefaultPropertyRttiVisibility)}
 
   {$ENDREGION}
 
@@ -2178,10 +2172,7 @@ type
     class function EnsureInitialized<T>(var target: T; const valueFactory: Func<T>): T; overload; static;
   end;
 
-  {$RTTI INHERIT
-      METHODS(DefaultMethodRttiVisibility)
-      FIELDS(DefaultFieldRttiVisibility)
-      PROPERTIES(DefaultPropertyRttiVisibility)}
+  {$RTTI INHERIT METHODS(DefaultMethodRttiVisibility) FIELDS(DefaultFieldRttiVisibility) PROPERTIES(DefaultPropertyRttiVisibility)}
 
   {$ENDREGION}
 
@@ -2243,10 +2234,7 @@ type
     class procedure MakeFromInterface(const value; var &result); overload; static;
   end;
 
-  {$RTTI INHERIT
-      METHODS(DefaultMethodRttiVisibility)
-      FIELDS(DefaultFieldRttiVisibility)
-      PROPERTIES(DefaultPropertyRttiVisibility)}
+  {$RTTI INHERIT METHODS(DefaultMethodRttiVisibility) FIELDS(DefaultFieldRttiVisibility) PROPERTIES(DefaultPropertyRttiVisibility)}
 
   {$ENDREGION}
 
@@ -2331,10 +2319,7 @@ type
     class function Make<T>(const value: T; const &finalizer: Action<T>): IShared<T>; overload; static;
   end;
 
-  {$RTTI INHERIT
-      METHODS(DefaultMethodRttiVisibility)
-      FIELDS(DefaultFieldRttiVisibility)
-      PROPERTIES(DefaultPropertyRttiVisibility)}
+  {$RTTI INHERIT METHODS(DefaultMethodRttiVisibility) FIELDS(DefaultFieldRttiVisibility) PROPERTIES(DefaultPropertyRttiVisibility)}
 
   {$ENDREGION}
 

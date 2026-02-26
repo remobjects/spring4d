@@ -84,7 +84,7 @@ type
     function DeleteAllInternal(const match: Predicate<T>;
       action: TCollectionChangedAction; extractedItems: PPointer): Integer;
     procedure DeleteRangeInternal(index, count: Integer;
-      action: TCollectionChangedAction; doClear: Boolean; result: PPointer);
+      action: TCollectionChangedAction; doClear: Boolean; &result: PPointer);
     function InsertInternal(index: Integer; const item: T): Integer;
     procedure SetItemInternal(index: Integer; const value: T);
     procedure DoNotifyExtracted(count: Integer);
@@ -1048,7 +1048,7 @@ begin
 end;
 
 procedure TAbstractArrayList<T>.DeleteRangeInternal(index, count: Integer;
-  action: TCollectionChangedAction; doClear: Boolean; result: PPointer);
+  action: TCollectionChangedAction; doClear: Boolean; &result: PPointer);
 var
   oldItems: TArray<T>;
   tailCount, i: Integer;
@@ -1094,8 +1094,8 @@ begin
       for i := 0 to count - 1 do
         TArray<TObject>(oldItems)[i].Free;
 
-  if Assigned(result) then
-    TArray<T>(result^) := oldItems;
+  if Assigned(&result) then
+    TArray<T>(&result^) := oldItems;
 end;
 
 procedure TAbstractArrayList<T>.DoNotifyExtracted(count: Integer);

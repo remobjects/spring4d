@@ -54,7 +54,7 @@ type
     FOpenArray: Boolean;
     {$ENDIF}
     FOffset: Integer;
-    class var GetArgLoc: function(Self: Pointer; AFrame: PInterceptFrame): Pointer;
+    class var GetArgLoc: function(&Self: Pointer; AFrame: PInterceptFrame): Pointer;
     procedure GetArg(AFrame: PInterceptFrame; out Value: TValue);
   end;
 

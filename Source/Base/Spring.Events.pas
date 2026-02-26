@@ -51,9 +51,9 @@ type
     fProxy: Pointer;
   protected
     procedure InternalInvokeMethod(UserData: Pointer;
-      const Args: TArray<TValue>; out Result: TValue); virtual;
+      const Args: TArray<TValue>; out &Result: TValue); virtual;
     procedure InternalInvokeDelegate(&Method: TRttiMethod;
-      const Args: TArray<TValue>; out Result: TValue); virtual;
+      const Args: TArray<TValue>; out &Result: TValue); virtual;
   {$ELSE}
   private
     const
@@ -578,7 +578,7 @@ end;
 {$IFDEF USE_RTTI_FOR_PROXY}
 procedure TEvent.InternalInvokeMethod(UserData: Pointer;
   const Args: TArray<TValue>;
-  out Result: TValue); //FI:O804
+  out &Result: TValue); //FI:O804
 var
   argsWithoutSelf: TArray<TValue>;
   guard: GuardedPointer;
@@ -605,7 +605,7 @@ end;
 
 procedure TEvent.InternalInvokeDelegate(&Method: TRttiMethod;
   const Args: TArray<TValue>;
-  out Result: TValue); //FI:O804
+  out &Result: TValue); //FI:O804
 var
   argsWithoutSelf: TArray<TValue>;
   guard: GuardedPointer;
