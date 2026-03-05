@@ -285,8 +285,15 @@ begin
   else
     Result := 0;
 end;
+{$ELSEIF Defined(OXYGENE)}
+begin
+  if size > 0 then
+    Result := memcmp(left, right, size)
+  else
+    Result := 0;
+end;
 {$ELSE}
-  {$MESSAGE ERROR 'Missing plaform support'}
+  {$MESSAGE ERROR 'Missing platform support'}
 {$IFEND}
 
 function SameGuid(const left, right: TGUID): Boolean;

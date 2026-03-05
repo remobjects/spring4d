@@ -91,7 +91,7 @@ type
     FreeInstance: TFreeInstance;
     Destroy: TDestroy;
 
-{$IF CPP_ABI_ADJUST > 0)}
+{$IF CPP_ABI_ADJUST > 0}
     CPP_API: array[1..CPP_ABI_ADJUST div SizeOf(Pointer)] of Pointer;
 {$IFEND}
 
