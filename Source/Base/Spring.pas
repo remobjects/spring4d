@@ -1443,10 +1443,14 @@ type
     objDestroyingFlag = Integer($80000000);
     function GetRefCount: Integer; inline;
   protected
-{$IF Declared(VolatileAttribute)}
+{$IFDEF OXYGENE}
+    fRefCount: Integer; volatile;
+{$ELSEIF Declared(VolatileAttribute)}
     [Volatile]
-{$IFEND}
     fRefCount: Integer;
+{$ELSE}
+    fRefCount: Integer;
+{$ENDIF}
     function AsObject: TObject;
   public
     function QueryInterface(const IID: TGUID; out obj): HResult; stdcall;
@@ -13194,7 +13198,7 @@ label
 var
   dest: Pointer<T>.P;
   leftCount, rightCount: Integer;
-{$IF Defined(DELPHIX_TOKYO_UP) Defined(WIN64) and Defined(OPTIMIZATION_ON)}
+{$IF Defined(DELPHIX_TOKYO_UP) and Defined(WIN64) and Defined(OPTIMIZATION_ON)}
   // Win64 with O+ has a codegen glitch as it later moves value from an uninitialized register
   temp_ts: PTimSort;
 {$IFEND}
@@ -13344,7 +13348,7 @@ label
 var
   dest, leftBase, rightBase: Pointer<T>.P;
   leftCount, rightCount: Integer;
-{$IF Defined(DELPHIX_TOKYO_UP) Defined(WIN64) and Defined(OPTIMIZATION_ON)}
+{$IF Defined(DELPHIX_TOKYO_UP) and Defined(WIN64) and Defined(OPTIMIZATION_ON)}
   // Win64 with O+ has a codegen glitch as it later moves value from an uninitialized register
   temp_ts: PTimSort;
 {$IFEND}
