@@ -73,11 +73,31 @@ type
   /// <summary>
   ///   Provides the abstract base class for ISpecification<T>.
   /// </summary>
-  TSpecification<T> = class abstract(TInterfacedObject, ISpecification<T>, Predicate<T>)
+  TSpecification<T> = class abstract(TInterfacedObject, ISpecification<T>
+{$IFNDEF ELEMENTS}
+    , Predicate<T>
+{$ENDIF}
+  )
   protected
+{$IFNDEF ELEMENTS}
     function Predicate<T>.Invoke = IsSatisfiedBy;
+{$ENDIF}
     function IsSatisfiedBy(const item: T): Boolean; virtual; abstract;
   end;
+
+{$IFDEF ELEMENTS}
+  // Delphi treats anonymous-method types as Invoke-based interface objects.
+  // Elements models "reference to" types as delegates instead, so adapt them
+  // through a small wrapper rather than inheriting from Predicate<T>.
+  TPredicateSpecification<T> = class sealed(TSpecification<T>)
+  private
+    fPredicate: Predicate<T>;
+  public
+    constructor Create(const predicate: Predicate<T>);
+  protected
+    function IsSatisfiedBy(const item: T): Boolean; override;
+  end;
+{$ENDIF}
 
   TUnarySpecification<T> = class abstract(TSpecification<T>)
   protected
@@ -128,7 +148,11 @@ end;
 class operator Specification<T>.Implicit(
   const specification: Predicate<T>): Specification<T>;
 begin
+{$IFDEF ELEMENTS}
+  Result.fInstance := TPredicateSpecification<T>.Create(specification);
+{$ELSE}
   Predicate<T>(Result.fInstance) := specification;
+{$ENDIF}
 end;
 
 class operator Specification<T>.Implicit(
@@ -140,7 +164,19 @@ end;
 class operator Specification<T>.Implicit(
   const specification: Specification<T>): Predicate<T>;
 begin
+{$IFDEF ELEMENTS}
+  var instance := specification.fInstance;
+  if Assigned(instance) then
+    Result :=
+      function(const item: T): Boolean
+      begin
+        Result := instance.IsSatisfiedBy(item);
+      end
+  else
+    Result := nil;
+{$ELSE}
   ISpecification<T>(Result) := specification.fInstance;
+{$ENDIF}
 end;
 
 class operator Specification<T>.In(const left: T;
@@ -158,7 +194,11 @@ end;
 class operator Specification<T>.Explicit(
   const specification: Predicate<T>): Specification<T>;
 begin
+{$IFDEF ELEMENTS}
+  Result.fInstance := TPredicateSpecification<T>.Create(specification);
+{$ELSE}
   Predicate<T>(Result.fInstance) := specification;
+{$ENDIF}
 end;
 
 class operator Specification<T>.Explicit(
@@ -189,6 +229,23 @@ begin
 end;
 
 {$ENDREGION}
+
+
+{$IFDEF ELEMENTS}
+{$REGION 'TPredicateSpecification<T>'}
+
+constructor TPredicateSpecification<T>.Create(const predicate: Predicate<T>);
+begin
+  fPredicate := predicate;
+end;
+
+function TPredicateSpecification<T>.IsSatisfiedBy(const item: T): Boolean;
+begin
+  Result := Assigned(fPredicate) and fPredicate(item);
+end;
+
+{$ENDREGION}
+{$ENDIF}
 
 
 {$REGION 'TUnarySpecification<T>'}
