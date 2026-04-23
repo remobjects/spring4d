@@ -2309,11 +2309,11 @@ begin
   while enumerator.MoveNext do
   begin
     if count >= capacity then
-      capacity := DynArrayGrow(result, typeInfo, capacity);
-    getCurrent(enumerator, PByte(result)[count*size]);
+      capacity := DynArrayGrow(&result, typeInfo, capacity);
+    getCurrent(enumerator, PByte(&result)[count*size]);
     Inc(count);
   end;
-  DynArraySetLength(result, typeInfo, 1, @count);
+  DynArraySetLength(&result, typeInfo, 1, @count);
 end;
 
 function TEnumerableBase.TryGetFirst(var value;
