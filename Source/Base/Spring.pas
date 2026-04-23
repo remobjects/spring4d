@@ -2052,11 +2052,21 @@ type
       procedure InvokeFactory(const valueFactory: Pointer); override;
     end;
 
-    TDefaultCtorFactory = class(TRefCountedObject, Func<TObject>)
+    TDefaultCtorFactory = class(TRefCountedObject
+{$IFNDEF ELEMENTS}
+      , Func<TObject>
+{$ENDIF}
+    )
     private
       classType: TClass;
       ctor: TConstructor;
       function Invoke: TObject;
+{$IFDEF ELEMENTS}
+      // Delphi treats anonymous-method types as Invoke-based interface objects.
+      // Elements models Func<T> as a delegate value instead, so expose a
+      // closure here rather than inheriting from Func<TObject>.
+      function AsFunc: Func<TObject>;
+{$ENDIF}
     end;
 
     TReference = record
@@ -2288,7 +2298,11 @@ type
       function Invoke: Pointer;
     end;
 
-    THandleFinalizer<T> = class(TInterfacedObject, IShared<T>)
+    THandleFinalizer<T> = class(TInterfacedObject
+{$IFNDEF ELEMENTS}
+      , IShared<T>
+{$ENDIF}
+    )
     private
       fValue: T;
       fFinalizer: Action<T>;
@@ -2296,6 +2310,12 @@ type
     public
       constructor Create(const value: T; &finalizer: Action<T>);
       destructor Destroy; override;
+{$IFDEF ELEMENTS}
+      // Delphi can implement "reference to" types via Invoke on an interfaced
+      // object. Elements keeps IShared<T> as a delegate value, so return a
+      // closure instead of inheriting from the anonymous-method type.
+      function AsShared: IShared<T>;
+{$ENDIF}
     end;
 
   const
@@ -9019,6 +9039,17 @@ begin
   Result := ctor(classType);
 end;
 
+{$IFDEF ELEMENTS}
+function Lazy.TDefaultCtorFactory.AsFunc: Func<TObject>;
+begin
+  Result :=
+    function: TObject
+    begin
+      Result := Invoke;
+    end;
+end;
+{$ENDIF}
+
 {$ENDREGION}
 
 
@@ -9183,7 +9214,11 @@ begin
   defaultCtor.classType := typeInfo.TypeData.ClassType;
   defaultCtor.ctor := TActivator.FindConstructor(defaultCtor.classType);
 
+{$IFDEF ELEMENTS}
+  MakeFromFactory(Pointer(defaultCtor.AsFunc), result, True);
+{$ELSE}
   MakeFromFactory(Pointer(Func<TObject>(defaultCtor)), result, True);
+{$ENDIF}
 end;
 
 class procedure Lazy.MakeFromFactory(factory: Pointer; var &result; ownsObject: Boolean);
@@ -9540,7 +9575,11 @@ end;
 class function Shared.Make<T>(const value: T;
   const &finalizer: Action<T>): IShared<T>;
 begin
+{$IFDEF ELEMENTS}
+  Result := THandleFinalizer<T>.Create(value, &finalizer).AsShared;
+{$ELSE}
   Result := THandleFinalizer<T>.Create(value, &finalizer);
+{$ENDIF}
 end;
 
 {$ENDREGION}
@@ -9606,6 +9645,17 @@ function Shared.THandleFinalizer<T>.Invoke: T;
 begin
   Result := fValue;
 end;
+
+{$IFDEF ELEMENTS}
+function Shared.THandleFinalizer<T>.AsShared: IShared<T>;
+begin
+  Result :=
+    function: T
+    begin
+      Result := Invoke;
+    end;
+end;
+{$ENDIF}
 
 {$ENDREGION}
 
