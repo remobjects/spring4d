@@ -80,7 +80,7 @@ type
   TLogLevels = set of TLogLevel;
 
 const
-  LOG_ALL_LEVELS = [Low(TLogLevel)..High(TLogLevel)] - [TLogLevel.Unknown]; //FI:O803
+  LOG_ALL_LEVELS: TLogLevels = [TLogLevel.Trace, TLogLevel.Debug, TLogLevel.Text, TLogLevel.Info, TLogLevel.Warn, TLogLevel.Error, TLogLevel.Fatal]; //FI:O803
   LOG_BASIC_LEVELS = [
     TLogLevel.Info,
     TLogLevel.Warn,
